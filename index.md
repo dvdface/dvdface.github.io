@@ -1,1 +1,1 @@
-[《测试修炼手册》](http://dvdface.github.io/SUMMARY.md)
+[《测试修炼手册》](https://github.com/dvdface/dvdface.github.io/blob/master/SUMMARY.md)
