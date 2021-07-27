@@ -71,10 +71,8 @@
 
 ## 性能设计与测试
 
----
-
-* [性能测试](untitled.md)
-* [参考资料](can-kao-zi-liao.md)
+* [性能测试](xing-neng-she-ji-yu-ce-shi/untitled.md)
+* [参考资料](xing-neng-she-ji-yu-ce-shi/can-kao-zi-liao.md)
 
 ## 用户体验设计与测试
 

@@ -8,7 +8,7 @@ description: Failure Mode and Effects Analysis)
 
 FMEA要早于FTA， 它出现于《Procedure for performing a failure mode effect and criticality analysis, November 9, 1949, United States Military Procedure, MIL-P-1629》；
 
-FMEA的最初的目标是识别对任务的成功和个人与装备安全有重大影响故障；即，在灾难性的故障发生之前，对之进行识别，和预防；
+FMEA的最初的目标是识别对任务的成功和个人与装备安全有重大影响故障；即，在灾难性的故障发生之前，对之进行识别和预防；
 
 FMEA一般由相关专家在产品开发的早期阶段对产品的设计与制造过程进行彻底的分析；它的目标是在产品交付到用户手中之前，找出和纠正产品的所有缺陷；
 
@@ -113,9 +113,9 @@ FMEA分为很多种类型，有：
 
 **2）发生概率划分**
 
-![Design FMEA&#x53D1;&#x751F;&#x6982;&#x7387;&#x5B9A;&#x4E49;](../../.gitbook/assets/image%20%2871%29.png)
+![Design FMEA&#x53D1;&#x751F;&#x6982;&#x7387;&#x5B9A;&#x4E49;](../../.gitbook/assets/image%20%283%29%20%281%29.png)
 
-![Process FMEA&#x53D1;&#x751F;&#x6982;&#x7387;&#x5B9A;&#x4E49;](../../.gitbook/assets/image%20%2857%29.png)
+![Process FMEA&#x53D1;&#x751F;&#x6982;&#x7387;&#x5B9A;&#x4E49;](../../.gitbook/assets/image%20%2826%29%20%281%29.png)
 
 **3\) 被检出的可能性**
 

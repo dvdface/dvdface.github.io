@@ -23,7 +23,7 @@ _**内层VLAN参数\(VID, TPID, COS\)**_：VID：1- 4085， TPID：0x8810, 0x88a
 
 _**外层VLAN匹配规则**_：
 
-![](../../../.gitbook/assets/image%20%282%29.png)
+![](../../../.gitbook/assets/image%20%2845%29.png)
 
 单个类型的匹配规则中有意义的组合：
 

@@ -6,7 +6,7 @@ description: Reliability Metrics
 
 ### 稳定性度量
 
-![&#x7A33;&#x5B9A;&#x6027;&#x5EA6;&#x91CF;&#x6307;&#x6807;](../.gitbook/assets/image%20%2832%29.png)
+![&#x7A33;&#x5B9A;&#x6027;&#x5EA6;&#x91CF;&#x6307;&#x6807;](../.gitbook/assets/image%20%2868%29.png)
 
 * **MTTF， 描述两次故障之间的平均间隔；** 飞行器特别适合使用MTTF描述，它关注起飞到落地的时间； 
 * **MTTR， 描述故障发生到恢复的平均时间；** 一些关键系统关注可用性，可用性由MTTF和MTTR组成，平均恢复时间至关重要； 如，那么可以把JVM以及存储芯片的GC时长看作为磁盘系统的MTTR时间； 

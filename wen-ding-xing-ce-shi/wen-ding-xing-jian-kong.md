@@ -6,7 +6,7 @@ description: 浴盆曲线
 
 一旦产品发布后，产品的稳定性遵循浴盆曲线；
 
-![&#x6D74;&#x76C6;&#x66F2;&#x7EBF;](../.gitbook/assets/image%20%2883%29.png)
+![&#x6D74;&#x76C6;&#x66F2;&#x7EBF;](../.gitbook/assets/image%20%2831%29%20%281%29.png)
 
 * **第一阶段，叫早夭期，Infant Mortality**
 
