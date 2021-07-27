@@ -23,7 +23,7 @@ description: >-
 
 ### 产品质量
 
-产品质量包含很多方面，比如，是否符合规范、无缺陷的情况、是否满足用户的需求；在ISO/IEC 25010 System and software quality models定义了8种可通过测试进行度量和评估的质量特征；
+产品质量包含很多方面，比如，是否符合规范、无缺陷的情况、是否满足用户的需求；在ISO/IEC 25010 System and software quality models定义了8种可通过测试进行度量和评估的质量特征；详见子章节；
 
 ### 软件测试所提供信息的作用
 
@@ -36,7 +36,7 @@ description: >-
 ### 测试注意事项
 
 * 测试是一个有多个活动组成的流程，这个流程将输入转换为输出（测试过程在29119-2中有详细阐述） 
-* 组织层面的测试流程负责设置和维护测试政策\(Policy:a principle of action\)、测试策略\(Strategy:the best plan of action\)，并在组织层面的项目和功能中进行应用 
+* 组织测试流程负责设置和维护测试政策\(Policy:a principle of action\)、测试策略\(Strategy:the best plan of action\)，并在组织层面的项目和功能中进行应用 
 * 测试应该计划、监控和控制；（测试过程在29119-2中有详细阐述） 
 * 测试过程和子过程可以应用在任意的测试层级和测试类型上； 
 * 每个测试都对应一个测试项目/被测对象； 
