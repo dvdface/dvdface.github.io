@@ -1,6 +1,6 @@
 # IPD测试管理
 
-![](../../.gitbook/assets/image%20%2884%29.png)
+![IPD&#x4E2D;&#x6709;&#x4E24;&#x6761;&#x7EBF;&#xFF0C;&#x4E00;&#x6761;&#x662F;&#x4E1A;&#x52A1;&#x8BA1;&#x5212;&#x51B3;&#x7B56;&#xFF1B;&#x4E00;&#x6761;&#x662F;&#x4E1A;&#x52A1;&#x6280;&#x672F;&#x51B3;&#x7B56;&#xFF1B;](../../.gitbook/assets/image%20%2884%29.png)
 
 ## IPD中的测试管理
 
