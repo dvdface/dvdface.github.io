@@ -71,7 +71,7 @@ V&V活动有很多种，在IEEE 1012 and ISO/IEC 12207中有详细定义，如�
 
 ![Relationship between Test Process&#x3001;Sub-process&#x3001;Test Level&#x3001;Test Type&#x3001;Quality Characteristics](../../../../.gitbook/assets/image%20%2823%29.png)
 
-### 测试流程
+### 三层测试流程模型
 
 ![The multi-layer relationship between test processes](../../../../.gitbook/assets/image%20%2890%29.png)
 
