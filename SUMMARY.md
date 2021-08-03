@@ -86,5 +86,6 @@
 ## 自动化测试
 
 * [静态测试](zi-dong-hua-ce-shi/untitled-1.md)
+* [动态测试](zi-dong-hua-ce-shi/dong-tai-ce-shi.md)
 * [参考资料](zi-dong-hua-ce-shi/untitled.md)
 
