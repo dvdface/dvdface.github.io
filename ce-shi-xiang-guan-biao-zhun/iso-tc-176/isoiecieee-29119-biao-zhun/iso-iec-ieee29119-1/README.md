@@ -474,7 +474,21 @@ V&V活动有很多种，在IEEE 1012 and ISO/IEC 12207中有详细定义，如�
 
 ### 基于数学的测试
 
+所谓基于数学的测试，就是采取数学工具对输入参数进行抽样；
 
+基于数学的测试方法有很多，主要有：
+
+* 组合测试\(Combinatorial testing\);
+* 随机选取测试用例进行测试\(Random test case selection\);
+
+在测试覆盖上，往往还是用统计学里面的取样方法构造测试覆盖项：
+
+* 分层抽样\(Stratified sampling\)；
+* 模糊测试\(Fuzzing Testing\)；
+* 聚类抽样\(Cluster sampling\)；
+* 基于专家的判断进行抽样\(Expert judgment sampling\)；
+
+在使用基于数学的测试时，往往需要自动化工具进行辅助；
 
 ### 基于经验的测试
 
