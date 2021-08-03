@@ -474,9 +474,7 @@ V&V活动有很多种，在IEEE 1012 and ISO/IEC 12207中有详细定义，如�
 
 在测试执行时建模，则是在测试执行时自动生成所需执行的测试用例，然后执行；
 
-一般建模需要工具支持。
-
-如，BoardCom提供了Agile Requirements Designer软件建立控制流模型，然后根据模型自动生成覆盖所需的用例；如，Cucumber提出了Behavir Driven Test，使用Gherkin语言对需求进行建模，然后使用BDD自动化框架，快速的把模型转换成自动化测试脚本；
+一般建模需要工具支持。BoardCom提供了Agile Requirements Designer软件对需求进行建模，然后根据模型自动生成覆盖所需的用例；Cucumber提出了Behavir Driven Test，使用Gherkin语言对需求进行建模，然后使用BDD自动化框架，快速的把模型转换成自动化测试脚本；
 
 ### 基于数学的测试
 
