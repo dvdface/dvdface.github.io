@@ -12,6 +12,8 @@
 
 ### 持久性测试\(endurance testing\)
 
+_//todo_
+
 ### 负载测试\(load testing\)
 
 _//todo_
