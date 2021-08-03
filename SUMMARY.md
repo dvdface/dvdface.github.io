@@ -32,7 +32,6 @@
   * [改进阶段](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/gai-jin-jie-duan.md)
   * [控制阶段](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/kong-zhi-jie-duan.md)
 * [ISTQB](ce-shi-xiang-guan-biao-zhun/istqb.md)
-* [EuroStar](ce-shi-xiang-guan-biao-zhun/eurostar.md)
 * [其他](ce-shi-xiang-guan-biao-zhun/qi-ta/README.md)
   * [质量管理七工具](ce-shi-xiang-guan-biao-zhun/qi-ta/zhi-liang-guan-li-qi-gong-ju.md)
 * [参考资料](ce-shi-xiang-guan-biao-zhun/can-kao-zi-liao.md)
