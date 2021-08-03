@@ -79,12 +79,7 @@
 
 * [参考资料](yong-hu-ti-yan-she-ji-yu-ce-shi/untitled.md)
 
----
-
-* [移动应用测试](yi-dong-ying-yong-ce-shi.md)
-* [参考资料](can-kao-zi-liao-1.md)
-
 ## 移动应用测试 <a id="yi-dong-ying-yong-ce-shi-1"></a>
 
-* [Untitled](yi-dong-ying-yong-ce-shi-1/untitled.md)
+* [参考资料](yi-dong-ying-yong-ce-shi-1/can-kao-zi-liao-1.md)
 
