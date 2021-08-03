@@ -1,6 +1,7 @@
 # 参考资料
 
 * **GBT 39788-2021** 系统与软件工程 性能测试方法 ****
+* [**ISTQB** **Foundation Level Performance Testing**](https://www.istqb.org/downloads/category/59-performance-testing.html) ****
 * **ISO/IEC 14756:1999** Information technology — Measurement and rating of performance of computer-based software systems ****
 * **ISO/IEC 29155-1:2017**
 
@@ -18,7 +19,6 @@
   ****
 
 * **ISO/IEC 29155-4:2016** Systems and software engineering — Information technology project performance benchmarking framework — Part 4: Guidance for data collection and maintenance 
-*  ****[**ISTQB** **Foundation Level Performance Testing**](https://www.istqb.org/downloads/category/59-performance-testing.html)\*\*\*\*
 
 
 
