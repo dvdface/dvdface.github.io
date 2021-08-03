@@ -85,6 +85,6 @@
 
 ## 自动化测试
 
-* [代码覆盖率](zi-dong-hua-ce-shi/untitled-1.md)
+* [静态测试](zi-dong-hua-ce-shi/untitled-1.md)
 * [参考资料](zi-dong-hua-ce-shi/untitled.md)
 
