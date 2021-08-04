@@ -29,5 +29,9 @@ description: 'Software and systems engineering — Software testing — Part 2: 
 
 ![&#x7EC4;&#x7EC7;&#x6D4B;&#x8BD5;&#x6D41;&#x7A0B;](../../../.gitbook/assets/image%20%2851%29.png)
 
+组织测试流程是用来开发和维护组织测试规范的；这个规范是通用的，会应用到组织测试活动当中，不和具体项目相关；
+
+
+
 
 
