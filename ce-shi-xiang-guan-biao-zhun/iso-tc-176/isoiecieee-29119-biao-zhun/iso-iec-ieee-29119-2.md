@@ -27,5 +27,7 @@ description: 'Software and systems engineering — Software testing — Part 2: 
 
 ## 组织测试流程
 
-![](../../../.gitbook/assets/image%20%2851%29.png)
+![&#x7EC4;&#x7EC7;&#x6D4B;&#x8BD5;&#x6D41;&#x7A0B;](../../../.gitbook/assets/image%20%2851%29.png)
+
+
 
