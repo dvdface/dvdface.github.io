@@ -15,7 +15,6 @@
 * [IPD](ce-shi-xiang-guan-biao-zhun/ipd/README.md)
   * [IPD测试管理](ce-shi-xiang-guan-biao-zhun/ipd/ipd-ce-shi-guan-li.md)
   * [参考资料](ce-shi-xiang-guan-biao-zhun/ipd/can-kao-zi-liao.md)
-* [PMP](ce-shi-xiang-guan-biao-zhun/pmp.md)
 * [ISO](ce-shi-xiang-guan-biao-zhun/iso-tc-176/README.md)
   * [ISO/IEC/IEEE 12207](ce-shi-xiang-guan-biao-zhun/iso-tc-176/iso-iec-ieee-12207/README.md)
     * [ISO/IEC 16085风险管理](ce-shi-xiang-guan-biao-zhun/iso-tc-176/iso-iec-ieee-12207/isoiec-16085-feng-xian-guan-li.md)
