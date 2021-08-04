@@ -49,9 +49,9 @@ IPD强调产品创新一定是基于市场需求和竞争分析的创新。为�
 
 产品开发项目的相对不确定性，要求开发流程在非结构化与过于结构化之间找到平衡。
 
-## IPD管理体系
+## IPD概览
 
-《IPD管理体系介绍》
+![](../../.gitbook/assets/image%20%2848%29.png)
 
 {% file src="../../.gitbook/assets/ipd-guan-li-ti-xi-jie-shao-.pdf" caption="IPD管理体系介绍" %}
 
