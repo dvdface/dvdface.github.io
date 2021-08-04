@@ -69,7 +69,7 @@ description: 'Software and systems engineering — Software testing — Part 2: 
 #### 监控组织测试规范
 
 1. 宣传组织测试规范，鼓励测试活动与组织规范对齐；
-2. 监控组织测试规范是否在组织内有效的施行；
+2. 监控组织测试规范在组织内有效的施行；
 
 #### 更新组织测试规范
 
