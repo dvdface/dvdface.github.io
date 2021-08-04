@@ -513,5 +513,5 @@ V&V活动有很多种，在IEEE 1012 and ISO/IEC 12207中有详细定义，如�
 
 在ISO/IEC/IEEE 29119-2中提到了一部分缺陷管理流程，主要是涉及对缺陷报告的分析、记录，和回归测试的；
 
-更详细的部分在ISO/IEC 12207、ISO/IEC 20000\(Service management\)、IEEE 1044\(Classification for Software Anomalies\)这三个标准中；
+更详细的部分在ISO/IEC 12207\(Software Life Cycle Processes\)、ISO/IEC 20000\(Service management\)、IEEE 1044\(Classification for Software Anomalies\)这三个标准中；
 
