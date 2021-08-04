@@ -6,7 +6,7 @@ description: 'Software and systems engineering — Software testing — Part 2: 
 
 ## 三层测试流程模型
 
-![](../../../.gitbook/assets/image%20%2851%29.png)
+![](../../../.gitbook/assets/image%20%2857%29.png)
 
 29119标准把软件生命周期中的所有测试活动分为了三个流程组：
 
@@ -24,4 +24,8 @@ description: 'Software and systems engineering — Software testing — Part 2: 
   * 测试环境搭建与维护流程；
   * 测试执行流程；
   * 测试问题报告流程；
+
+## 组织测试流程
+
+![](../../../.gitbook/assets/image%20%2851%29.png)
 
