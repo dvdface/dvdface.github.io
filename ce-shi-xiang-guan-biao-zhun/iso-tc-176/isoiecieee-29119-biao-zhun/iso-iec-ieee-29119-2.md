@@ -78,7 +78,7 @@ description: 'Software and systems engineering — Software testing — Part 2: 
 
 ### 信息项目
 
-
+* 组织测试规范；
 
 
 
