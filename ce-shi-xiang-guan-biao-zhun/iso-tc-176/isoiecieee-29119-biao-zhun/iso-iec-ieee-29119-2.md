@@ -125,7 +125,7 @@ description: 'Software and systems engineering — Software testing — Part 2: 
 
 ![](../../../.gitbook/assets/image%20%2871%29.png)
 
-1测试计划负责人应参照测试计划流程进行以上活动，遵守组织政策和流程。
+测试计划负责人应参照测试计划流程进行以上活动，遵守组织政策和流程。
 
 
 
