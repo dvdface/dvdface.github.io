@@ -73,7 +73,7 @@ description: 'Software and systems engineering — Software testing — Part 2: 
 
 1. 评审对组织测试规范的反馈；
 2. 改进组织测试规范、使其更有效；
-3. 识别对组织测试规范的变更；
+3. 对组织测试规范进行变更；
 4. 沟通对组织测试规范的变更；
 
 ### 信息项目
