@@ -6,7 +6,7 @@ description: 'Software and systems engineering — Software testing — Part 2: 
 
 ## 三层测试流程模型
 
-![&#x591A;&#x5C42;&#x6D4B;&#x8BD5;&#x6D41;&#x7A0B;](../../../.gitbook/assets/image%20%2851%29.png)
+![](../../../.gitbook/assets/image%20%2851%29.png)
 
 29119标准把软件生命周期中的所有测试活动分为了三个流程组：
 
@@ -15,5 +15,13 @@ description: 'Software and systems engineering — Software testing — Part 2: 
   * 测试计划流程；
   * 测试监视和控制流程；
   * 测试关闭流程；
-* **动态测试流程** 
+* **动态测试流程**
+
+  定义动态测试的流程；  
+  动态测试流程有：
+
+  * 测试设计与实现流程；
+  * 测试环境搭建与维护流程；
+  * 测试执行流程；
+  * 测试问题报告流程；
 
