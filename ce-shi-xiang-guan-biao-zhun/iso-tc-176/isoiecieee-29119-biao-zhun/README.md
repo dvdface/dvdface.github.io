@@ -4,7 +4,7 @@ description: Software and systems engineering — Software testing
 
 # ISO/IEC/IEEE 29119
 
-该系列标准主要是涉及软件测试的，有如下子标准：
+该系列标准主要是涉及软件静态和动态测试的标准，有如下子文档：
 
 * ISO/IEC/IEEE 29119-1：PART 1: CONCEPTS AND DEFINITIONS
 * ISO/IEC/IEEE 29119-2：PART 2: TEST PROCESSES
