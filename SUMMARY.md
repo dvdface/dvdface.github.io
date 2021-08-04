@@ -51,9 +51,7 @@
 
 * [概述](ce-shi-she-ji/untitled.md)
 * [基于规格的测试设计](ce-shi-she-ji/gong-neng-ce-shi-mo-xing/README.md)
-  * [场景测试](ce-shi-she-ji/gong-neng-ce-shi-mo-xing/chang-jing-ce-shi/README.md)
-    * [案例：ONU VLAN翻译功能](ce-shi-she-ji/gong-neng-ce-shi-mo-xing/chang-jing-ce-shi/untitled.md)
-    * [案例：VLAN内添外加功能](ce-shi-she-ji/gong-neng-ce-shi-mo-xing/chang-jing-ce-shi/untitled-1.md)
+  * [场景测试](ce-shi-she-ji/gong-neng-ce-shi-mo-xing/chang-jing-ce-shi.md)
 * [基于结构的测试设计](ce-shi-she-ji/jie-gou-hua-ce-shi-mo-xing.md)
 * [基于经验的测试设计](ce-shi-she-ji/ji-yu-jing-yan-de-ce-shi-she-ji.md)
 * [参考资料](ce-shi-she-ji/can-kao-zi-liao.md)
