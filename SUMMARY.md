@@ -72,6 +72,7 @@
 ## 性能设计与测试
 
 * [性能测试](xing-neng-she-ji-yu-ce-shi/untitled.md)
+* [必备知识](xing-neng-she-ji-yu-ce-shi/bi-bei-zhi-shi.md)
 * [参考资料](xing-neng-she-ji-yu-ce-shi/can-kao-zi-liao.md)
 
 ## 用户体验设计与测试
