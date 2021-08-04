@@ -508,3 +508,12 @@ V&V活动有很多种，在IEEE 1012 and ISO/IEC 12207中有详细定义，如�
 
 更详细的部分在ISO/IEC 12207\(Software Life Cycle Processes\)、ISO/IEC 20000\(Service management\)、IEEE 1044\(Classification for Software Anomalies\)这三个标准中；
 
+## 指标与度量
+
+测试中常用以下指标进行度量：
+
+* 剩余风险 ： 减轻的风险数 / 识别到的风险总数；
+* 累计缺陷开闭比： 每日新增的缺陷数 / 每日关闭的缺陷数；
+* 测试进展：执行的用例数 / 需要执行的总数；
+* 缺陷发现比率：测试过程中发现的缺陷 / 发现的缺陷总数；
+
