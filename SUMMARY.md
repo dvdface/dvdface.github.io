@@ -24,7 +24,7 @@
       * [ISO/IEC 25051](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee29119-1/iso-iec-25051.md)
       * [术语表](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee29119-1/shu-yu-biao.md)
     * [ISO/IEC/IEEE 29119-2](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-2.md)
-    * [组织测试流程]()
+    * [组织测试流程](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/zu-zhi-ce-shi-liu-cheng.md)
 * [IEEE](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/README.md)
   * [IEEE-1012](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/ieee-1012.md)
 * [六西格玛](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/README.md)
