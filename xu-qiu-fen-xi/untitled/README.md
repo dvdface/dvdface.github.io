@@ -90,7 +90,7 @@ so that <business value>
 
 ## Discovery
 
-有了User Story之后，就要开始对其进行分析， 类似于要把SR转换成DR，分析方法称为Discovery
+有了User Story之后，就要开始对其进行分析， 类似于要把OR转换成SR，分析方法称为Discovery
 
 在Discovery阶段，遵循一个原则，叫做 Last Responsible Moment。核心的意思就是，越晚做决策越好，因为那个时候获取的信息越多，越不容易导致返工。
 
