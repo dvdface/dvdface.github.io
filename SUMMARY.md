@@ -28,6 +28,7 @@
     * [测试管理流程](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/ce-shi-guan-li-liu-cheng/README.md)
       * [测试计划流程](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/ce-shi-guan-li-liu-cheng/ce-shi-ji-hua-liu-cheng.md)
       * [测试监控流程](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/ce-shi-guan-li-liu-cheng/ce-shi-jian-kong-liu-cheng.md)
+      * [测试关闭流程](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/ce-shi-guan-li-liu-cheng/ce-shi-guan-bi-liu-cheng.md)
 * [IEEE](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/README.md)
   * [IEEE-1012](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/ieee-1012.md)
 * [六西格玛](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/README.md)
