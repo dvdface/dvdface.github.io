@@ -34,6 +34,7 @@
         * [测试环境搭建流程](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-2/dong-tai-ce-shi-liu-cheng/ce-shi-huan-jing-zhun-bei-liu-cheng.md)
         * [测试执行流程](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-2/dong-tai-ce-shi-liu-cheng/ce-shi-zhi-hang-liu-cheng.md)
         * [测试问题报告流程](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-2/dong-tai-ce-shi-liu-cheng/ce-shi-wen-ti-bao-gao-liu-cheng.md)
+        * [示例](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-2/dong-tai-ce-shi-liu-cheng/shi-li.md)
 * [IEEE](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/README.md)
   * [IEEE-1012](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/ieee-1012.md)
 * [六西格玛](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/README.md)
