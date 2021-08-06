@@ -28,7 +28,7 @@
 
 ## 活动与任务
 
-![&#x7EC4;&#x7EC7;&#x6D4B;&#x8BD5;&#x6D41;&#x7A0B;&#x7684;&#x4E09;&#x4E2A;&#x7EC4;&#x8981;&#x7684;&#x4EFB;&#x52A1;](../../../.gitbook/assets/image%20%2851%29.png)
+![&#x7EC4;&#x7EC7;&#x6D4B;&#x8BD5;&#x6D41;&#x7A0B;&#x7684;&#x4E09;&#x4E2A;&#x7EC4;&#x8981;&#x7684;&#x4EFB;&#x52A1;](../../../../.gitbook/assets/image%20%2851%29.png)
 
 ### 1. 开发组织测试规范\(OT1\)
 
