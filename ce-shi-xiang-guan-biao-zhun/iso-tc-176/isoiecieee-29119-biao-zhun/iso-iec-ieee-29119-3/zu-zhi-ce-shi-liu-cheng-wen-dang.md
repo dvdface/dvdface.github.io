@@ -50,5 +50,7 @@
 
 ![&#x7EC4;&#x7EC7;&#x6D4B;&#x8BD5;&#x7B56;&#x7565;&#x793A;&#x4F8B;](../../../../.gitbook/assets/image%20%28102%29.png)
 
+### 文档结构
+
 ![&#x7EC4;&#x7EC7;&#x6D4B;&#x8BD5;&#x7B56;&#x7565;&#x6587;&#x6863;&#x7ED3;&#x6784;](../../../../.gitbook/assets/test-strategy.png)
 
