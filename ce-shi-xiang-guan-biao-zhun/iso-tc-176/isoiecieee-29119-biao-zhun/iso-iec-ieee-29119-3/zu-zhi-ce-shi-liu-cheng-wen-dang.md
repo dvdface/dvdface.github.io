@@ -18,9 +18,7 @@
 
 ### 文档结构
 
-![](../../../../.gitbook/assets/zu-zhi-ce-shi-zheng-ce-.png)
-
-
+![&#x7EC4;&#x7EC7;&#x6D4B;&#x8BD5;&#x653F;&#x7B56;&#x6587;&#x6863;&#x7ED3;&#x6784;](../../../../.gitbook/assets/zu-zhi-ce-shi-zheng-ce-%20%281%29.png)
 
 ## 组织测试策略
 
