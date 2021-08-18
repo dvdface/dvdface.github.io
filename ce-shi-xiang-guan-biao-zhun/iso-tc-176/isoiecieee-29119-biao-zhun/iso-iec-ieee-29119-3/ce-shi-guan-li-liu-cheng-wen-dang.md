@@ -16,9 +16,7 @@
 
 ### 文档结构
 
-
-
-
+![](../../../../.gitbook/assets/ce-shi-ji-hua-.png)
 
 ## 测试状态报告
 
