@@ -14,7 +14,7 @@
 
 ### 文档结构
 
-![](../../../../.gitbook/assets/test-design-specification.png)
+![Test Design Specification](../../../../.gitbook/assets/test-design-specification.png)
 
 ## 测试用例文档
 
@@ -24,7 +24,7 @@
 
 ### 文档结构
 
-![](../../../../.gitbook/assets/test-case-specification.png)
+![Test Case Specification](../../../../.gitbook/assets/test-case-specification.png)
 
 ## 测试过程文档
 
@@ -34,7 +34,7 @@
 
 ### 文档结构
 
-
+![Test Procedure Specification](../../../../.gitbook/assets/test-procedure-specification.png)
 
 
 
