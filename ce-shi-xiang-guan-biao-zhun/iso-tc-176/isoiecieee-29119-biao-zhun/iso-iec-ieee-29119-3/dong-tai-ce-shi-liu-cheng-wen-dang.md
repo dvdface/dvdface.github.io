@@ -46,6 +46,8 @@
 
 ### 文档结构
 
+![Test Data Requirement](../../../../.gitbook/assets/test-data-requirement.png)
+
 ## 测试环境需求
 
 ### 概述
