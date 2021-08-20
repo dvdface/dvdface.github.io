@@ -14,6 +14,8 @@
 
 ### 文档结构
 
+![](../../../../.gitbook/assets/test-design-specification.png)
+
 ## 测试用例文档
 
 ## 测试过程文档
