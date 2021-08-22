@@ -126,3 +126,5 @@
 
 ### 文档结构
 
+![](../../../../.gitbook/assets/incident-report.png)
+
