@@ -114,6 +114,8 @@
 
 ### 文档结构
 
+![Test Execution Log](../../../../.gitbook/assets/test-execution-log.png)
+
 ## 测试问题报告
 
 ### 概述
