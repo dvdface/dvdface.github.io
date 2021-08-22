@@ -78,6 +78,8 @@
 
 ### 文档结构
 
+![Test Environment Readiness Report](../../../../.gitbook/assets/test-environment-readiness-report.png)
+
 ## 实际结果
 
 ### 概述
