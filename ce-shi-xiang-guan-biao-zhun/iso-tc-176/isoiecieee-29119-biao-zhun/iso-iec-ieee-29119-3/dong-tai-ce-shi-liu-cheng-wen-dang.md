@@ -64,7 +64,11 @@
 
 ### 概述
 
+描述每个测试数据需求准备的状态；可以作为一个占位符存在测试数据需求报告中；
+
 ### 文档结构
+
+![Test Data Readiness Report](../../../../.gitbook/assets/test-data-readiness-report.png)
 
 ## 测试环境准备报告
 
