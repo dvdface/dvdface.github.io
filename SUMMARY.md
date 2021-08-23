@@ -41,6 +41,7 @@
     * [ISO/IEC/IEEE 29119-4](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/README.md)
       * [基于规格的测试设计](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/ji-yu-gui-ge-de-ce-shi-she-ji.md)
       * [基于结构的测试设计](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/ji-yu-jie-gou-de-ce-shi-she-ji.md)
+      * [基于经验的测试设计](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/ji-yu-jing-yan-de-ce-shi-she-ji.md)
     * [ISO/IEC/IEEE 29119-5](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-5.md)
     * [ISO/IEC/IEEE 29119-6](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-6.md)
   * [ISO/IEC TR 19759](ce-shi-xiang-guan-biao-zhun/iso-tc-176/iso-iec-tr-19759.md)
