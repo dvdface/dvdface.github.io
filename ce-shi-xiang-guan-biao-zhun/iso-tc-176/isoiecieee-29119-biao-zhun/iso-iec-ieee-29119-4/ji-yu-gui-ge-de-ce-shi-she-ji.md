@@ -38,15 +38,19 @@
 
 ![](../../../../.gitbook/assets/image%20%28105%29.png)
 
-分类树把被测对象的输入划分为多个类别，每个类别之间不重叠，并以树的形式进行展现；
+分类树把被测对象输入划分为一个个分类\(Classification\)，每个分类再分多个类型\(Class\)，并以树的形式进行展现；见上图；
 
-分类树中的每个类别都是一个测试规格；
-
-它和等价类划分的最大差异在于，分类树要求每个类型不可相交，等价划分是可以的；
+分类树中的每个分类都是一个测试规格，如，Privilege、Operation、Access Method；
 
 #### Test Condition -&gt; Test Coverage Item
 
+根据前面的测试规格，一般有两种方式推导测试覆盖项；
 
+* minimized
+
+  最小覆盖法，即每个
+
+* maximized
 
 #### Test Coverage Item -&gt; Test Case
 
