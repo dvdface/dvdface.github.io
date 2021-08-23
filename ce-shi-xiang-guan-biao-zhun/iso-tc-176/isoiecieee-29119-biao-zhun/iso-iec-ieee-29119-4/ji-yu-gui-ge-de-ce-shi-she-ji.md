@@ -88,8 +88,8 @@
 
 测试覆盖项有两种推导方式：
 
-* **Two-value boundary** 两个取值分别为：边界值，边界外侧的值；
-* **Three-value boundary** 三个取值分别为：边界值，边界两侧各一个值；
+* **Two-value boundary** 两个取值分别为：边界值，边界外侧的值； 如， 边界值1需要测试0和1；
+* **Three-value boundary** 三个取值分别为：边界值，边界两侧各一个值； 如，边界值1需要测试0、1、2；
 
 #### Test Coverage Item -&gt; Test Case
 
