@@ -36,11 +36,15 @@
 
 #### Feature Set -&gt; Test Condition
 
-分类树使用分类树对被测对象的输入进行划分；
+分类树把被测对象的输入划分为多个类别，每个类别之间不重叠，并以树的形式进行展现；
+
+分类树中的每个类别都是一个测试规格；
 
 它和等价类划分的最大差异在于，分类树要求每个类型不可相交，等价划分是可以的；
 
 #### Test Condition -&gt; Test Coverage Item
+
+
 
 #### Test Coverage Item -&gt; Test Case
 
