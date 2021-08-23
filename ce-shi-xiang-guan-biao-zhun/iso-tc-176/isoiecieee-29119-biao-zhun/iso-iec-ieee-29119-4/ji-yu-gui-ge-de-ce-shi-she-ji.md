@@ -48,9 +48,9 @@
 
 * **minimized**
 
-  最小覆盖法，即每个分类
+  最小覆盖法，即每个分类的类型取值至少覆盖一次；
 
-* **maximized**
+* **maximized** 最大覆盖法，即每个分类的类型取值组合至少覆盖一次；
 
 #### Test Coverage Item -&gt; Test Case
 
