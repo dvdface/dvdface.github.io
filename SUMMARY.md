@@ -19,6 +19,7 @@
   * [ISO/IEC/IEEE 12207](ce-shi-xiang-guan-biao-zhun/iso-tc-176/iso-iec-ieee-12207/README.md)
     * [ISO/IEC 16085风险管理](ce-shi-xiang-guan-biao-zhun/iso-tc-176/iso-iec-ieee-12207/isoiec-16085-feng-xian-guan-li.md)
   * [ISO/IEC/IEEE 29119](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/README.md)
+    * [ISO/IEC TR 19759](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-tr-19759.md)
     * [ISO/IEC/IEEE29119-1](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee29119-1/README.md)
       * [ISO 25010 质量模型](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee29119-1/iso25010-zhi-liang-mo-xing.md)
       * [ISO/IEC 25051](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee29119-1/iso-iec-25051.md)
