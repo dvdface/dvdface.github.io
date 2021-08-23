@@ -44,13 +44,13 @@
 
 #### Test Condition -&gt; Test Coverage Item
 
-根据前面的测试规格，一般有两种方式生成测试覆盖项；
+根据前面的测试规格，生成测试覆盖项；
 
-* **minimized**
+* **Minimized**
 
   最小覆盖法，即每个分类的类型取值至少覆盖一次；
 
-* **maximized** 最大覆盖法，即每个分类的类型取值组合至少覆盖一次；
+* **Maximized** 最大覆盖法，即每个分类的类型取值组合至少覆盖一次；
 
 #### Test Coverage Item -&gt; Test Case
 
