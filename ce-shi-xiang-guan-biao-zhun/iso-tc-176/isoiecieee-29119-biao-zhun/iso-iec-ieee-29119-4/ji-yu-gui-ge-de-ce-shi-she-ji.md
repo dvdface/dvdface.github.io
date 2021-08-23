@@ -2,6 +2,10 @@
 
 ## 等价类划分\(Equivalence Partitioning\)
 
+### 用途
+
+用于减少测试用例的数量；
+
 ### 用法
 
 #### Feature Set -&gt; Test Condition
@@ -31,6 +35,10 @@
 等价划分覆盖 = 测试用例覆盖的等价划分数 / 等价划分总数；
 
 ## [分类树\(Classification Tree Method\)](https://aneejian.com/classification-tree-method-crack-istqb/#what-is-the-classification-tree-method)
+
+### 用途
+
+用于有多个类型输入参数的被测对象的测试；
 
 ### 用法
 
