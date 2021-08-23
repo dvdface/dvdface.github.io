@@ -40,5 +40,7 @@ description: 'Software and systems engineering — Software testing — Part 4: 
 * **基于结构的测试设计** 将源码、代码的结构作为测试设计的主要依据；
 * **基于经验的测试设计** 将测试人员的知识和经验作为测试的主要依据；
 
+![](../../../.gitbook/assets/image%20%28104%29.png)
+
 
 
