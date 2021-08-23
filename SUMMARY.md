@@ -41,6 +41,7 @@
       * [动态测试流程文档](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-3/dong-tai-ce-shi-liu-cheng-wen-dang.md)
     * [ISO/IEC/IEEE 29119-4](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4.md)
     * [ISO/IEC/IEEE 29119-5](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-5.md)
+    * [ISO/IEC/IEEE 29119-6](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-6.md)
 * [IEEE](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/README.md)
   * [IEEE-1012](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/ieee-1012.md)
 * [六西格玛](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/README.md)
