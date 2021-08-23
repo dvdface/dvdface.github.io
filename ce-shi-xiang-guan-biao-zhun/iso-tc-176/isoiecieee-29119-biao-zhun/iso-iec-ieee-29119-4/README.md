@@ -6,7 +6,7 @@ description: 'Software and systems engineering — Software testing — Part 4: 
 
 ## 概述
 
-![&#x6D4B;&#x8BD5;&#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;&#x8FC7;&#x7A0B;](../../../.gitbook/assets/1629686093-1-%20%282%29.png)
+![&#x6D4B;&#x8BD5;&#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;&#x8FC7;&#x7A0B;](../../../../.gitbook/assets/1629686093-1-%20%282%29.png)
 
 测试设计技术，主要用于以上过程的以下部分：
 
@@ -40,7 +40,7 @@ description: 'Software and systems engineering — Software testing — Part 4: 
 * **基于结构的测试设计** 将源码、代码的结构作为测试设计的主要依据；
 * **基于经验的测试设计** 将测试人员的知识和经验作为测试的主要依据；
 
-![](../../../.gitbook/assets/image%20%28104%29.png)
+![](../../../../.gitbook/assets/image%20%28104%29.png)
 
 
 
