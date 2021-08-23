@@ -22,7 +22,7 @@ description: 'Software and systems engineering — Software testing — Part 4: 
 
 #### **测试覆盖项\(Test Coverage Item\)**
 
-测试覆盖项是测试规格中可以使用测试覆盖的属性部分；
+测试覆盖项是测试规格中可测试覆盖的属性；
 
 单个测试规格可以作为一个或者多个测试覆盖项的依据；
 
