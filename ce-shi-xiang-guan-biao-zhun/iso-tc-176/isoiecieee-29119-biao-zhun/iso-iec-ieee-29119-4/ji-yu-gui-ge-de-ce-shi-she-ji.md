@@ -109,11 +109,11 @@
 
 ### 用法
 
-#### 用于推导测试规格
+#### Feature Set -&gt; Test Condition
 
-#### 用于推导测试覆盖项
+#### Test Condition -&gt; Test Coverage Item
 
-#### 用于推导测试用例
+#### Test Coverage Item -&gt; Test Case
 
 ### 测试度量
 
