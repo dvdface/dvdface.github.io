@@ -42,5 +42,5 @@ description: 'Software and systems engineering — Software testing — Part 4: 
 
 ![](../../../../.gitbook/assets/image%20%28104%29.png)
 
-
+无论使用哪种测试设计技术，都会用到模型这个概念；模型是对被测对象的逻辑表示，常用来推导测试规格；
 
