@@ -30,7 +30,7 @@
 
 等价划分覆盖 = 测试用例覆盖的等价划分数 / 等价划分总数；
 
-## 分类树\(Classification Tree Method\)
+## [分类树\(Classification Tree Method\)](https://aneejian.com/classification-tree-method-crack-istqb/#what-is-the-classification-tree-method)
 
 ### 用法
 
