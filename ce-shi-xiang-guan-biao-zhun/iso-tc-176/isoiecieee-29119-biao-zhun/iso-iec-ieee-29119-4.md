@@ -8,8 +8,6 @@ description: 'Software and systems engineering — Software testing — Part 4: 
 
 ![&#x6D4B;&#x8BD5;&#x8BBE;&#x8BA1;&#x4E0E;&#x5B9E;&#x73B0;&#x8FC7;&#x7A0B;](../../../.gitbook/assets/1629686093-1-%20%282%29.png)
 
-测试设计技术主要用于设计测试用例，通过执行所设计的用例来验证被测对象满足需求；
-
 测试设计技术，主要用于以上过程的以下部分：
 
 * 根据Feature Set推导Test Condition \(TD2\)
