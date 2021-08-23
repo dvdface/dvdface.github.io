@@ -46,11 +46,11 @@
 
 根据前面的测试规格，一般有两种方式推导测试覆盖项；
 
-* minimized
+* **minimized**
 
   最小覆盖法，即每个
 
-* maximized
+* **maximized**
 
 #### Test Coverage Item -&gt; Test Case
 
