@@ -38,13 +38,13 @@
 
 ![](../../../../.gitbook/assets/image%20%28105%29.png)
 
-分类树把被测对象输入划分为一个个分类\(Classification\)，每个分类再分多个类型\(Class、SubClass\)，并以树的形式进行展现；见上图；
+分类树把被测对象输入划分为多个分类\(Classification\)，每个分类的输入再分为多个类型\(Class、SubClass\)，并以树的形式进行展现；见上图；
 
-分类树中的每个分类都是一个测试规格，如，Privilege、Operation、Access Method；
+分类树中的每个分类\(Classification\)都是一个测试规格，如，Privilege、Operation、Access Method；
 
 #### Test Condition -&gt; Test Coverage Item
 
-根据前面的测试规格，一般有两种方式推导测试覆盖项；
+根据前面的测试规格，一般有两种方式生成测试覆盖项；
 
 * **minimized**
 
