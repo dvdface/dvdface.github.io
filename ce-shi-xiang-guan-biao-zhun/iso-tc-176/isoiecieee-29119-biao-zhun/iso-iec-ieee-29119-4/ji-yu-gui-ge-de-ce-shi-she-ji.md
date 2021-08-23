@@ -111,6 +111,12 @@
 
 #### Feature Set -&gt; Test Condition
 
+语法测试使用形式化模型对被测对象的输入进行建模，并作为测试依据；
+
+语法可以使用文本的方式表示，也可以使用图示的方式表示；
+
+在语法测试中，把整个被测对象输入模型，或者输入模型的一部分作为被测规格；
+
 #### Test Condition -&gt; Test Coverage Item
 
 #### Test Coverage Item -&gt; Test Case
