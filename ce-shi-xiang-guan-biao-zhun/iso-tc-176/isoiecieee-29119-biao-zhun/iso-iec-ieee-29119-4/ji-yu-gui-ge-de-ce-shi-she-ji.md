@@ -273,6 +273,12 @@
 
 ### 用途
 
+因果图和判定表类似，只不过用图形来表示Condtions与Actions之间的判定关系；
+
+![](../../../../.gitbook/assets/image%20%28108%29.png)
+
+
+
 ### 用法
 
 #### Feature Set -&gt; Test Condition
