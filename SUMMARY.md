@@ -59,7 +59,7 @@
   * [质量管理七工具](ce-shi-xiang-guan-biao-zhun/qi-ta/zhi-liang-guan-li-qi-gong-ju.md)
 * [参考资料](ce-shi-xiang-guan-biao-zhun/can-kao-zi-liao.md)
 
-## 需求分析方法 <a id="xu-qiu-fen-xi"></a>
+## 需求工程 <a id="xu-qiu-fen-xi"></a>
 
 * [实例化需求](xu-qiu-fen-xi/untitled/README.md)
   * [Gherkin语法](xu-qiu-fen-xi/untitled/gherkin-yu-fa.md)
