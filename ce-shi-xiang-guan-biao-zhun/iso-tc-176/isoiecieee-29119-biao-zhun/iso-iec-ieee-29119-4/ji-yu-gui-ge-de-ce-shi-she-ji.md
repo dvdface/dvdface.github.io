@@ -192,11 +192,11 @@
 
 * **All Combinations Testing**
 
-  全组合的测试覆盖项 为 所有PV项 的组合；
+  测试覆盖项为 P-V项全组合 的集合；
 
-* **Pair-wise Testing** 成对的测试覆盖项目 为  PV项成对 组合；
-* **Each Choice Testing**
-* **Base Choice Testing**
+* **Pair-wise Testing**\(2-wise\) ****测试覆盖项为  PV项成对组合 的集合；
+* **Each Choice Testing\(1-wise\)** 测试覆盖项为 PV项 的集合；
+* **Base Choice Testing** 测试覆盖项为 除了一个参数选择Base以外的有效值，其他参数均选择Base值 的组合；
 
 #### Test Coverage Item -&gt; Test Case
 
