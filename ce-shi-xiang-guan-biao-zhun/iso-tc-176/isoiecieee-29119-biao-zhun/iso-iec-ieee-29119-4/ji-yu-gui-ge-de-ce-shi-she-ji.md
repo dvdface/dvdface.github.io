@@ -232,7 +232,7 @@
 
 ### 测试覆盖度量
 
-组合测试覆盖 = 测试用例所覆盖的全/2-Wise/1-Wise/Base Choice PV组合 / 所有PV项全/2-Wise/1-Wise/Base Choice PV组合
+组合测试覆盖率 = 测试用例所覆盖的全/2-Wise/1-Wise/Base Choice PV组合 / 所有PV项全/2-Wise/1-Wise/Base Choice PV组合
 
 ## [判定表测试\(Decision Table Testing\)](https://www.guru99.com/decision-table-testing.html)
 
@@ -264,6 +264,8 @@
 4. 重复步骤1~3，直到达到所需的测试覆盖率；
 
 ### 测试覆盖度量
+
+判定表测试覆盖率 = 测试用例所覆盖的判定规则数理 / 所有判定规则数量
 
 ## 因果图\(Cause-Effect Graphing\)
 
