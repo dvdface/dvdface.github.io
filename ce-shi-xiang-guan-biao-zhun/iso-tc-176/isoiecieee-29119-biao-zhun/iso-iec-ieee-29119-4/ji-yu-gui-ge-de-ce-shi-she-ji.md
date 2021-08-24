@@ -109,11 +109,11 @@
 
 ## 语法测试\(Syntax Testing / Grammar-Based Testing\)
 
+### 背景
+
 基于语法的测试主要用来测试那些输入可以使用形式化描述的被测对象；
 
 比如， GUI程序、XML/HTML程序、使用命令行的软件、脚本语言、数据库查询语言和编译器等；
-
-### 用法
 
 #### Feature Set -&gt; Test Condition
 
