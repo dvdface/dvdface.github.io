@@ -172,6 +172,8 @@
 
 ## 组合测试设计技术\(Combinatorial Test Design Techniques\)
 
+### 用途
+
 ### 用法
 
 #### Feature Set -&gt; Test Condition
@@ -183,6 +185,8 @@
 ### 测试覆盖度量
 
 ## 决策表测试\(Decision Table Testing\)
+
+### 用途
 
 ### 用法
 
@@ -196,6 +200,8 @@
 
 ## 因果图\(Cause-Effect Graphing\)
 
+### 用途
+
 ### 用法
 
 #### Feature Set -&gt; Test Condition
@@ -207,6 +213,8 @@
 ### 测试覆盖度量
 
 ## 状态迁移测试\(State Transition Testing\)
+
+### 用途
 
 ### 用法
 
@@ -231,6 +239,8 @@
 ### 测试覆盖度量
 
 ## 随机测试\(RamdonTesting\)
+
+### 用途
 
 ### 用法
 
