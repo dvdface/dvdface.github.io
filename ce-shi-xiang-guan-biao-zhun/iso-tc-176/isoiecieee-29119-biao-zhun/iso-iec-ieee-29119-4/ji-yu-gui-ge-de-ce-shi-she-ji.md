@@ -190,9 +190,9 @@
 
 * **All Combinations Testing**
 
-  全组合的测试覆盖项为唯一PV对集合；
+  全组合的测试覆盖项 为 所有PV项的组合；
 
-* **Pair-wise Testing**
+* **Pair-wise Testing** 成对的测试覆盖项目 为  PV项成对组合；
 * **Each Choice Testing**
 * **Base Choice Testing**
 
