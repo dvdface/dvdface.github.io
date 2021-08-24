@@ -71,14 +71,6 @@
 * [概述](square/untitled.md)
 * [参考资料](square/can-kao-zi-liao-1.md)
 
-## 一般性测试设计方法 <a id="ce-shi-she-ji"></a>
-
-* [概述](ce-shi-she-ji/untitled.md)
-* [基于规格的测试设计](ce-shi-she-ji/gong-neng-ce-shi-mo-xing/README.md)
-  * [场景测试](ce-shi-she-ji/gong-neng-ce-shi-mo-xing/chang-jing-ce-shi.md)
-* [基于结构的测试设计](ce-shi-she-ji/jie-gou-hua-ce-shi-mo-xing.md)
-* [基于经验的测试设计](ce-shi-she-ji/ji-yu-jing-yan-de-ce-shi-she-ji.md)
-
 ## 稳定性设计与测试 <a id="wen-ding-xing-ce-shi"></a>
 
 * [稳定性度量](wen-ding-xing-ce-shi/wen-ding-xing-du-liang.md)
