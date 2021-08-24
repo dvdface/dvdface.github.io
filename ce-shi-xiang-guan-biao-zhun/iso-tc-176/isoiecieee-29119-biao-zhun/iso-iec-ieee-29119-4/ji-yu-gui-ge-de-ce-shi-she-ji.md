@@ -133,13 +133,13 @@
 
        如，input = A \| B \| C，对应A、B、C三个覆盖项；
   * 迭代型语法
-    * 无最大数量限制的，使用one letter和more than one letter两个选项； 
+    * 无最大数量限制的，使用one letter和more than one letter两类选项； 
 
-      如，input = \[ABC\]+，对应one letter和more than one letter两个测试覆盖项；
+      如，input = \[ABC\]+，对应两类测试覆盖项：A、B、C和AA、BB、CC
 
     * 有最大数量限制的，使用max repetitions和beyond max repetitions两个选项；
 
-      如，input = \[ABC\]{1000}， 对应max repetitions和beyond max repetitions两个选项；
+      如，input = \[ABC\]{2}， 对应AA、BB、CC和ABC；
 * 根据语法定义，生成对应的无效语法选项；
   * 选择型语法
     * 使用非有效列表里面的语法选项
@@ -147,6 +147,14 @@
       如，input = A \| B \| C， 则对应D一个覆盖项；
 
 #### Test Coverage Item -&gt; Test Case
+
+1. 确定如何使用测试用例覆盖测试覆盖项：
+   * 一条用例覆盖一个覆盖项；
+   * 一条用例覆盖多个覆盖项；
+2. 选取要进行覆盖的测试覆盖项；
+3. 确定测试用例的输入参数；
+4. 确定测试用例的预期输出；
+5. 重复2~4，直到覆盖所有测试覆盖项；
 
 ### 测试度量
 
