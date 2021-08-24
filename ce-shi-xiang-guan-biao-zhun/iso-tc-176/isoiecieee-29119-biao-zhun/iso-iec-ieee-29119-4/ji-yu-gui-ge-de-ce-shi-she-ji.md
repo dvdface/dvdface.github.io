@@ -207,11 +207,16 @@
 #### Test Coverage Item -&gt; Test Case
 
 * **All Combinations Testing**
-
-  测试覆盖项为 P-V项全组合 的集合；
-
-* **Pair-wise Testing\(2-wise\)** 测试覆盖项为  PV项成对组合 的集合；
-* **Each Choice Testing\(1-wise\)** 测试覆盖项为 PV项 的集合；
+  1. 选择一个测试覆盖项用测试用例覆盖；
+  2. 根据输入值确定预期结果；
+  3. 重复步骤1~2，直到覆盖所有测试覆盖项；
+* **Pair-wise Testing\(2-wise\)**
+  1. 选择一个测试覆盖项\(每对PV取一对尚未覆盖的参数取\)值用测试用例覆盖；
+  2. 测试用例中的其他参数任取有效值；
+  3. 根据输入值确定预期结果；
+  4. 重复步骤1~3，直到覆盖所有测试覆盖项\(一般使用正交法计算所有参数组合\)；
+* **Each Choice Testing\(1-wise\)**
+  1. \*\*\*\*
 * **Base Choice Testing** 测试覆盖项为 除了一个参数选择Base以外的有效值，其他参数均选择Base值的组合 的集合；
 
 ### 测试覆盖度量
