@@ -324,7 +324,16 @@
 
 #### Test Condition -&gt; Test Coverage Item
 
+测试覆盖项取决于测试准出要求，可能准出要求有：
+
+* 覆盖所有的状态；
+* 覆盖所有的单步状态迁移\(0-Switch\)；
+* 覆盖所有单步状态迁移，包括有效和无效迁移；
+* 覆盖多步状态转义\(N-Switch\)，即状态要转义N+1次；
+
 #### Test Coverage Item -&gt; Test Case
+
+
 
 ### 测试覆盖度量
 
