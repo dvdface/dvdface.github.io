@@ -164,35 +164,35 @@
 
 ### 用法
 
-#### 用于推导测试规格
+#### Feature Set -&gt; Test Condition
 
-#### 用于推导测试覆盖项
+#### Test Condition -&gt; Test Coverage Item
 
-#### 用于推导测试用例
+#### Test Coverage Item -&gt; Test Case
 
-### 测试度量
+### 测试覆盖度量
 
 ## 决策表测试\(Decision Table Testing\)
 
 ### 用法
 
-#### 用于推导测试规格
+#### Feature Set -&gt; Test Condition
 
-#### 用于推导测试覆盖项
+#### Test Condition -&gt; Test Coverage Item
 
-#### 用于推导测试用例
+#### Test Coverage Item -&gt; Test Case
 
-### 测试度量
+### 测试覆盖度量
 
 ## 因果图\(Cause-Effect Graphing\)
 
 ### 用法
 
-#### 用于推导测试规格
+#### Feature Set -&gt; Test Condition
 
-#### 用于推导测试覆盖项
+#### Test Condition -&gt; Test Coverage Item
 
-#### 用于推导测试用例
+#### Test Coverage Item -&gt; Test Case
 
 ### 测试覆盖度量
 
@@ -200,11 +200,11 @@
 
 ### 用法
 
-#### 用于推导测试规格
+#### Feature Set -&gt; Test Condition
 
-#### 用于推导测试覆盖项
+#### Test Condition -&gt; Test Coverage Item
 
-#### 用于推导测试用例
+#### Test Coverage Item -&gt; Test Case
 
 ### 测试覆盖度量
 
@@ -212,11 +212,11 @@
 
 ### 用法
 
-#### 用于推导测试规格
+#### Feature Set -&gt; Test Condition
 
-#### 用于推导测试覆盖项
+#### Test Condition -&gt; Test Coverage Item
 
-#### 用于推导测试用例
+#### Test Coverage Item -&gt; Test Case
 
 ### 测试覆盖度量
 
@@ -224,11 +224,11 @@
 
 ### 用法
 
-#### 用于推导测试规格
+#### Feature Set -&gt; Test Condition
 
-#### 用于推导测试覆盖项
+#### Test Condition -&gt; Test Coverage Item
 
-#### 用于推导测试用例
+#### Test Coverage Item -&gt; Test Case
 
 ### 测试覆盖度量
 
