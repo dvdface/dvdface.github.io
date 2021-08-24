@@ -236,11 +236,13 @@
 
 判定表测试一般用来测试复杂的业务规则；
 
-需要分析被测对象，梳理因\(Cause\)果\(Effect\)关系，并以判定表的形式记录下来；
-
 ### 用法
 
 #### Feature Set -&gt; Test Condition
+
+分析被测对象，梳理因\(Cause\)果\(Effect\)关系，并以判定表的形式记录下来；
+
+每个因果关系都是一个测试规格；
 
 #### Test Condition -&gt; Test Coverage Item
 
