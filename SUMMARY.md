@@ -42,6 +42,7 @@
       * [基于规格的测试设计](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/ji-yu-gui-ge-de-ce-shi-she-ji.md)
       * [基于结构的测试设计](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/ji-yu-jie-gou-de-ce-shi-she-ji.md)
       * [基于经验的测试设计](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/ji-yu-jing-yan-de-ce-shi-she-ji.md)
+      * [参考资料](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/can-kao-zi-liao.md)
     * [ISO/IEC/IEEE 29119-5](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-5.md)
     * [ISO/IEC/IEEE 29119-6](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-6.md)
   * [ISO/IEC TR 19759](ce-shi-xiang-guan-biao-zhun/iso-tc-176/iso-iec-tr-19759.md)
@@ -73,7 +74,6 @@
 ## 一般性测试设计方法 <a id="ce-shi-she-ji"></a>
 
 * [概述](ce-shi-she-ji/untitled.md)
-* [参考资料](ce-shi-she-ji/can-kao-zi-liao.md)
 * [基于规格的测试设计](ce-shi-she-ji/gong-neng-ce-shi-mo-xing/README.md)
   * [场景测试](ce-shi-she-ji/gong-neng-ce-shi-mo-xing/chang-jing-ce-shi.md)
 * [基于结构的测试设计](ce-shi-she-ji/jie-gou-hua-ce-shi-mo-xing.md)
