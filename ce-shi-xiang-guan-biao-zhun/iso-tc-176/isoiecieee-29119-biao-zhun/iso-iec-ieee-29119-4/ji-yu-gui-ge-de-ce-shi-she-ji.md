@@ -170,7 +170,7 @@
 
 业界尚无测试覆盖度量的计算方法；
 
-## 组合测试设计技术\(Combinatorial Test Design Techniques\)
+## [组合测试设计技术\(Combinatorial Test Design Techniques\)](https://csrc.nist.gov/Projects/automated-combinatorial-testing-for-software/)
 
 ### 用途
 
