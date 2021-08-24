@@ -188,6 +188,14 @@
 
 #### Test Condition -&gt; Test Coverage Item
 
+* **All Combinations Testing**
+
+  全组合的测试覆盖项为唯一PV对集合；
+
+* **Pair-wise Testing**
+* **Each Choice Testing**
+* **Base Choice Testing**
+
 #### Test Coverage Item -&gt; Test Case
 
 ### 测试覆盖度量
