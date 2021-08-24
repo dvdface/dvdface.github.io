@@ -380,7 +380,7 @@
 
 ### 用途
 
-一般用于稳定性测试，如，Fuzzing Testing；
+一般适合自动化测试中使用，如，稳定性测试中的Fuzzing Testing；
 
 ### 用法
 
