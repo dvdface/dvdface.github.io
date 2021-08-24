@@ -230,11 +230,13 @@
 
 组合测试覆盖 = 测试用例所覆盖的PV组合 / 所有PV组合
 
-## 判定表测试\(Decision Table Testing\)
+## [判定表测试\(Decision Table Testing\)](https://www.guru99.com/decision-table-testing.html)
 
 ### 用途
 
 判定表测试一般用来测试复杂的业务规则；
+
+![&#x5224;&#x5B9A;&#x8868;&#x793A;&#x4F8B;](../../../../.gitbook/assets/image%20%28107%29.png)
 
 ### 用法
 
