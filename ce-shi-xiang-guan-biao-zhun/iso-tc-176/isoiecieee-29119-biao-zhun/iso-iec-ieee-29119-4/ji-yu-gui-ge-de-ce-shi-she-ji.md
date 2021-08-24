@@ -380,13 +380,28 @@
 
 ### 用途
 
+一般用于稳定性测试，如，Fuzzing Testing；
+
 ### 用法
 
 #### Feature Set -&gt; Test Condition
 
+为被测对象输入参数的所有可能输入值进行建模；
+
+选择一个输入参数的分布，一般选正态分布；
+
+把整个输入域作为测试条件；
+
 #### Test Condition -&gt; Test Coverage Item
 
+无特别的测试覆盖项
+
 #### Test Coverage Item -&gt; Test Case
+
+1. 为被测对象的输入选择分布函数；
+2. 使用分布函数创建测试用例的输入值；
+3. 确定测试用例的预期输出；
+4. 重复2~3，直到完成测试；
 
 ### 测试覆盖度量
 
