@@ -230,7 +230,7 @@
 
 组合测试覆盖 = 测试用例所覆盖的PV组合 / 所有PV组合
 
-## 决策表测试\(Decision Table Testing\)
+## 判定表测试\(Decision Table Testing\)
 
 ### 用途
 
