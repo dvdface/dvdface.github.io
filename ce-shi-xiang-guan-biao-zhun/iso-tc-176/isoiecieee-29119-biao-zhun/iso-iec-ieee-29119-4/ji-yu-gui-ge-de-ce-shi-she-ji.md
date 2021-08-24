@@ -291,6 +291,8 @@
 
 #### Test Condition -&gt; Test Coverage Item
 
+因果形成的判定规则对应测试覆盖项；
+
 #### Test Coverage Item -&gt; Test Case
 
 ### 测试覆盖度量
