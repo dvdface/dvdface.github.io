@@ -320,6 +320,8 @@
 
 #### Feature Set -&gt; Test Condition
 
+为被测对象建立状态迁移模型，可以是图的形式，也可以是表的形式，然后将状态、状态迁移或者整个模型作为测试规格；
+
 #### Test Condition -&gt; Test Coverage Item
 
 #### Test Coverage Item -&gt; Test Case
