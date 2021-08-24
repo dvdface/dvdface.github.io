@@ -2,7 +2,7 @@
 
 ## 等价类划分\(Equivalence Partitioning\)
 
-### 用途
+### 背景
 
 等价类划分主要对被测对象的输入、输出\(使用输出反推输入\)域进行等价类划分，对于每个划分，系统处理它的行为是类似的；由于等价划分数量是有限的，因此方法能有效的减少测试用例的数量；
 
@@ -36,7 +36,7 @@
 
 ## [分类树\(Classification Tree Method\)](https://aneejian.com/classification-tree-method-crack-istqb/#what-is-the-classification-tree-method)
 
-### 用途
+### 背景
 
 分类树首先会对测试对象的输入\(可以是输入参数，也可以是预置条件等等\)做分类分析\(Classification\)，看有多少个输入类型；再看看每个输入类型下，各有多少类的输入参数\(常用等价类的方式进行划分\)；得到了输入分类和类之后，应用组合测试设计推导对应的测试覆盖项；
 
@@ -76,9 +76,9 @@
 
 ## 边界值分析\(Boundary Value Analysis\)
 
-### 用法
+### 背景
 
-
+边界值分析主要是在等价类划分的前提下，把边界值的测试考虑在内；
 
 #### Feature Set -&gt; Test Condition
 
