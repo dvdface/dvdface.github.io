@@ -128,9 +128,23 @@
 推导测试覆盖项主要基于两个目标：测试有效语法，测试无效语法；
 
 * 根据语法定义，列出所有有效的语法选项；
-* 根据语法定义，列出所有有效语法选项后，再稍加变化，生成对应的无效语法选项；
+  * 选择型语法
+    * 使用每个语法选项
 
-如，
+       如，input = A \| B \| C，对应A、B、C三个覆盖项；
+  * 迭代型语法
+    * 无最大数量限制的，使用one letter和more than one letter两个选项； 
+
+      如，input = \[ABC\]+，对应one letter和more than one letter两个测试覆盖项；
+
+    * 有最大数量限制的，使用max repetitions和beyond max repetitions两个选项；
+
+      如，input = \[ABC\]{1000}， 对应max repetitions和beyond max repetitions两个选项；
+* 根据语法定义，生成对应的无效语法选项；
+  * 选择型语法
+    * 使用非有效列表里面的语法选项
+
+      如，input = A \| B \| C， 则对应D一个覆盖项；
 
 #### Test Coverage Item -&gt; Test Case
 
