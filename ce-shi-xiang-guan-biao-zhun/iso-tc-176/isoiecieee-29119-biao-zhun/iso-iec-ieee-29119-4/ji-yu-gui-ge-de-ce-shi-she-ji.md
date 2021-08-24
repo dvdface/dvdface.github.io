@@ -210,7 +210,7 @@
 
   测试覆盖项为 P-V项全组合 的集合；
 
-* **Pair-wise Testing**\(2-wise\) ****测试覆盖项为  PV项成对组合 的集合；
+* **Pair-wise Testing\(2-wise\)** 测试覆盖项为  PV项成对组合 的集合；
 * **Each Choice Testing\(1-wise\)** 测试覆盖项为 PV项 的集合；
 * **Base Choice Testing** 测试覆盖项为 除了一个参数选择Base以外的有效值，其他参数均选择Base值的组合 的集合；
 
