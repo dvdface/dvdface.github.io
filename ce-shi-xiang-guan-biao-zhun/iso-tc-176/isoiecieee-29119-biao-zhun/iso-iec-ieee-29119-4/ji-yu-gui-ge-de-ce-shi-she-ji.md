@@ -246,11 +246,13 @@
 
 #### Feature Set -&gt; Test Condition
 
-分析被测对象，梳理因\(Cause\)果\(Effect\)关系，并以判定表的形式记录下来；
+分析被测对象，梳理因\(Conditions\)果\(Actions\)关系，并以判定表的形式记录下来；
 
-每个因果关系都是一个测试规格；
+* 每个Condition是等价划分后的输入值，一个取值对应True，一个取值对应False；
+* 每个Action一般是被测对象的一个输出或输出组合，一个取值对应True，一个取值对应False；
+* Conditions与Actions之间形成一个判定关系；
 
-如果因不是布尔值，可以使用等价类将其划分为多个值，然后使用；
+每个判定关系对应一个测试规格；
 
 #### Test Condition -&gt; Test Coverage Item
 
