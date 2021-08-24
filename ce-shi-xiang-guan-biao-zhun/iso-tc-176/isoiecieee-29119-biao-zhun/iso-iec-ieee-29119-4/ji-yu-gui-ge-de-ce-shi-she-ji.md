@@ -277,11 +277,17 @@
 
 ![](../../../../.gitbook/assets/image%20%28108%29.png)
 
-
-
 ### 用法
 
 #### Feature Set -&gt; Test Condition
+
+使用因果图的形式表示因与果之间的判定关系：
+
+* 每个因是一对等价划分后的值，一个对应True，一个对应False；
+* 每个果是被测对象的一个或者一组输出组合，一个值对应True，一个值对应False；
+* 它们之间的判定关系用因果图表示，有Identity/Not/And/Or/Nand/Nor几种；
+
+每个判定关系作为一个测试规格；
 
 #### Test Condition -&gt; Test Coverage Item
 
