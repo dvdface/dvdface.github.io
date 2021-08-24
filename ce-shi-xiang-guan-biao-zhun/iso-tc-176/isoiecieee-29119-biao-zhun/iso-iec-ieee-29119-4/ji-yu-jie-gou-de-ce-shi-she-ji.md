@@ -45,6 +45,8 @@
 
 #### Test Condition -&gt; Test Coverage Item
 
+每条控制流分支都作为一个测试覆盖项；
+
 #### Test Coverage Item -&gt; Test Case
 
 ### 测试覆盖度量
