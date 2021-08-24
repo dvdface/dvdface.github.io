@@ -244,6 +244,8 @@
 
 每个因果关系都是一个测试规格；
 
+如果因不是布尔值，可以使用等价类将其划分为多个值，然后使用；
+
 #### Test Condition -&gt; Test Coverage Item
 
 #### Test Coverage Item -&gt; Test Case
