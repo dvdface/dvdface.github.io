@@ -102,3 +102,7 @@
 * [动态测试](zi-dong-hua-ce-shi/dong-tai-ce-shi.md)
 * [参考资料](zi-dong-hua-ce-shi/untitled.md)
 
+## 质量可视化
+
+* [参考](zhi-liang-ke-shi-hua/can-kao.md)
+
