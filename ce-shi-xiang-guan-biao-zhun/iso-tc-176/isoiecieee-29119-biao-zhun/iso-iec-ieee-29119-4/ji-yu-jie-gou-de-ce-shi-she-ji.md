@@ -6,6 +6,8 @@
 
 对可执行语句进行覆盖；
 
+![Demo of Statement Testing](../../../../.gitbook/assets/image%20%28110%29.png)
+
 ### 用法
 
 #### Feature Set -&gt; Test Condition
