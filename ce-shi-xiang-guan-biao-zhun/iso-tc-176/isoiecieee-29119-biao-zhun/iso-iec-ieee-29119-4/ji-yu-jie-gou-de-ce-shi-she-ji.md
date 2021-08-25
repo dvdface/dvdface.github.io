@@ -35,6 +35,8 @@
 
 对代码分支进行覆盖；
 
+![Demo of Branch Testing](../../../../.gitbook/assets/image%20%28111%29.png)
+
 ### 用法
 
 #### Feature Set -&gt; Test Condition
@@ -74,7 +76,7 @@
 
 对判定点进行覆盖；
 
-![Demo of Decision Testing](../../../../.gitbook/assets/image%20%28111%29.png)
+![Demo of Decision Testing](../../../../.gitbook/assets/image%20%28112%29.png)
 
 ### 用法
 
