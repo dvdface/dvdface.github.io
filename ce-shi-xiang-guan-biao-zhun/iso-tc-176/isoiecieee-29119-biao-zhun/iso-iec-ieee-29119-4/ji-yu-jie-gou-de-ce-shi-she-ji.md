@@ -1,6 +1,6 @@
 # 基于结构的测试设计
 
-## 语句测试
+## 语句测试\(Statement Testing\)
 
 ### 用法
 
@@ -23,7 +23,7 @@
 
 语句测试覆盖率 = 测试用例覆盖的可执行语句 / 被测对象所有可执行语句；
 
-## 分支测试
+## 分支测试\(Branch Testing\)
 
 ### 用法
 
@@ -58,7 +58,7 @@
 
 分支测试覆盖率 = 测试用例覆盖的控制流分支数量 / 所有控制流分支数量；
 
-## 判定测试
+## 判定测试\(Decision Testing\)
 
 ### 用法
 
@@ -70,7 +70,7 @@
 
 ### 测试覆盖度量
 
-## 分支条件测试
+## 分支条件测试\(Branch Condition Testing\)
 
 ### 用法
 
@@ -82,7 +82,7 @@
 
 ### 测试覆盖度量
 
-## 分支条件组合测试
+## 分支条件组合测试\(Branch Condition Combination Testing\)
 
 ### 用法
 
@@ -94,7 +94,19 @@
 
 ### 测试覆盖度量
 
-## 数据流测试
+## 数据流测试\(Modified Condition Decision Coverage Testing\)
+
+### 用法
+
+#### Feature Set -&gt; Test Condition
+
+#### Test Condition -&gt; Test Coverage Item
+
+#### Test Coverage Item -&gt; Test Case
+
+### 测试覆盖度量
+
+## 数据流测试\(Data Flow Testing\)
 
 ### 用法
 
