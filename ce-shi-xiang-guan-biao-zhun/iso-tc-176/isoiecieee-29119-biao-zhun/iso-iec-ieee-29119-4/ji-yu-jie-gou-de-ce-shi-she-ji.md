@@ -164,7 +164,20 @@ Test Condition的推导和Decision Testing没有什么区别；
 
 #### Feature Set -&gt; Test Condition
 
+为被测对象建立控制流模型，控制流模型中的每个判定点作为测试规格；
+
 #### Test Condition -&gt; Test Coverage Item
+
+把决策点中的条件组合作为测试覆盖项；
+
+如，决策点为 A \| \( B & C\)，要覆盖的测试覆盖项有：
+
+* A=T， B=T， C=T
+* A=T， B=T， C=F
+* A=T， B=F， C=T
+* A=T， B=F， C=F
+
+    ...
 
 #### Test Coverage Item -&gt; Test Case
 
