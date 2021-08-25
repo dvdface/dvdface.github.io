@@ -1,4 +1,4 @@
-# 控制流类型的测试设计
+# 基于结构的测试设计
 
 ## 语句测试\(Statement Testing\)
 
@@ -6,7 +6,7 @@
 
 对可执行语句进行覆盖；
 
-![Demo of Statement Testing](../../../../../.gitbook/assets/image%20%28110%29.png)
+![Demo of Statement Testing](../../../../.gitbook/assets/image%20%28110%29.png)
 
 ### 用法
 
@@ -35,7 +35,7 @@
 
 对代码分支进行覆盖；
 
-![Demo of Branch Testing](../../../../../.gitbook/assets/image%20%28111%29.png)
+![Demo of Branch Testing](../../../../.gitbook/assets/image%20%28111%29.png)
 
 ### 用法
 
@@ -76,7 +76,7 @@
 
 对判定点进行覆盖；
 
-![Demo of Decision Testing](../../../../../.gitbook/assets/image%20%28112%29.png)
+![Demo of Decision Testing](../../../../.gitbook/assets/image%20%28112%29.png)
 
 ### 用法
 
@@ -227,6 +227,31 @@ Test Condition的推导和Decision Testing没有什么区别；
 ### 测试覆盖度量
 
 修改条件判定覆盖率 = 测试用例覆盖的测试覆盖项数量 / 测试覆盖项总数
+
+## 数据流测试\(Data Flow Testing\)
+
+### 背景
+
+### **用法**
+
+#### Feature Set -&gt; Test Condition
+
+在数据流测试中，对变量有如下定义：
+
+* definition，为变量赋值；
+* use，不给变量赋值的方式使用变量：
+  * p-uses，在判断语句里面使用变量；
+  * c-uses，变量参与表达式计算；
+
+数据流测试的是那些定义变量并使用变量的控制流路径，即，definition-use 对；
+
+
+
+#### Test Condition -&gt; Test Coverage Item
+
+#### Test Coverage Item -&gt; Test Case
+
+### 测试覆盖度量
 
 
 
