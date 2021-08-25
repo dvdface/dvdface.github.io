@@ -166,6 +166,8 @@ Test Condition的推导和Decision Testing没有什么区别；
 
 为被测对象建立控制流模型，控制流模型中的每个判定点作为测试规格；
 
+如，把决策点为 A \| \( B & C\)作为测试规格；
+
 #### Test Condition -&gt; Test Coverage Item
 
 把决策点中的条件组合作为测试覆盖项；
@@ -181,9 +183,9 @@ Test Condition的推导和Decision Testing没有什么区别；
 
 #### Test Coverage Item -&gt; Test Case
 
-分支条件组合测试覆盖率 = 测试用例覆盖的分支条件组合数量 / 分支条件组合总数；
-
 ### 测试覆盖度量
+
+分支条件组合测试覆盖率 = 测试用例覆盖的分支条件组合数量 / 分支条件组合总数；
 
 ## 修改条件判定覆盖测试\(Modified Condition Decision Coverage Testing\)
 
