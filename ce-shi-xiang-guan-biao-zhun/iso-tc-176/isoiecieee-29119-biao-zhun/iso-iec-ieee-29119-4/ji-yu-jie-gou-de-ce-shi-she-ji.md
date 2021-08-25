@@ -154,6 +154,8 @@ Test Condition的推导和Decision Testing没有什么区别；
 
 ### 测试覆盖度量
 
+分支条件测试覆盖率 = 测试用例覆盖的 \(条件数 + 决策点后的控制流分支数\) /  \(条件总数 + 决策点后的控制流分支总数\)
+
 ## 分支条件组合测试\(Branch Condition Combination Testing\)
 
 ### 用法
