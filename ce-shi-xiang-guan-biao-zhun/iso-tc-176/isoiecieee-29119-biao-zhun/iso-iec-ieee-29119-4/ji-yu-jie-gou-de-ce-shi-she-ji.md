@@ -127,7 +127,7 @@ Test Condition的推导和Decision Testing没有什么区别；
 
 #### Test Condition -&gt; Test Coverage Item
 
-把决策点中的所有Bool判定条件作为测试覆盖项；
+把决策点中的所有Bool判定条件、控制流分支作为测试覆盖项；
 
 #### Test Coverage Item -&gt; Test Case
 
