@@ -74,6 +74,8 @@
 
 对判定点进行覆盖；
 
+![Demo of Decision Testing](../../../../.gitbook/assets/image%20%28111%29.png)
+
 ### 用法
 
 #### Feature Set -&gt; Test Condition
