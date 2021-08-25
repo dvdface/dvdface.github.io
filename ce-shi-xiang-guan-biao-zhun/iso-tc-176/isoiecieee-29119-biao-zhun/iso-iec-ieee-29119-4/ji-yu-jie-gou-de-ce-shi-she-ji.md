@@ -158,6 +158,8 @@ Test Condition的推导和Decision Testing没有什么区别；
 
 ## 分支条件组合测试\(Branch Condition Combination Testing\)
 
+### 背景
+
 ### 用法
 
 #### Feature Set -&gt; Test Condition
