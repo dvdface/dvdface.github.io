@@ -123,7 +123,7 @@
 
 ### 测试覆盖度量
 
-## 数据流测试\(Modified Condition Decision Coverage Testing\)
+## 修改条件判定覆盖测试\(Modified Condition Decision Coverage Testing\)
 
 ### 用法
 
