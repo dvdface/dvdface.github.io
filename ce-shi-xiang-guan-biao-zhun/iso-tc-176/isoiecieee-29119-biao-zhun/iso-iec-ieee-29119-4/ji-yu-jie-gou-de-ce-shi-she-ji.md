@@ -243,11 +243,22 @@ Test Condition的推导和Decision Testing没有什么区别；
   * p-uses，在判断语句\(if/for/while/switch\)里面使用变量；
   * c-uses，变量参与表达式计算；
 
-测试规格是那些定义变量并使用变量的控制流路径，即，definition-use pair；
+测试规格是那些定义变量并使用变量的控制流路径，即，definition-use pair，这个definition-use路径中不可再对变量进行赋值；
 
 #### Test Condition -&gt; Test Coverage Item
 
+* all definitions testing 测试覆盖项是每个变量的definition-use\(p-use或c-use\)的控制流路径； 强调覆盖所有definition，其中，use有为之配对的就行；
+* all-c-uses testing 测试覆盖项是每个变量的definition-use\(c-use\)的控制流路径； 强调覆盖所有c-use，其中，definition有为之配对的就行；
+* all-p-uses testing 测试覆盖项是每个变量的definition-use\(p-use\)的控制流路径； 强调覆盖所有p-use，其中，definition有为之配对的就行；
+* all-uses testing 测试覆盖项是每个变量的definition-use\(p-use和c-use\)的控制流路径； 强调覆盖所有p-use和c-use，其中，definition有为之配对的就行；
+* all-du-paths testing  测试覆盖项是每个变量所有definition-use\(p-use和c-use\)组合的控制流路径；
+
 #### Test Coverage Item -&gt; Test Case
+
+1. 选择一条尚未覆盖的definition-use pair控制流进行覆盖；
+2. 确定测试用例的输入参数，确保执行时，能覆盖到该控制流；
+3. 确定测试用例的预期结果；
+4. 重复步骤1~3，直到覆盖所有的测试覆盖项；
 
 ### 测试覆盖度量
 
