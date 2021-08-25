@@ -76,6 +76,8 @@
 
 #### Feature Set -&gt; Test Condition
 
+为被测对象建立控制流模型，控制流模型中的每个判定点作为测试规格；
+
 #### Test Condition -&gt; Test Coverage Item
 
 #### Test Coverage Item -&gt; Test Case
