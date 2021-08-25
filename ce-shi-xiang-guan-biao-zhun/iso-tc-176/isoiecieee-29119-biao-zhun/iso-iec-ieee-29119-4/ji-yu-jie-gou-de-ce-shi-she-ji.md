@@ -241,6 +241,8 @@ Test Condition的推导和Decision Testing没有什么区别；
 * 使用变量前，定义了多次；
 * 使用变量前，释放了变量；
 
+由于比较耗时，基本不再使用此测试设计方法，改用代码静态扫描工具替代；
+
 ### **用法**
 
 #### Feature Set -&gt; Test Condition
