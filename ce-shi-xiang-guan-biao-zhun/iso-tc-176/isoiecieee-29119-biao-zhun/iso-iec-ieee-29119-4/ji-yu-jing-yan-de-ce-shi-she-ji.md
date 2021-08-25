@@ -2,7 +2,9 @@
 
 ## 错误猜测法\(Error-Guessing\)
 
-## 探索型软件测试\(Exploratory Testing\)
+### 背景
 
-## 检查表法\(Checklist Testing\)
+### 用法
+
+### 测试覆盖度量
 
