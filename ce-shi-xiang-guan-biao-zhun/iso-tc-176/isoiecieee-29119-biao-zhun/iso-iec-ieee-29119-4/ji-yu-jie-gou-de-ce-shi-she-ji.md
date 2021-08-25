@@ -240,12 +240,10 @@ Test Condition的推导和Decision Testing没有什么区别；
 
 * definition，为变量赋值；
 * use，不给变量赋值的方式使用变量：
-  * p-uses，在判断语句里面使用变量；
+  * p-uses，在判断语句\(if/for/while/switch\)里面使用变量；
   * c-uses，变量参与表达式计算；
 
-数据流测试的是那些定义变量并使用变量的控制流路径，即，definition-use 对；
-
-
+测试规格的是那些定义变量并使用变量的控制流路径，即，definition-use pair；
 
 #### Test Condition -&gt; Test Coverage Item
 
