@@ -78,9 +78,19 @@
 
 为被测对象建立控制流模型，控制流模型中的每个判定点作为测试规格；
 
+比较典型的决策点有：
+
+* if-then-else
+* while-loop、for-loop
+* switch-case
+
 #### Test Condition -&gt; Test Coverage Item
 
+决策点每个后续分支都是一个测试覆盖项；
+
 #### Test Coverage Item -&gt; Test Case
+
+
 
 ### 测试覆盖度量
 
