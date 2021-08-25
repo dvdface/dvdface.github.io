@@ -194,17 +194,43 @@ Test Condition的推导和Decision Testing没有什么区别；
 
 ## 修改条件判定覆盖测试\(Modified Condition Decision Coverage Testing\)
 
+### 背景
+
 ### 用法
 
 #### Feature Set -&gt; Test Condition
 
+为被测对象建立控制流模型，控制流模型中的每个判定点作为测试规格；
+
+如，把决策点为 A \| \( B & C\)作为测试规格；
+
 #### Test Condition -&gt; Test Coverage Item
+
+把决策点中单个条件可以独立影响判定的条件组合作为测试覆盖项；
+
+如，决策点为 A \| \( B & C\)，要覆盖的测试覆盖项有：
+
+* A=T， B=F， C=F， Outcome=T
+* A=F， B=F， C=F， Outcome=F
+* A=F， B=T， C=T， Outcome=T
+* A=F， B=F， C=T， Outcome=F
+* A=F， B=T， C=T， Outcome=T
+* A=F， B=T， C=F， Outcome=F
 
 #### Test Coverage Item -&gt; Test Case
 
+1. 新建一条测试用例，覆盖一个或多个尚未覆盖的测试覆盖项；
+2. 确定测试用例的输入参数，确保控制流分支会被执行到；
+3. 确定测试用例预期输出结果；
+4. 重复步骤1~3，确保所有的测试覆盖项被覆盖到；
+
 ### 测试覆盖度量
 
+修改条件判定覆盖率 = 测试用例覆盖的测试覆盖项数量 / 测试覆盖项总数
+
 ## 数据流测试\(Data Flow Testing\)
+
+### 背景
 
 ### 用法
 
