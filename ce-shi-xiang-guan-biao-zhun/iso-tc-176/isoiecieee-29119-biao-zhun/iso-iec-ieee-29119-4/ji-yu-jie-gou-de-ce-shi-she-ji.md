@@ -103,6 +103,8 @@
 
 ### 背景
 
+对判定点中的条件进行覆盖；
+
 ### 用法
 
 #### Feature Set -&gt; Test Condition
