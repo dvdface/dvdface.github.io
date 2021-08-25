@@ -262,5 +262,7 @@ Test Condition的推导和Decision Testing没有什么区别；
 
 ### 测试覆盖度量
 
+数据流覆盖率 = 测试用例覆盖的definition-use pair数量 / 需要覆盖的definition-use pair数量总数；
+
 
 
