@@ -25,5 +25,5 @@ description: Software and systems engineering — Software testing
 * 讲述了达成软件测试目标的策略：
   * 约束的达成策略是基于风险的测试；
   * 提供质量信息的达成策略是采取基于规格的测试实践；
-  * 尽可能发现多的缺陷的达成策略是采取
+  * 尽可能发现多的缺陷的达成策略是采取过程改进；
 
