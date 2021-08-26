@@ -12,7 +12,7 @@ description: 由Cucumber提出
 
 采用这种方法分析和形式化描述的需求，非常具体，同时对测试用例的设计有非常大的帮助；
 
-## 需求分析流程概述
+## 分析流程概述
 
 ![Cucumber&#x63D0;&#x4F9B;&#x7684;BDD&#x6574;&#x4F53;&#x6D41;&#x7A0B;](../../.gitbook/assets/image%20%2835%29.png)
 
@@ -70,7 +70,9 @@ Feature: Title (one line describing the story/feature)
 
 主要是对Gherkin描述的结构化需求，实现自动化
 
-## Story
+## 分析流程详述
+
+### Story
 
 早期的瀑布模型里面， 采用形式化或者半形式化的方法记录和描述需求，但是这种方法除了显著的增加成本以外，并没有特别好的解决需求模糊不清的问题，而且在快速改变的业务中，这些个需求调整起来也费劲。
 
@@ -88,7 +90,7 @@ I want <capability>
 so that <business value>
 ```
 
-## Discovery
+### Discovery
 
 有了User Story之后，就要开始对其进行分析， 类似于要把OR转换成SR，分析方法称为Discovery
 
