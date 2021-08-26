@@ -11,10 +11,10 @@
 
 ---
 
-* [全面质量管理](quan-mian-zhi-liang-guan-li.md)
+* [质量管理](quan-mian-zhi-liang-guan-li.md)
 * [参考资料](can-kao-zi-liao.md)
 
-## 相关行业组织与标准 <a id="ce-shi-xiang-guan-biao-zhun"></a>
+## 软件测试 <a id="ce-shi-xiang-guan-biao-zhun"></a>
 
 * [概述](ce-shi-xiang-guan-biao-zhun/untitled.md)
 * [IPD](ce-shi-xiang-guan-biao-zhun/ipd/README.md)
