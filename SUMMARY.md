@@ -71,6 +71,10 @@
   * [Gherkin语法](xu-qiu-fen-xi/untitled/gherkin-yu-fa.md)
 * [参考资料](xu-qiu-fen-xi/can-kao-zi-liao.md)
 
+---
+
+* [动态测试](dong-tai-ce-shi.md)
+
 ## SQuaRE\(系统与软件的质量评估\) <a id="square"></a>
 
 * [概述](square/untitled.md)
@@ -104,10 +108,13 @@
 ## 自动化测试
 
 * [静态测试](zi-dong-hua-ce-shi/untitled-1.md)
-* [动态测试](zi-dong-hua-ce-shi/dong-tai-ce-shi.md)
 * [参考资料](zi-dong-hua-ce-shi/untitled.md)
 
 ## 质量可视化
 
 * [参考](zhi-liang-ke-shi-hua/can-kao.md)
+
+## 过程改进
+
+* [Untitled](guo-cheng-gai-jin/untitled.md)
 
