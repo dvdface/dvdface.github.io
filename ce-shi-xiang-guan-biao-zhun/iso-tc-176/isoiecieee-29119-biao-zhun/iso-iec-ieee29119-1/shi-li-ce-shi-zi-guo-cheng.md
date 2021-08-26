@@ -64,11 +64,63 @@ Walkthrough, technical review, or inspection \(remember that an inspection shoul
 
 #### Static test 4: Detailed design with regard to performance
 
+**Test objective**
 
+To provide information about how the performance requirements have been incorporated in the detailed design
+
+**Test item**
+
+One or more detailed design items as appropriate
+
+**Test basis**
+
+Performance requirements and relevant checklists
+
+#### **Test design techniques\(s\):**
+
+Walkthrough, technical review, or inspection \(remember that an inspection should be preceded by an informal or technical review to ensure a certain maturity of the requirements to be inspected\).
 
 #### Dynamic test 1: Applicable sub-system with regard to performance
 
+**Test objective**
+
+To provide information about the performance of a specific sub-system
+
+**Test item**
+
+One or more relevant sub-systems
+
+**Test basis**
+
+Performance requirements and possibly identified performance risks
+
+#### Detailed test processes**\(s\):**
+
+Test design and implementation; test environment set-up and maintenance; test execution; and test incident reporting. Some test procedures for integration testing may be reused
+
+**Test design techniques\(s\):** 
+
+Applicable techniques
+
 #### Dynamic test 2: The completed system with regard to performance.
 
+**Test objective**
 
+To provide information about the performance of the completely integrated system
+
+**Test item**
+
+The completed system
+
+**Test basis**
+
+Performance requirements and possibly identified performance risks
+
+#### Detailed test processes**\(s\):**
+
+Test design and implementation; test environment set-up and maintenance; test execution; and test incident reporting. Some test procedures for system test may be reused
+
+**Test design techniques\(s\):** 
+
+Applicable techniques
 
