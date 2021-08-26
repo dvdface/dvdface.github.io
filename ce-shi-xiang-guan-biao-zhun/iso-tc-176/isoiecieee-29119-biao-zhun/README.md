@@ -112,6 +112,8 @@ description: Software and systems engineering — Software testing
   * 测试执行过程
   * 测试问题报告过程
 
+大部分过程都遵从Plan-Do-Check-Act的戴明环；
+
 
 
 
