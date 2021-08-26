@@ -107,6 +107,10 @@ description: Software and systems engineering — Software testing
   * 测试监控过程
   * 测试退出过程
 * 动态测试过程
+  * 测试设计与实现过程
+  * 测试环节搭建过程
+  * 测试执行过程
+  * 测试问题报告过程
 
 
 
