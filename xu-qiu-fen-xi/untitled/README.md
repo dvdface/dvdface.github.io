@@ -12,7 +12,7 @@ description: 由Cucumber提出
 
 采用这种方法分析和形式化描述的需求，非常具体，同时对测试用例的设计有非常大的帮助；
 
-## 分析流程
+## 需求分析流程概述
 
 ![Cucumber&#x63D0;&#x4F9B;&#x7684;BDD&#x6574;&#x4F53;&#x6D41;&#x7A0B;](../../.gitbook/assets/image%20%2835%29.png)
 
