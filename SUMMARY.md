@@ -20,7 +20,7 @@
 * [概述](xu-qiu-fen-xi/untitled-1.md)
 * [实例化需求](xu-qiu-fen-xi/untitled/README.md)
   * [Gherkin语法](xu-qiu-fen-xi/untitled/gherkin-yu-fa.md)
-* [参考资料](xu-qiu-fen-xi/can-kao-zi-liao.md)
+  * [参考资料](xu-qiu-fen-xi/untitled/can-kao-zi-liao.md)
 
 ## SQuaRE\(系统与软件的质量评估\) <a id="square"></a>
 
