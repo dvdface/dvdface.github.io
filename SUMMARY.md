@@ -9,6 +9,10 @@
 * [推断统计学](shu-li-tong-ji/tui-duan-tong-ji-xue.md)
 * [参考资料](shu-li-tong-ji/can-kao-zi-liao.md)
 
+---
+
+* [全面质量管理](quan-mian-zhi-liang-guan-li.md)
+
 ## 相关行业组织与标准 <a id="ce-shi-xiang-guan-biao-zhun"></a>
 
 * [概述](ce-shi-xiang-guan-biao-zhun/untitled.md)
