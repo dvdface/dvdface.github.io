@@ -38,7 +38,7 @@ Example Mapping， 使用Story-Rule-Example，Question的方法，不断澄清�
 
 主要是对澄清完毕的需求，进行形式化的描述
 
-模式为：
+方法为：
 
 Story，使用As a - I want - so that模式描述
 
@@ -46,7 +46,9 @@ Rule-Example，使用Feature + Scenarios组合描述
 
 Example，使用Scenario里面的Given-When-Then进行描述
 
-Formulation完成后，形成如下文档:
+
+
+Formulation完成后，文档形式如下：
 
 ```text
 Feature: Title (one line describing the story/feature)
