@@ -98,6 +98,16 @@ description: Software and systems engineering — Software testing
 
 ### 29119-2 测试过程
 
+本章中主要讲了三层软件测试模型中各个过程：
+
+* 组织测试过程
+  * 组织测试规范开发过程
+* 测试管理过程
+  * 测试计划过程
+  * 测试监控过程
+  * 测试退出过程
+* 动态测试过程
+
 
 
 
