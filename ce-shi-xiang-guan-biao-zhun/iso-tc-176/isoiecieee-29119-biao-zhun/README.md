@@ -54,5 +54,5 @@ description: Software and systems engineering — Software testing
   * 组织测试过程
 
     * 在组织测试政策中识别组织级别的风险；
-    * 在组织测试策略中采取措施来管理测试流程中的风险，并给出测试方法来应对这些风险；
+    * 在组织测试策略中采取措施管理测试流程中的风险，并给出测试方法来应对这些风险；
 
