@@ -17,7 +17,7 @@ description: Software and systems engineering — Software testing
 
 ## 标准内容概述
 
-### 29119-1内容概述
+### 29119-1 概念与理论
 
 软件测试的目标：在进度和成本约束下，尽早提供质量和遗留风险信息，尽可能发现多的缺陷来减轻产品质量差所带来的风险；
 
@@ -95,6 +95,10 @@ description: Software and systems engineering — Software testing
     * 测试设计活动中，产品风险\(质量风险\)可以帮助测试人员确定应用哪种测试设计技术；
     * 测试设计活动中，风险的大小可以帮助测试人员确定测试分析的多寡；
     * 风险还用于为特性、测试规格、测试用例确定优先级；
+
+### 29119-2内容概述
+
+
 
 
 
