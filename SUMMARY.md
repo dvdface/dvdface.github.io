@@ -14,6 +14,17 @@
 * [质量管理](quan-mian-zhi-liang-guan-li.md)
 * [参考资料](can-kao-zi-liao.md)
 
+## 需求工程 <a id="xu-qiu-fen-xi"></a>
+
+* [实例化需求](xu-qiu-fen-xi/untitled/README.md)
+  * [Gherkin语法](xu-qiu-fen-xi/untitled/gherkin-yu-fa.md)
+* [参考资料](xu-qiu-fen-xi/can-kao-zi-liao.md)
+
+## SQuaRE\(系统与软件的质量评估\) <a id="square"></a>
+
+* [概述](square/untitled.md)
+* [参考资料](square/can-kao-zi-liao-1.md)
+
 ## 软件测试 <a id="ce-shi-xiang-guan-biao-zhun"></a>
 
 * [概述](ce-shi-xiang-guan-biao-zhun/untitled.md)
@@ -65,16 +76,9 @@
   * [质量管理七工具](ce-shi-xiang-guan-biao-zhun/qi-ta/zhi-liang-guan-li-qi-gong-ju.md)
 * [参考资料](ce-shi-xiang-guan-biao-zhun/can-kao-zi-liao.md)
 
-## 需求工程 <a id="xu-qiu-fen-xi"></a>
+## 过程改进
 
-* [实例化需求](xu-qiu-fen-xi/untitled/README.md)
-  * [Gherkin语法](xu-qiu-fen-xi/untitled/gherkin-yu-fa.md)
-* [参考资料](xu-qiu-fen-xi/can-kao-zi-liao.md)
-
-## SQuaRE\(系统与软件的质量评估\) <a id="square"></a>
-
-* [概述](square/untitled.md)
-* [参考资料](square/can-kao-zi-liao-1.md)
+* [参考资料](guo-cheng-gai-jin/untitled.md)
 
 ## 稳定性设计与测试 <a id="wen-ding-xing-ce-shi"></a>
 
@@ -110,8 +114,4 @@
 ## 质量可视化
 
 * [参考](zhi-liang-ke-shi-hua/can-kao.md)
-
-## 过程改进
-
-* [Untitled](guo-cheng-gai-jin/untitled.md)
 
