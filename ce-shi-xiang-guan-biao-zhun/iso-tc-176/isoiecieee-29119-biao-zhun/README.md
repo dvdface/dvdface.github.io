@@ -17,7 +17,7 @@ description: Software and systems engineering — Software testing
 
 ## 标准内容概述
 
-### 29119-1 概念与理论
+### 29119-1 概念与定义
 
 软件测试的目标：在进度和成本约束下，尽早提供质量和遗留风险信息，尽可能发现多的缺陷来减轻产品质量差所带来的风险；
 
