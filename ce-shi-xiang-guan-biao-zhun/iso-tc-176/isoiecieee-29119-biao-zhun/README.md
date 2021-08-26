@@ -96,7 +96,7 @@ description: Software and systems engineering — Software testing
     * 测试设计活动中，风险的大小可以帮助测试人员确定测试分析的多寡；
     * 风险还用于为特性、测试规格、测试用例确定优先级；
 
-### 29119-2内容概述
+### 29119-2 测试过程
 
 
 
