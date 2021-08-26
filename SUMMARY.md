@@ -12,6 +12,7 @@
 ---
 
 * [全面质量管理](quan-mian-zhi-liang-guan-li.md)
+* [参考资料](can-kao-zi-liao.md)
 
 ## 相关行业组织与标准 <a id="ce-shi-xiang-guan-biao-zhun"></a>
 
