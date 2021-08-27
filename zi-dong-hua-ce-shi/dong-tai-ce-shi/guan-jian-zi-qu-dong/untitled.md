@@ -59,7 +59,6 @@ Robot Framework是一个开源的自动化测试框架, 用于准入测试, 准�
 3. pip config set global.index-url [https://pypi.tuna.tsinghua.edu.cn/simple](https://pypi.tuna.tsinghua.edu.cn/simple)
 4. pip install robotframework
 5. 安装robotframework-ride， ride是robotframework的IDE
-
    1. 修改c:\windows\system32\drivers\etc\hosts，增加 23.50.38.17 [aka.ms](http://aka.ms/)
    2. 安装Build Tools for Visual Studio
 
@@ -69,11 +68,8 @@ Robot Framework是一个开源的自动化测试框架, 用于准入测试, 准�
    4. 修改C:\Program Files\Python39\Lib\site-packages\robotide\preferences\settings.cfg
 
       show\_message\_log = True
-
-   6-7浏览器自动化需要
-
-6. pip install robotframework-seleniumlibrary
-7. 安装浏览器自动化控制的驱动，要放入到PATH路径里面
+6. \(仅浏览器\) pip install robotframework-seleniumlibrary
+7. \(仅浏览器\) 安装浏览器自动化控制的驱动，要放入到PATH路径里面
 
    [Chrome](https://chromedriver.chromium.org/downloads)， [Edge](https://developer.microsoft.com/zh-cn/microsoft-edge/tools/webdriver/)\(需要重命名为MicrosoftWebDriver.exe\)， [Firefox](https://github.com/mozilla/geckodriver/releases)， [Safari](https://webkit.org/blog/6900/webdriver-support-in-safari-10/)
 
