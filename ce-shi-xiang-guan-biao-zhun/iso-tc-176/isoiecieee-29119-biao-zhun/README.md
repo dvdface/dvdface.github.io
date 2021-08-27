@@ -39,7 +39,7 @@ description: Software and systems engineering — Software testing
 
 这里给出一个风险管理表格的示例：
 
-![](../../../.gitbook/assets/image%20%28121%29.png)
+![](../../../.gitbook/assets/image%20%28122%29.png)
 
 ### 29119-2 测试过程
 
@@ -94,7 +94,7 @@ description: Software and systems engineering — Software testing
 
 输入输出模型，即使用Input-Process-Output模型对系统进行建模；
 
-![input-process-output](../../../.gitbook/assets/image%20%28127%29.png)
+![input-process-output](../../../.gitbook/assets/image%20%28129%29.png)
 
 输入和输出之间的关系体现系统行为：
 
@@ -106,7 +106,7 @@ $$
 
 输入和输出参数经常会出现无限取值的情况，为了解决这个问题，常常对输入和输出采用等价划分减少输入和输出域；等价划分要求每个划分下的系统行为是类似的；
 
-![Equivalence Partition](../../../.gitbook/assets/image%20%28126%29.png)
+![Equivalence Partition](../../../.gitbook/assets/image%20%28128%29.png)
 
 由于每个划分的边界值的处理很容易出现问题，所以往往对每个划分再应用边界值的分析设计方法；边界值设计主要有取2值法和取3值法，取2值法会取边界值和边界外部的值，取3值法会取边界内外的两个值和边界值；
 
@@ -130,7 +130,7 @@ $$
 
 根据美国国家技术域标准研究所的研究，n-wise排列，n要取值到6基本能发现所有的缺陷，特别是航空电子软件，涉及生命安全，特别强调这种严谨的方法进行测试：
 
-![NIST&#x5173;&#x4E8E;&#x7EC4;&#x5408;&#x6D4B;&#x8BD5;&#x8BBE;&#x8BA1;&#x7684;&#x7814;&#x7A76;](../../../.gitbook/assets/image%20%28128%29.png)
+![NIST&#x5173;&#x4E8E;&#x7EC4;&#x5408;&#x6D4B;&#x8BD5;&#x8BBE;&#x8BA1;&#x7684;&#x7814;&#x7A76;](../../../.gitbook/assets/image%20%28130%29.png)
 
 #### 序列模型
 
@@ -142,7 +142,7 @@ $$
 
 操作序列模型说白了就是把一个个的IPO模型串起来，使用序列的方式进行建模；
 
-![&#x5E8F;&#x5217;&#x6A21;&#x578B;&#x793A;&#x610F;](../../../.gitbook/assets/image%20%28120%29.png)
+![&#x5E8F;&#x5217;&#x6A21;&#x578B;&#x793A;&#x610F;](../../../.gitbook/assets/image%20%28121%29.png)
 
 操作序列模型的优点在于，一次操作可以覆盖多个功能模块，能模拟和外部系统\(比如用户\)的交互，容易发现多个模块和外部系统交互时产生的问题；；
 
@@ -152,7 +152,7 @@ $$
 
 有时候系统对用户输入的处理往往和上个处理相关，即和状态相关，此时，使用IPO模型和序列模型均无法很好的对被测对象进行表示，这个时候就需要使用状态机对被测对象进行建模；
 
-![](../../../.gitbook/assets/image%20%28122%29.png)
+![](../../../.gitbook/assets/image%20%28123%29.png)
 
 状态机模型中可以覆盖状态、也可以覆盖状态迁移，具体覆盖什么取决于测试策略；
 
