@@ -108,10 +108,10 @@ description: >-
 
 有些关键字在执行的时候可能会出现阻塞，此时需要对关键字进行标注，一般标注为：
 
-* **May be blocked**
-* **Must not be blocked**
+* May be blocked
+* Must not be blocked
 
-\*\*\*\*
+
 
 
 
