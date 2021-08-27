@@ -160,7 +160,7 @@ description: Software and systems engineering — Software testing
 黑盒方式建模主要分为：
 
 * 输入输出模型：等价类、边界值、分类树、判定表、组合测试； 
-* 序列模型：场景测试、状态迁移；
+* 序列模型：场景、状态迁移测试；
 
 **输入输出模型**
 
