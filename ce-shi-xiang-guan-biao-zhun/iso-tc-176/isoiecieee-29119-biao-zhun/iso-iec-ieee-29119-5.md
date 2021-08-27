@@ -77,6 +77,8 @@ description: >-
 
 ![&#x590D;&#x5408;&#x5173;&#x952E;&#x5B57;&#x4E0E;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x5173;&#x952E;&#x5B57;&#x7684;&#x5173;&#x7CFB;](../../../.gitbook/assets/image%20%28133%29.png)
 
+适合复合关键字使得用例使用业务或域模型来表达成为了可能，有助于大家对业务的理解；
+
 ![&#x4F7F;&#x7528;&#x590D;&#x5408;&#x5173;&#x952E;&#x5B57;&#x6784;&#x5EFA;intermediate layer](../../../.gitbook/assets/image%20%28132%29.png)
 
 ### 导航/交互\(input\) 和 验证\(output\)
