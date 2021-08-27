@@ -75,6 +75,8 @@ description: >-
 
 此时，需要组合使用简单关键字实现更复杂的操作，相应参数可能会需要用到符合参数，即，数据结构；
 
+![&#x4F7F;&#x7528;&#x590D;&#x5408;&#x5173;&#x952E;&#x5B57;&#x6784;&#x5EFA;domain&#x548C;intermediate layer](../../../.gitbook/assets/image%20%28132%29.png)
+
 ### 导航/交互\(input\) 和 验证\(output\)
 
 ### 关键字和测试结果
