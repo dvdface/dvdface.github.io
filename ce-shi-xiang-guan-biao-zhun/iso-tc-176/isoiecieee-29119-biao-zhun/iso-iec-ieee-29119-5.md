@@ -59,8 +59,7 @@ description: >-
   领域层的关键字开发适合实现无关的，无需考虑实现被测对象的技术；  
   构建在领域层上面的测试不会受到被测对象实现的影响；
 
-* **Test Interface Layer** 
-* 一般而言，关键字至少分两层：Domain layer和Test Interface Layer；根据需要，它们之间还可以由其他层的关键字；
+* **Test Interface Layer** 本层的关键字与具体的测试接口相关，它和被测对象的实现密切相关； 它的数量一般远少于领域层的关键字； 一般把GUI控件、命令作为测试接口层的关键字；
 
 在Test Interface Layer下面，可能还需要实现一层测试自动化层，来对被测接口\(GUI或CMD\)进行控制，如，WebDriver；
 
