@@ -63,7 +63,6 @@
       * [基于经验的测试设计](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/ji-yu-jing-yan-de-ce-shi-she-ji.md)
       * [参考资料](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/can-kao-zi-liao.md)
     * [ISO/IEC/IEEE 29119-5](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-5.md)
-    * [ISO/IEC/IEEE 29119-6](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-6.md)
   * [ISO/IEC TR 19759](ce-shi-xiang-guan-biao-zhun/iso-tc-176/iso-iec-tr-19759.md)
   * [ISO/IEC 16085](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiec-16085-feng-xian-guan-li.md)
 * [IEEE](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/README.md)
