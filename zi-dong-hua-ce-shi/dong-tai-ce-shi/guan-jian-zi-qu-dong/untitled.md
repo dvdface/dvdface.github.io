@@ -40,20 +40,6 @@ Robot Framework是一个开源的自动化测试框架, 用于准入测试, 准�
 
 支持测试用例和测试套级别的初始化和清理
 
-* Enables easy-to-use tabular syntax for [creating test cases](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-cases) in a uniform way.
-* Provides ability to create reusable [higher-level keywords](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-user-keywords) from the existing keywords.
-* Provides easy-to-read result [reports](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#report-file) and [logs](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#log-file) in HTML format.
-* Is platform and application independent.
-* Provides a simple [library API](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-libraries) for creating customized test libraries which can be implemented natively with either Python or Java.
-* Provides a [command line interface](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#id173) and XML based [output files](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#output-file) for integration into existing build infrastructure \(continuous integration systems\).
-* Provides support for Selenium for web testing, Java GUI testing, running processes, Telnet, SSH, and so on.
-* Supports creating [data-driven test cases](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#data-driven-style).
-* Has built-in support for [variables](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#variables), practical particularly for testing in different environments.
-* Provides [tagging](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#tagging-test-cases) to categorize and [select test cases](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#selecting-test-cases) to be executed.
-* Enables easy integration with source control: [test suites](http://robot-framework.readthedocs.org/en/master/autodoc/robot.running.html#robot.running.model.TestSuite) are just files and directories that can be versioned with the production code.
-* Provides [test-case](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-setup-and-teardown) and [test-suite](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#suite-setup-and-teardown) -level setup and teardown.
-* The modular architecture supports creating tests even for applications with several diverse interfaces
-
 #### Robot Framework的架构
 
 ![](../../../.gitbook/assets/image%20%28131%29.png)
