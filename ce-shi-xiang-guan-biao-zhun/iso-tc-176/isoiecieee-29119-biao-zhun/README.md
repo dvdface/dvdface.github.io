@@ -162,8 +162,6 @@ description: Software and systems engineering — Software testing
 * 输入输出模型：等价类、边界值、分类树、判定表、组合测试； 
 * 序列模型：场景测试、状态迁移；
 
-
-
 **输入输出模型**
 
 输入输出模型，即使用Input-Process-Output模型对系统进行建模；
