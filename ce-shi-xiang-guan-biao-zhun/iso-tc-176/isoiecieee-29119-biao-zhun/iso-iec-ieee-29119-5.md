@@ -111,6 +111,10 @@ description: >-
 * May be blocked
 * Must not be blocked
 
+前者不会影响测试结果，后者则会影响测试结果；
+
+测试框架还可以提供额外的错误识别机制，
+
 
 
 
