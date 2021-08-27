@@ -52,7 +52,15 @@ description: >-
 
 ![](../../../.gitbook/assets/image%20%28120%29.png)
 
-一般而言，关键字至少分两层：Domain layer和Test Interface Layer；根据需要，它们之间还可以由其他层的关键字；
+* **Domain Layer**
+
+  领域层对应业务和领域相关的活动，对应领域的一些专业术语；  
+  有了领域层，测试人员可以在业务和领域内更加容易的编写测试用例；  
+  领域层的关键字开发适合实现无关的，无需考虑实现被测对象的技术；  
+  构建在领域层上面的测试不会受到被测对象实现的影响；
+
+* **Test Interface Layer** 
+* 一般而言，关键字至少分两层：Domain layer和Test Interface Layer；根据需要，它们之间还可以由其他层的关键字；
 
 在Test Interface Layer下面，可能还需要实现一层测试自动化层，来对被测接口\(GUI或CMD\)进行控制，如，WebDriver；
 
