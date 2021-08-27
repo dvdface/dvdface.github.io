@@ -266,13 +266,16 @@ Default Tags       default tag 1    default tag 2    default tag 3
 
 ### [变量的定义与使用](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#variables)
 
-[Untitled](https://www.notion.so/3507d2cfd8f344bca5c45b27fecba6b5)
+### 
 
 ### [资源文件](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#resource-and-variable-files)
 
-资源文件用于 用户关键字 和 变量 的重用，后缀名用.resource
+💡资源文件用于 用户关键字 和 变量 的重用，后缀名用.resource
 
-[Untitled](https://www.notion.so/b7b155bebc6a451f9f2655ca426e5ced)
+| 说明 | 示例 |
+| :--- | :--- |
+| [引用资源文件](https://www.notion.so/19ece5806959477382f42fbe2be61a4b) | **\*\* Settings \*\*\*** **Resource** example.resource **Resource** ../data/resources.robot **Resource** ${RESOURCES}/common.resource |
+| [资源文件结构](https://www.notion.so/68365d48fc0e4320b239a8daf6b6f7f0) | \* 可以使用\*\*\*Settings\*\*\*, \*\*\*Variables\*\*\*和\*\*\*Keywords\*\*\* \* 在\*\*\*Settings\*\*\*里面，只能使用Library Resource Variables Documentation几种指令 |
 
 ### [变量文件](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#variable-files)
 
