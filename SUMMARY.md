@@ -111,8 +111,7 @@
 ## 自动化测试
 
 * [静态测试](zi-dong-hua-ce-shi/untitled-1.md)
-* [动态测试](zi-dong-hua-ce-shi/dong-tai-ce-shi/README.md)
-  * [关键字驱动](zi-dong-hua-ce-shi/dong-tai-ce-shi/guan-jian-zi-qu-dong.md)
+* [动态测试](zi-dong-hua-ce-shi/dong-tai-ce-shi.md)
 * [参考资料](zi-dong-hua-ce-shi/untitled.md)
 
 ## 质量可视化
