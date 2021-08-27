@@ -393,55 +393,6 @@ Default Tags       default tag 1    default tag 2    default tag 3
       Click Element    id:submit
   ```
 
-**模板使用方法**
-
-* 在用例里面使用\[Template\]定义模板关键字
-
-  ```text
-  *** Test Cases **
-  Templated test case
-      [Template]    Example keyword  # 模板化的关键字
-      first argument    second argument  # 关键字的参数， 参数1  与 参数2
-
-  *** Keywords ***
-  Example keyword
-  	[Arguments]    ${argument1}    ${argument2}
-    Log  ${argument1}
-    Log  ${argument2}
-  ```
-
-* 在\*\*\*Settings\*\*\*里面定义和使用关键字
-
-  ```text
-  *** Settings ***
-  # 指定哪个关键字用于模板用例
-  Test Template     登录
-  Library           SeleniumLibrary
-
-  # 用例的模板化参数
-  # 起头要求
-  *** Test Cases ***    username       password
-  # 用例名             传入参数2   传入参数2
-  正常用户名密码        test            test
-                       test1           test1
-  # 用例名             传入参数2   传入参数2
-  用户名为空            ${empty}        test2
-  # 用例名             传入参数2   传入参数2
-  密码为空              test2           ${empty}
-  # 用例名             传入参数2   传入参数2
-  用户名和密码均为空     ${empty}        ${empty}
-
-  *** Keywords ***
-  # 参数化的关键字
-  登录
-      [Arguments]    ${username}    ${password}
-      Open Browser    <https://fty.zobao.net/web/index.html>    edge
-      Input Text    id:username    ${username}
-      Input Text    id:password    ${password}
-      Get Element Attribute    id:code    text
-      Click Element    id:submit
-  ```
-
 #### **用例设置**
 
 | Name | 作用 | 支持Settings里面设置？ |
