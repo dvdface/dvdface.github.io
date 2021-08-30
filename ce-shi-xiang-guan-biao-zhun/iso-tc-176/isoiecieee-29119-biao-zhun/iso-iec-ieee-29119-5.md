@@ -203,8 +203,14 @@ TD4流程中有四个环节：
 
 * **editor** 关键字驱动用例编写器；
 * **decomposer** 它负责把包含复合关键字用例转换成基础关键字用例；
-* **data sequencer**  负责将用例中的测试数据占位符替换为对应的测试数据；
-* 
+* **data sequencer** 负责将用例中的测试数据占位符替换为对应的测试数据；
+* **manual test assistant**
+
+  负责呈现测试用例执行界面，方便测试人员执行测试用例，打结果；
+
+* **tool bridge** 负责根据关键字驱动用例调用执行引擎创建可执行脚本；
+* **test execution environment & execution engine** 
+
 \*\*\*\*
 
 
