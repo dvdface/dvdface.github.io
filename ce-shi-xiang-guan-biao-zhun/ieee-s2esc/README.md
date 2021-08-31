@@ -26,6 +26,7 @@ S2ESC作为美国技术顾问团成员开发国际标准，并贡献到ISO/IEC J
 
 #### 软件测试相关标准节选
 
+* **ISO/IEC TR 19759 Software Engineering — Guide to the software engineering body of knowledge \(SWEBOK\)** 
 * **IEEE/ISO/IEC P29119 Software and systems engineering--Software testing**  [IEEE/ISO/IEC P29119-1 - ISO/IEC/IEEE Draft International Standard - Software and systems engineering--Software testing--Part 1: Concepts and definitions ](https://standards.ieee.org/project/29119-1.html) [IEEE/ISO/IEC P29119-2 - ISO/IEC/IEEE Draft International Standard - Software and systems engineering - Software testing -- Part 2: Test processes ](https://standards.ieee.org/project/29119-2.html) [IEEE/ISO/IEC P29119-3 - IEEE/ISO/IEC Draft International Standard - Software and systems engineering -- Software testing -- Part 3: Test documentation ](https://standards.ieee.org/project/29119-3.html) [IEEE/ISO/IEC P29119-4 - IEEE/ISO/IEC Draft International Standard - Software and systems engineering--Software testing--Part 4: Test techniques ](https://standards.ieee.org/project/29119-4.html) [IEEE/ISO/IEC 29119-5-2016 - ISO/IEC/IEEE International Standard - Software and systems engineering -- Software testing -- Part 5: Keyword-Driven Testing](https://standards.ieee.org/standard/29119-5-2016.html) 
 * **IEEE 829**  [IEEE 829-2008 - IEEE Standard for Software and System Test Documentation](https://standards.ieee.org/standard/829-2008.html)
 
