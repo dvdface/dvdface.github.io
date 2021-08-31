@@ -7,11 +7,11 @@
 * [概述](shu-li-tong-ji/gai-shu.md)
 * [描述统计学](shu-li-tong-ji/tong-ji-liang-yu-gu-ji-liang.md)
 * [推断统计学](shu-li-tong-ji/tui-duan-tong-ji-xue.md)
-* [参考资料](shu-li-tong-ji/can-kao-zi-liao.md)
 
 ---
 
-* [质量管理](quan-mian-zhi-liang-guan-li.md)
+* [质量管理](quan-mian-zhi-liang-guan-li/README.md)
+  * [参考资料](quan-mian-zhi-liang-guan-li/can-kao-zi-liao.md)
 * [概述](gai-shu.md)
 * [参考资料](can-kao-zi-liao.md)
 
@@ -37,7 +37,7 @@
   * [ISO/IEC/IEEE 12207](ce-shi-xiang-guan-biao-zhun/iso-tc-176/iso-iec-ieee-12207.md)
   * [ISO/IEC 16085](ce-shi-xiang-guan-biao-zhun/iso-tc-176/isoiec-16085-feng-xian-guan-li.md)
 * [IEEE](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/README.md)
-  * [IEEE-1012](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/ieee-1012.md)
+  * [ISO/IEC TR 19759](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/iso-iec-tr-19759.md)
   * [ISO/IEC/IEEE 29119](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/isoiecieee-29119-biao-zhun/README.md)
     * [术语表](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/isoiecieee-29119-biao-zhun/shu-yu-biao.md)
     * [ISO/IEC/IEEE29119-1](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/isoiecieee-29119-biao-zhun/iso-iec-ieee29119-1/README.md)
@@ -66,7 +66,7 @@
       * [基于经验的测试设计](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/ji-yu-jing-yan-de-ce-shi-she-ji.md)
       * [参考资料](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/can-kao-zi-liao.md)
     * [ISO/IEC/IEEE 29119-5](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-5.md)
-  * [ISO/IEC TR 19759](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/iso-iec-tr-19759.md)
+  * [IEEE-1012](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/ieee-1012.md)
 * [六西格玛](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/README.md)
   * [界定阶段](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/jie-ding-jie-duan.md)
   * [测量阶段](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/ce-liang-jie-duan.md)
