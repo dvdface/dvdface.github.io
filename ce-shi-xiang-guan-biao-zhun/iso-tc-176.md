@@ -28,7 +28,7 @@ ISO是国际标准，标准众多；检索方法如下：
 2. 选择浏览\(见下图\)
 3. 选择按照ICS\(国际分类标准\)或者TC\(技术委员会\)对标准进行检索； ICS标准，一般选择：         35 Information technology 下的35.080 Software TC技术委员会一般选择：        ISO/IEC JTC 1 Information technology下的ISO/IEC JTC 1/SC 7        ISO/TC 176 Quality management and quality assurance
 
-![](../../.gitbook/assets/image%20%284%29.png)
+![](../.gitbook/assets/image%20%284%29.png)
 
 下载ISO和IEEE标准，可以通过Sci-Hub的方式下载
 
@@ -43,7 +43,7 @@ ISO是国际标准，标准众多；检索方法如下：
 1. 进入[TC28/SC7 全国信息技术标准化技术委员会软件与系统工程分技术委员会网站 ](http://std.samr.gov.cn/search/orgDetailView?tcCode=TC28SC7)
 2. 滑动到底部，输入关键字进行检索 
 
-![&#x6807;&#x51C6;&#x68C0;&#x7D22;&#x754C;&#x9762;](../../.gitbook/assets/image%20%2865%29.png)
+![&#x6807;&#x51C6;&#x68C0;&#x7D22;&#x754C;&#x9762;](../.gitbook/assets/image%20%2865%29.png)
 
 下载GB，可以去[标准网](https://www.biaozhun.org/)搜索和下载；
 
