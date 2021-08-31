@@ -113,10 +113,6 @@
 
 * [参考资料](yong-hu-ti-yan-she-ji-yu-ce-shi/untitled.md)
 
-## 移动应用测试 <a id="yi-dong-ying-yong-ce-shi-1"></a>
-
-* [参考资料](yi-dong-ying-yong-ce-shi-1/can-kao-zi-liao-1.md)
-
 ## 自动化测试
 
 * [静态测试](zi-dong-hua-ce-shi/untitled-1.md)
