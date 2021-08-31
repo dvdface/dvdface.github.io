@@ -109,7 +109,7 @@
 
 ### 背景
 
-对判定点中的条件进行覆盖；
+对判定点中的条件和分支进行覆盖；
 
 ### 用法
 
@@ -159,6 +159,8 @@ Test Condition的推导和Decision Testing没有什么区别；
 ## 分支条件组合测试\(Branch Condition Combination Testing\)
 
 ### 背景
+
+对其中的分支条件组合进行覆盖；
 
 ### 用法
 
