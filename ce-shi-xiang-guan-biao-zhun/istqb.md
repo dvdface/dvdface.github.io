@@ -6,25 +6,29 @@ ISTQB是一个软件测试职业认证机构，主要负责提供软件测试的
 
 ISTQB的认证有如下内容：
 
-_基础级_
+**Foundation Level\(基础级\)**
 
-* _测试自动化_
-* _可用性测试_
-* _性能测试_
-* _移动应用测试_
-* _准入测试_
-* _博彩业测试工程师_
-* _敏捷测试工程师_
-* _基于模型测试_
+* Certified Tester
+* Acceptance Testing
+* Agile Tester
+* Automotive Software Tester
+* Mobile Application Testing
+* Model-Based Tester
+* Performance Testing
+* Usability Testing
 
-_高级级_
+**Advanced Level\(高级级\)**
 
-* _敏捷技术测试工程师_
-* _基于模型测试_
-* _安全测试_
-* _测试自动化_
+* Agile Technical Tester
+* Security Tester
+* Technical Test Analyst
+* Test Analyst
+* Test Automation Engineer
 
-_专家级_
+**Expert Level\(专家级\)**
+
+* Improving the Testing Process
+* Test Management
 
 \_\_
 
