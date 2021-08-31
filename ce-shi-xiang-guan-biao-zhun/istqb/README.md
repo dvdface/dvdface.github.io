@@ -6,6 +6,8 @@ ISTQB是一个软件测试职业认证机构，主要负责提供软件测试的
 
 ISTQB的认证有如下内容：
 
+![ISTQB &#x8BA4;&#x8BC1;&#x4F53;&#x7CFB;](../../.gitbook/assets/image%20%28145%29.png)
+
 **Foundation Level\(基础级\)**
 
 * Certified Tester
