@@ -71,6 +71,7 @@
   * [CTAL](ce-shi-xiang-guan-biao-zhun/istqb/ctal/README.md)
     * [Technical Test Analyst](ce-shi-xiang-guan-biao-zhun/istqb/ctal/ctal-r-technical-test-analyst.md)
     * [Test Analyst](ce-shi-xiang-guan-biao-zhun/istqb/ctal/ctal-r-test-analyst.md)
+    * [Security Tester](ce-shi-xiang-guan-biao-zhun/istqb/ctal/security-tester.md)
   * [CTEL](ce-shi-xiang-guan-biao-zhun/istqb/ctel/README.md)
     * [Test Management](ce-shi-xiang-guan-biao-zhun/istqb/ctel/ctel-r-test-management.md)
     * [Improving the Testing Process](ce-shi-xiang-guan-biao-zhun/istqb/ctel/ctel-r-improving-the-testing-process.md)
