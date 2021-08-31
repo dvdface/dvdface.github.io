@@ -71,6 +71,7 @@
   * [控制阶段](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/kong-zhi-jie-duan.md)
 * [ISTQB](ce-shi-xiang-guan-biao-zhun/istqb/README.md)
   * [CTFL](ce-shi-xiang-guan-biao-zhun/istqb/untitled-1.md)
+  * [CTAL® Test Analyst](ce-shi-xiang-guan-biao-zhun/istqb/ctal-r-test-analyst.md)
 * [其他](ce-shi-xiang-guan-biao-zhun/qi-ta/README.md)
   * [质量管理七工具](ce-shi-xiang-guan-biao-zhun/qi-ta/zhi-liang-guan-li-qi-gong-ju.md)
 * [参考资料](ce-shi-xiang-guan-biao-zhun/can-kao-zi-liao.md)
