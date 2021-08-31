@@ -4,9 +4,11 @@ description: CTAL® Technical Test Analyst
 
 # Technical Test Analyst
 
+`技术测试分析师主要是协助测试经理选择适当的测试方法来应对项目中的风险；`
+
 `The Test Manager has overall responsibility for establishing and managing a risk-based testing strategy.` 
 
-`The Test Manager will usually request the involvement of the Technical Test Analyst to ensure the riskbased approach is implemented correctly.` 
+`The Test Manager will usually request the involvement of the Technical Test Analyst to ensure the risk-based approach is implemented correctly.` 
 
 `Technical Test Analysts work within the risk-based testing framework established by the Test Manager for the project.` 
 
