@@ -15,17 +15,17 @@
 * [概述](gai-shu.md)
 * [参考资料](can-kao-zi-liao.md)
 
+## SQuaRE\(系统与软件的质量评估\) <a id="square"></a>
+
+* [概述](square/untitled.md)
+* [参考资料](square/can-kao-zi-liao-1.md)
+
 ## 需求工程 <a id="xu-qiu-fen-xi"></a>
 
 * [概述](xu-qiu-fen-xi/untitled-1.md)
 * [实例化需求](xu-qiu-fen-xi/untitled/README.md)
   * [Gherkin语法](xu-qiu-fen-xi/untitled/gherkin-yu-fa.md)
   * [参考资料](xu-qiu-fen-xi/untitled/can-kao-zi-liao.md)
-
-## SQuaRE\(系统与软件的质量评估\) <a id="square"></a>
-
-* [概述](square/untitled.md)
-* [参考资料](square/can-kao-zi-liao-1.md)
 
 ## 软件测试 <a id="ce-shi-xiang-guan-biao-zhun"></a>
 
