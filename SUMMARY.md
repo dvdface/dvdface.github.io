@@ -71,6 +71,7 @@
   * [控制阶段](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/kong-zhi-jie-duan.md)
 * [ISTQB](ce-shi-xiang-guan-biao-zhun/istqb/README.md)
   * [CTFL](ce-shi-xiang-guan-biao-zhun/istqb/untitled-1.md)
+  * [CTFL® Performance Testing](ce-shi-xiang-guan-biao-zhun/istqb/ctfl-r-performance-testing.md)
   * [CTAL® Test Analyst](ce-shi-xiang-guan-biao-zhun/istqb/ctal-r-test-analyst.md)
   * [CTAL® Technical Test Analyst](ce-shi-xiang-guan-biao-zhun/istqb/ctal-r-technical-test-analyst.md)
   * [CTEL® Improving the Testing Process](ce-shi-xiang-guan-biao-zhun/istqb/ctel-r-improving-the-testing-process.md)
