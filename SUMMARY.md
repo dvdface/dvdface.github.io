@@ -66,6 +66,7 @@
 * [ISTQB](ce-shi-xiang-guan-biao-zhun/istqb/README.md)
   * [CTFL](ce-shi-xiang-guan-biao-zhun/istqb/ctfl/README.md)
     * [CTFL](ce-shi-xiang-guan-biao-zhun/istqb/ctfl/untitled-1.md)
+    * [Model-Based Tester](ce-shi-xiang-guan-biao-zhun/istqb/ctfl/model-based-tester.md)
     * [Performance Testing](ce-shi-xiang-guan-biao-zhun/istqb/ctfl/ctfl-r-performance-testing.md)
     * [Usability Testing](ce-shi-xiang-guan-biao-zhun/istqb/ctfl/ctfl-r-usability-testing.md)
     * [Acceptance Testing](ce-shi-xiang-guan-biao-zhun/istqb/ctfl/acceptance-testing.md)
