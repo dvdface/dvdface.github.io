@@ -66,7 +66,7 @@
       * [基于经验的测试设计](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/ji-yu-jing-yan-de-ce-shi-she-ji.md)
       * [参考资料](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-4/can-kao-zi-liao.md)
     * [ISO/IEC/IEEE 29119-5](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/isoiecieee-29119-biao-zhun/iso-iec-ieee-29119-5.md)
-* [ISO/IEC TR 19759](ce-shi-xiang-guan-biao-zhun/iso-iec-tr-19759.md)
+  * [ISO/IEC TR 19759](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/iso-iec-tr-19759.md)
 * [六西格玛](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/README.md)
   * [界定阶段](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/jie-ding-jie-duan.md)
   * [测量阶段](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/ce-liang-jie-duan.md)
