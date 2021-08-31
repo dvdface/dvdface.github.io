@@ -35,7 +35,6 @@
   * [参考资料](ce-shi-xiang-guan-biao-zhun/ipd/can-kao-zi-liao.md)
 * [ISO](ce-shi-xiang-guan-biao-zhun/iso-tc-176.md)
 * [IEEE](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/README.md)
-  * [IEEE-1012](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/ieee-1012.md)
   * [ISO/IEC/IEEE 12207](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/iso-iec-ieee-12207.md)
   * [ISO/IEC 16085](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/isoiec-16085-feng-xian-guan-li.md)
   * [ISO/IEC/IEEE 29119](ce-shi-xiang-guan-biao-zhun/ieee-s2esc/isoiecieee-29119-biao-zhun/README.md)
