@@ -72,7 +72,7 @@
 * [ISTQB](ce-shi-xiang-guan-biao-zhun/istqb/README.md)
   * [CTFL](ce-shi-xiang-guan-biao-zhun/istqb/untitled-1.md)
   * [Performance Testing](ce-shi-xiang-guan-biao-zhun/istqb/ctfl-r-performance-testing.md)
-  * [CTFL® Usability Testing](ce-shi-xiang-guan-biao-zhun/istqb/ctfl-r-usability-testing.md)
+  * [Usability Testing](ce-shi-xiang-guan-biao-zhun/istqb/ctfl-r-usability-testing.md)
   * [CTAL® Test Analyst](ce-shi-xiang-guan-biao-zhun/istqb/ctal-r-test-analyst.md)
   * [CTAL® Technical Test Analyst](ce-shi-xiang-guan-biao-zhun/istqb/ctal-r-technical-test-analyst.md)
   * [CTEL® Improving the Testing Process](ce-shi-xiang-guan-biao-zhun/istqb/ctel-r-improving-the-testing-process.md)
