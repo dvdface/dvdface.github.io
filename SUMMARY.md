@@ -7,11 +7,11 @@
 * [概述](shu-li-tong-ji/gai-shu.md)
 * [描述统计学](shu-li-tong-ji/tong-ji-liang-yu-gu-ji-liang.md)
 * [推断统计学](shu-li-tong-ji/tui-duan-tong-ji-xue.md)
+* [参考资料](shu-li-tong-ji/can-kao-zi-liao.md)
 
 ---
 
-* [质量管理](quan-mian-zhi-liang-guan-li/README.md)
-  * [参考资料](quan-mian-zhi-liang-guan-li/can-kao-zi-liao.md)
+* [质量管理](quan-mian-zhi-liang-guan-li.md)
 * [概述](gai-shu.md)
 * [参考资料](can-kao-zi-liao.md)
 
