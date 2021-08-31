@@ -73,6 +73,7 @@
   * [CTFL](ce-shi-xiang-guan-biao-zhun/istqb/untitled-1.md)
   * [CTAL® Test Analyst](ce-shi-xiang-guan-biao-zhun/istqb/ctal-r-test-analyst.md)
   * [CTAL® Technical Test Analyst](ce-shi-xiang-guan-biao-zhun/istqb/ctal-r-technical-test-analyst.md)
+  * [CTEL® Improving the Testing Process](ce-shi-xiang-guan-biao-zhun/istqb/ctel-r-improving-the-testing-process.md)
 * [其他](ce-shi-xiang-guan-biao-zhun/qi-ta/README.md)
   * [质量管理七工具](ce-shi-xiang-guan-biao-zhun/qi-ta/zhi-liang-guan-li-qi-gong-ju.md)
 * [参考资料](ce-shi-xiang-guan-biao-zhun/can-kao-zi-liao.md)
