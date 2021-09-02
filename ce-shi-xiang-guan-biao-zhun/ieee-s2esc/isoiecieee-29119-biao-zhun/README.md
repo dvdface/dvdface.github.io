@@ -115,6 +115,8 @@ $$
 
 有些特殊的形式化描述的输入或者可以进行形式化描述的输入，也可以划分成等价类，具体的划分方法在语法测试中进行了介绍；
 
+如，某个匹配规则，存在上行、下行两种类型的配置，而且可以同时配置上下行的匹配规则，用形式化的方式可以描述为： input = \(upConfig \| downConfig\) { 0, 8 }，使用语法测试设计方法，先展开里面的选择类型为 upConfig, downConfig, upConfig & downConfig；再展开里面的迭代类型为: 无配置，8条upConfig， 8条downConfig，8条upConfig与downConfig的混合配置， 9条upConfig， 9条downConfig，9条pConfig与downConfig的混合配置；
+
 ![Equivalence Partition](../../../.gitbook/assets/image%20%28128%29.png)
 
 由于每个划分的边界值的处理很容易出现问题，所以往往对每个划分再应用边界值的分析设计方法；边界值设计主要有取2值法和取3值法，取2值法会取边界值和边界外部的值，取3值法会取边界内外的两个值和边界值；
