@@ -45,7 +45,9 @@ ISO是国际标准，标准众多；检索方法如下：
 
 ![&#x6807;&#x51C6;&#x68C0;&#x7D22;&#x754C;&#x9762;](../.gitbook/assets/image%20%2865%29.png)
 
-下载ISO，可以去[此网站](http://snti.ru/snips_magnet09.htm)搜索，里面ISO文件下载是通过磁力链提供的，使用迅雷打开后，选择所需的标准进行选择性下载；
+下载ISO，可以去[此网站](http://snti.ru/)搜索，里面ISO文件下载是通过磁力链提供的，使用迅雷打开后，选择所需的标准进行选择性下载；
+
+![snti.ru&#x7F51;&#x7AD9;](../.gitbook/assets/image%20%28147%29.png)
 
 下载GB，可以去[标准网](https://www.biaozhun.org/)搜索和下载；
 
