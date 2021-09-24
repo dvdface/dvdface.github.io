@@ -9,15 +9,14 @@
 * [推断统计学](shu-li-tong-ji/tui-duan-tong-ji-xue.md)
 * [参考资料](shu-li-tong-ji/can-kao-zi-liao.md)
 
----
+## 软件工程
 
-* [质量管理](quan-mian-zhi-liang-guan-li.md)
-* [概述](gai-shu.md)
-* [参考资料](can-kao-zi-liao.md)
+* [Untitled](ruan-jian-gong-cheng/untitled.md)
 
 ## 全面质量管理 <a id="quan-mian-zhi-liang-guan-li-1"></a>
 
 * [概述](quan-mian-zhi-liang-guan-li-1/untitled.md)
+* [参考资料](quan-mian-zhi-liang-guan-li-1/can-kao-zi-liao.md)
 
 ## 过程改进
 
