@@ -24,17 +24,9 @@
 
 为了解决该危机，提出了软件工程的概念：
 
-> The application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software; that is, the application of engineering to software.
->
-> 软件工程是将工程学应用在软件的开发、运营和维护当中；
-
 即，使用软件工程来解决**T**ime-**Q**uality-**C**ost问题；
 
-### 导致TQC的典型问题
-
-* 需求和系统依赖定义不清晰
-* 频繁的需求变更
-* 缺少相关工具
+软件工程采用项目管理的方式来管理软件的开发、运营和维护；
 
 
 
