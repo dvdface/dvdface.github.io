@@ -18,10 +18,6 @@
 * [概述](quan-mian-zhi-liang-guan-li-1/untitled.md)
 * [参考资料](quan-mian-zhi-liang-guan-li-1/can-kao-zi-liao.md)
 
-## 过程改进
-
-* [参考资料](guo-cheng-gai-jin/untitled.md)
-
 ## SQuaRE\(系统与软件的质量评估\) <a id="square"></a>
 
 * [概述](square/untitled.md)
