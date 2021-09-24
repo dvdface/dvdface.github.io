@@ -15,6 +15,10 @@
 * [概述](gai-shu.md)
 * [参考资料](can-kao-zi-liao.md)
 
+## 全面质量管理 <a id="quan-mian-zhi-liang-guan-li-1"></a>
+
+* [概述](quan-mian-zhi-liang-guan-li-1/untitled.md)
+
 ## SQuaRE\(系统与软件的质量评估\) <a id="square"></a>
 
 * [概述](square/untitled.md)
@@ -122,8 +126,4 @@
 ## 质量可视化
 
 * [参考](zhi-liang-ke-shi-hua/can-kao.md)
-
-## 全面质量管理 <a id="quan-mian-zhi-liang-guan-li-1"></a>
-
-* [Untitled](quan-mian-zhi-liang-guan-li-1/untitled.md)
 
