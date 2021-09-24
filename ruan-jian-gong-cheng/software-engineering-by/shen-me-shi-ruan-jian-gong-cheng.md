@@ -30,20 +30,7 @@
 
 即，使用软件工程来解决**T**ime-**Q**uality-**C**ost问题；
 
-### 软件工程包含哪些方面？
-
-* **软件需求Software Requirement** 定义系统应该做什么
-* **软件设计Software Design** 如何设计这个系统
-* **软件测试Software Testing** 发现和消除系统中的错误
-* **软件维护Software Maintaince**
-* **软件配置管理** 管理系统中不同的版本和配置
-* **软件工程过程Software Engineering Process** 定义和改进软件的开发过程
-* **软件工程工具和方法Software Engineering Tools and Method**
-* **质量保证Quality Assurances**
-
-### 系统工程与软件工程的异同？
-
-### 软件工程包括哪些内容？
+### 导致TQC的典型问题
 
 
 
