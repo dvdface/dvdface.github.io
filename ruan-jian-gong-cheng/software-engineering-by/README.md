@@ -13,7 +13,7 @@ description: 德国达姆城工业大学(tu-darmstadt)——计算机系——�
 * 知晓基本的设计模式；
 * 知晓质量保证的基本方法；
 
-![](../.gitbook/assets/software-engineering%20%281%29.jpg)
+![](../../.gitbook/assets/software-engineering%20%281%29.jpg)
 
 
 
