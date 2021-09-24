@@ -2,7 +2,7 @@
 description: 德国达姆城工业大学(tu-darmstadt)——计算机系——软件工程教程
 ---
 
-# Software Engineering by
+# Software Engineering教程
 
 学习目的：了解如何系统化的交付小型软件系统；
 
