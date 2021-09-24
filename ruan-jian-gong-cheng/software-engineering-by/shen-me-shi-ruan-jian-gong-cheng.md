@@ -41,10 +41,6 @@
 * **软件工程工具和方法Software Engineering Tools and Method**
 * **质量保证Quality Assurances**
 
-
-
-
-
 ### 系统工程与软件工程的异同？
 
 ### 软件工程包括哪些内容？
