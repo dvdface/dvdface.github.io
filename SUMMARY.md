@@ -12,6 +12,7 @@
 ## 软件工程
 
 * [概述](ruan-jian-gong-cheng/untitled.md)
+* [参考资料](ruan-jian-gong-cheng/can-kao-zi-liao.md)
 
 ## 全面质量管理 <a id="quan-mian-zhi-liang-guan-li-1"></a>
 
@@ -121,8 +122,4 @@
 ## 质量可视化
 
 * [参考](zhi-liang-ke-shi-hua/can-kao.md)
-
----
-
-* [参考资料](can-kao-zi-liao.md)
 
