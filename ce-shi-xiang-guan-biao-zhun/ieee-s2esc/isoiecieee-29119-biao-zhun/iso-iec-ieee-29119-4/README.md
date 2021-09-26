@@ -16,7 +16,7 @@ description: 'Software and systems engineering — Software testing — Part 4: 
 
 #### **测试规格\(Test Condition\)**
 
-测试规格是被测项中可测试的部分，功能、事务、特性、质量属性、结构元素等等可以作为测试依据的部分；
+测试规格是被测项中可测试的部分，功能、事务\(Transaction\)、特性、质量属性、结构元素等等可以作为测试依据的部分；
 
 可以和干系人一起商量把哪些属性作为测试规格，或者自行通过测试技术进行推导；
 
