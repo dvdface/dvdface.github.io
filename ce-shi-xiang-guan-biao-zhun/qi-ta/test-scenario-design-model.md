@@ -17,7 +17,7 @@ description: 测试场景设计模型
 1. 讲Story切分为Transaction，每个Transaction用Gherkin语言描述； 这个类似于把一个大的Use Case分成小的Use Case，一般涉及一个组件；
 2. 识别UI/UX，涉及Gherkin描述中的一些用户行为相关UI参数； 如，按钮，页面等；
 3. 识别Data，涉及Gherkin描述中的一些用户行为相关的数据，要记录数据的语法和语义； 所谓语法，就是数据的语法，如，账号名的一些字符包含、长度要求等； 所谓语义，就是数据形式，数字、图片等；
-4. 识别Intergration，即涉及哪些组件完成当前的Transaction;
+4. 识别Intergration，涉及哪些组件完成当前的Transaction，即识别上下游的依赖;
 5. 识别Risk，根据失效影响分析风险大小；
 
 ![](../../.gitbook/assets/image%20%28149%29.png)
