@@ -1,8 +1,8 @@
 ---
-description: 测试场景设计模型
+description: Test Scenario Design Model
 ---
 
-# Test Scenario Design Model
+# 测试场景设计模型
 
 ### 为什么要发明测试场景设计模型？
 
