@@ -1,5 +1,7 @@
 ---
-description: 'Deriving Test Cases from Use Cases: A Four-Step Process'
+description: >-
+  Deriving Test Cases from Use Cases: A Four-Step Process from <Managing
+  Software Requirements: A Use Case Approach>
 ---
 
 # 四步测试用例设计法
