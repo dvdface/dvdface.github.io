@@ -20,7 +20,7 @@ description: 测试场景设计模型
 4. 识别Intergration，涉及哪些组件完成当前的Transaction，即识别上下游的依赖;
 5. 识别Risk，根据失效影响分析风险大小；
 
-![](../../.gitbook/assets/image%20%28149%29.png)
+![](../../../.gitbook/assets/image%20%28149%29.png)
 
 ### 如何根据测试场景模型设计用例？
 

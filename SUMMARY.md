@@ -93,10 +93,10 @@
   * [改进阶段](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/gai-jin-jie-duan.md)
   * [控制阶段](ce-shi-xiang-guan-biao-zhun/liu-xi-ge-ma/kong-zhi-jie-duan.md)
 * [其他](ce-shi-xiang-guan-biao-zhun/qi-ta/README.md)
+  * [质量管理七工具](ce-shi-xiang-guan-biao-zhun/qi-ta/zhi-liang-guan-li-qi-gong-ju/README.md)
+    * [Test Scenario Design Model](ce-shi-xiang-guan-biao-zhun/qi-ta/zhi-liang-guan-li-qi-gong-ju/test-scenario-design-model.md)
+    * [四步测试用例设计法](ce-shi-xiang-guan-biao-zhun/qi-ta/zhi-liang-guan-li-qi-gong-ju/deriving-test-cases-from-use-cases-a-four-step-process.md)
   * [分析场景设计测试用例](ce-shi-xiang-guan-biao-zhun/qi-ta/fen-xi-chang-jing-she-ji-ce-shi-yong-li.md)
-  * [Test Scenario Design Model](ce-shi-xiang-guan-biao-zhun/qi-ta/test-scenario-design-model.md)
-  * [Deriving Test Cases from Use Cases: A Four-Step Process](ce-shi-xiang-guan-biao-zhun/qi-ta/deriving-test-cases-from-use-cases-a-four-step-process.md)
-  * [质量管理七工具](ce-shi-xiang-guan-biao-zhun/qi-ta/zhi-liang-guan-li-qi-gong-ju.md)
 * [参考资料](ce-shi-xiang-guan-biao-zhun/can-kao-zi-liao.md)
 
 ## 稳定性设计与测试 <a id="wen-ding-xing-ce-shi"></a>
