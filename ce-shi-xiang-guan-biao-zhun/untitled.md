@@ -4,6 +4,10 @@
 
 ![http://www.testingreferences.com](../.gitbook/assets/image%20%28165%29.png)
 
+其中，有四个软件测试模型值得关注：
+
+![Major Testing Models](../.gitbook/assets/image%20%28166%29.png)
+
 
 
 
