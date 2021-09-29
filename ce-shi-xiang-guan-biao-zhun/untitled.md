@@ -8,6 +8,13 @@
 
 ![Major Testing Models](../.gitbook/assets/image%20%28166%29.png)
 
+这四个模型的出发点各自不同：
+
+* **Phase Models Demonstration** 从确保软件满足规格的角度触发
+* **Destruction** 从发现缺陷的角度触发，即，缺陷检测
+* **Life Cycle Models** 从尽早检测各个阶段的缺陷角度出发，即，分层测试；
+* **Prevention** 从尽早预防各个阶段的缺陷的角度出发，即，流程设计
+
 
 
 
