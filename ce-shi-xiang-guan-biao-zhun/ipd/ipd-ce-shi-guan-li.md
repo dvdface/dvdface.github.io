@@ -15,9 +15,9 @@ IPD中的测试管理通过Incremental Build And Test模型进行，思想就是
 * **SIT\(System Intergration Test\) \[ TR4A - TR5 \]**
 
   
-  ****系统集成测试SIT（System Integration Test）：产品整机测试，测试内容与SDV大致相同，但增加可用性测试、可维护性测试和包装测试。SIT在开发阶段后期，由测试人员负责完成。  
+  ****系统集成测试SIT\(System Integration Test\)：产品整机测试，测试内容与SDV大致相同，但增加可用性测试、可维护性测试和包装测试。SIT在开发阶段后期，由测试人员负责完成。  
 
-* **SVT\(System Verification Test\) \[ TR5-TR6 \]** 系统验证测试SVT（System Verification Test）:小批量试制情况下的测试，测试内容与SDV大致相同，但强调从试制生产线随机抽检，关注产品质量一致性，SVT必须在SIT完成之后在验证阶段完成．SVT工作以测试人员为主，试制人员参加即可。
+* **SVT\(System Verification Test\) \[ TR5-TR6 \]** 系统验证测试SVT\(System Verification Test\)：小批量试制情况下的测试，测试内容与SDV大致相同，但强调从试制生产线随机抽检，关注产品质量一致性，SVT必须在SIT完成之后在验证阶段完成．SVT工作以测试人员为主，试制人员参加即可。
 
 ![SDV&#x3001;SIT&#x548C;SVT&#x9636;&#x6BB5;&#x5F02;&#x540C;](../../.gitbook/assets/image%20%2837%29.png)
 
