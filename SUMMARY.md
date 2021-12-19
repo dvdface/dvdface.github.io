@@ -1,17 +1,8 @@
 # Table of contents
 
-* [序言](README.md)
-
-## 数据统计与分析 <a href="#shu-li-tong-ji" id="shu-li-tong-ji"></a>
-
-* [概述](shu-li-tong-ji/gai-shu.md)
-* [描述统计学](shu-li-tong-ji/tong-ji-liang-yu-gu-ji-liang.md)
-* [推断统计学](shu-li-tong-ji/tui-duan-tong-ji-xue.md)
-* [参考资料](shu-li-tong-ji/can-kao-zi-liao.md)
-
 ## 软件工程
 
-* [概述](ruan-jian-gong-cheng/untitled.md)
+* [概述](README.md)
 * [Software Engineering教程](ruan-jian-gong-cheng/software-engineering-by/README.md)
   * [概述](ruan-jian-gong-cheng/software-engineering-by/gai-shu.md)
   * [软件工程概述](ruan-jian-gong-cheng/software-engineering-by/shen-me-shi-ruan-jian-gong-cheng.md)
@@ -126,11 +117,6 @@
 * [静态测试](zi-dong-hua-ce-shi/untitled-1.md)
 * [动态测试](zi-dong-hua-ce-shi/dong-tai-ce-shi.md)
 * [参考资料](zi-dong-hua-ce-shi/untitled.md)
-
-***
-
-* [Page 1](page-1.md)
-* [Page 1](page-1-1.md)
 
 ## 质量可视化
 

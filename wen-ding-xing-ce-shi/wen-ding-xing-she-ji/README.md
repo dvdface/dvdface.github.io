@@ -2,13 +2,18 @@
 
 ## 稳定性工程方法
 
-稳定性工程涉及方方面面，参考Wikipedia上面对[稳定性工程](https://en.wikipedia.org/wiki/Reliability_engineering)的描述；
+稳定性工程涉及方方面面，参考Wikipedia上面对[稳定性工程](https://en.wikipedia.org/wiki/Reliability\_engineering)的描述；
 
 稳定性中比较有用的方法有：
 
-* **Functional system failure analysis and derived requirements specification** 对系统的失效进行分析并形成继承性的稳定性需求规范 
-* **System diagnostics design** 设计一套系统诊断，对可发现系统中的问题，并进行诊断和分析； 
-* **FRACAS\(Failure reporting, analysis, and corrective action system\)**  建立一套IT系统，用来收集相关缺陷，进行分析并采取相应的行动；
+* **Functional system failure analysis and derived requirements specification**\
+  ****对系统的失效进行分析并形成继承性的稳定性需求规范\
+
+* **System diagnostics design**\
+  ****设计一套系统诊断，对可发现系统中的问题，并进行诊断和分析；\
+
+* **FRACAS(Failure reporting, analysis, and corrective action system)**\
+  **** 建立一套IT系统，用来收集相关缺陷，进行分析并采取相应的行动；
 
 ## 稳定性工程过程
 
@@ -25,6 +30,4 @@
 * 功能框图法；
 * 失效模式与影响分析法；
 * 故障树分析法；
-
-
 
