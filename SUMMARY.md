@@ -2,7 +2,7 @@
 
 * [序言](README.md)
 
-## 数据统计与分析 <a id="shu-li-tong-ji"></a>
+## 数据统计与分析 <a href="#shu-li-tong-ji" id="shu-li-tong-ji"></a>
 
 * [概述](shu-li-tong-ji/gai-shu.md)
 * [描述统计学](shu-li-tong-ji/tong-ji-liang-yu-gu-ji-liang.md)
@@ -18,25 +18,25 @@
   * [需求工程](ruan-jian-gong-cheng/software-engineering-by/xu-qiu-gong-cheng.md)
 * [参考资料](ruan-jian-gong-cheng/can-kao-zi-liao.md)
 
-## 全面质量管理 <a id="quan-mian-zhi-liang-guan-li-1"></a>
+## 全面质量管理 <a href="#quan-mian-zhi-liang-guan-li-1" id="quan-mian-zhi-liang-guan-li-1"></a>
 
 * [概述](quan-mian-zhi-liang-guan-li-1/untitled.md)
 * [参考资料](quan-mian-zhi-liang-guan-li-1/can-kao-zi-liao.md)
 
-## SQuaRE\(系统与软件的质量评估\) <a id="square"></a>
+## SQuaRE(系统与软件的质量评估) <a href="#square" id="square"></a>
 
 * [概述](square/untitled.md)
 * [使用质量评估过程](square/shi-yong-zhi-liang-ping-gu-guo-cheng.md)
 * [参考资料](square/can-kao-zi-liao-1.md)
 
-## 需求工程 <a id="xu-qiu-fen-xi"></a>
+## 需求工程 <a href="#xu-qiu-fen-xi" id="xu-qiu-fen-xi"></a>
 
 * [概述](xu-qiu-fen-xi/untitled-1.md)
 * [实例化需求](xu-qiu-fen-xi/untitled/README.md)
   * [Gherkin语法](xu-qiu-fen-xi/untitled/gherkin-yu-fa.md)
   * [参考资料](xu-qiu-fen-xi/untitled/can-kao-zi-liao.md)
 
-## 软件测试 <a id="ce-shi-xiang-guan-biao-zhun"></a>
+## 软件测试 <a href="#ce-shi-xiang-guan-biao-zhun" id="ce-shi-xiang-guan-biao-zhun"></a>
 
 * [概述](ce-shi-xiang-guan-biao-zhun/untitled.md)
 * [IPD](ce-shi-xiang-guan-biao-zhun/ipd/README.md)
@@ -100,14 +100,14 @@
     * [四步测试用例设计法](ce-shi-xiang-guan-biao-zhun/qi-ta/fen-xi-chang-jing-she-ji-ce-shi-yong-li/deriving-test-cases-from-use-cases-a-four-step-process.md)
 * [参考资料](ce-shi-xiang-guan-biao-zhun/can-kao-zi-liao.md)
 
-## 稳定性设计与测试 <a id="wen-ding-xing-ce-shi"></a>
+## 稳定性设计与测试 <a href="#wen-ding-xing-ce-shi" id="wen-ding-xing-ce-shi"></a>
 
 * [稳定性度量](wen-ding-xing-ce-shi/wen-ding-xing-du-liang.md)
 * [稳定性规律](wen-ding-xing-ce-shi/wen-ding-xing-jian-kong.md)
 * [稳定性分析](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/README.md)
-  * [功能框图\(Block diagram\)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/gong-neng-kuang-tu-block-diagram.md)
-  * [失效模式与影响分析\(FMEA\)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/fmea.md)
-  * [故障树分析\(FTA\)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/gu-zhang-shu-fta.md)
+  * [功能框图(Block diagram)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/gong-neng-kuang-tu-block-diagram.md)
+  * [失效模式与影响分析(FMEA)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/fmea.md)
+  * [故障树分析(FTA)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/gu-zhang-shu-fta.md)
 * [稳定性测试](wen-ding-xing-ce-shi/dai-ma-fu-za-du-du-liang.md)
 * [参考资料](wen-ding-xing-ce-shi/can-kao-zi-liao.md)
 
@@ -127,7 +127,11 @@
 * [动态测试](zi-dong-hua-ce-shi/dong-tai-ce-shi.md)
 * [参考资料](zi-dong-hua-ce-shi/untitled.md)
 
+***
+
+* [Page 1](page-1.md)
+* [Page 1](page-1-1.md)
+
 ## 质量可视化
 
 * [参考](zhi-liang-ke-shi-hua/can-kao.md)
-
