@@ -124,4 +124,4 @@
 
 ## 兼容性测试
 
-* [Page 1](jian-rong-xing-ce-shi/page-1.md)
+* [概述](jian-rong-xing-ce-shi/gai-shu.md)

@@ -2,15 +2,15 @@
 description: Fault Tree Analysis
 ---
 
-# 故障树分析\(FTA\)
+# 故障树分析(FTA)
 
 ## 什么是FTA
 
-故障树的分析方法最早是与1962年由贝尔实验室的H Waston和A Mearns为美国空军开发出来的；  
-后来为波音所采用，逐渐应用到各个行业，如，航空、化工、汽车、原子能、软件等和安全强相关的行业；  
-  
-FTA主要用于在设计阶段提前识别系统发生故障的可能根因，并采取应对措施；  
-FTA可以单独使用，也可以作为FMEA分析的补充；  
+故障树的分析方法最早是与1962年由贝尔实验室的H Waston和A Mearns为美国空军开发出来的；\
+后来为波音所采用，逐渐应用到各个行业，如，航空、化工、汽车、原子能、软件等和安全强相关的行业；\
+\
+FTA主要用于在设计阶段提前识别系统发生故障的可能根因，并采取应对措施；\
+FTA可以单独使用，也可以作为FMEA分析的补充；\
 
 
 ## FTA分析过程
@@ -31,13 +31,13 @@ Cut Set：一个根因事件的集合，集合里面的根因事件全部发生�
 
 Minimal Cut Set：最小的Cut Set，它仍然可以触发顶层的故障；
 
-![\(X,Y\), \(X,Z\)&#x662F;&#x6700;&#x5C0F;&#x7684;Cut Set](../../.gitbook/assets/image%20%2852%29.png)
+![(X,Y), (X,Z)是最小的Cut Set](<../../.gitbook/assets/image (52).png>)
 
 ## **FTA分析示例**
 
-![&#x7EBF;&#x7F06;&#x706B;&#x707E;&#x5206;&#x6790;](../../.gitbook/assets/image%20%2839%29.png)
+![线缆火灾分析](<../../.gitbook/assets/image (39).png>)
 
-![&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x6982;&#x7387;&#x6D4B;&#x7B97;](../../.gitbook/assets/image%20%2882%29.png)
+![事件发生概率测算](<../../.gitbook/assets/image (82).png>)
 
 $$
 μpumpfail =1-(0.05*0.05)*(1-0.003)*(1-0.002)*(1-0.018)*(1-0.02) = 0.0448
@@ -47,15 +47,13 @@ $$
 
 Event事件有如下符号表示：
 
-![Event&#x56FE;&#x7D20;](../../.gitbook/assets/image%20%2836%29.png)
+![Event图素](<../../.gitbook/assets/image (36).png>)
 
 Gate有如下符号表示：
 
-![Gate&#x56FE;&#x7D20;](../../.gitbook/assets/image%20%2847%29.png)
+![Gate图素](<../../.gitbook/assets/image (47).png>)
 
 FTA图形示例
 
-![FTA&#x56FE;&#x5F62;&#x793A;&#x4F8B;](../../.gitbook/assets/image%20%2827%29.png)
-
-
+![FTA图形示例](<../../.gitbook/assets/image (27).png>)
 
