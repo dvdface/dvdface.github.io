@@ -1,4 +1,4 @@
-# 功能框图(Block diagram)
+# 功能框图\(Block diagram\)
 
 ## **什么是Block Diagram**
 
@@ -10,10 +10,11 @@
 
 期间出现第二类故障时要进行告警，出现第一类故障要采取重试动作、设计上要采取冗余备份，以及错误报告；
 
-![](<../../.gitbook/assets/image (92).png>)
+![](../../.gitbook/assets/image%20%2892%29.png)
 
 ## 如何绘制Block Diagram
 
 //TODO:
 
-****
+\*\*\*\*
+
