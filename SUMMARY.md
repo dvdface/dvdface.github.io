@@ -124,6 +124,5 @@
 
 ## 兼容性测试
 
-* [Page 1](jian-rong-xing-ce-shi/page-1.md)
 * [参考资料](jian-rong-xing-ce-shi/can-kao-zi-liao.md)
 * [概述](jian-rong-xing-ce-shi/gai-shu.md)
