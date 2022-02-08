@@ -93,7 +93,7 @@
 
 ## 可靠性设计与测试 <a href="#wen-ding-xing-ce-shi" id="wen-ding-xing-ce-shi"></a>
 
-* [Page 1](wen-ding-xing-ce-shi/page-1.md)
+* [可靠性历史](wen-ding-xing-ce-shi/ke-kao-xing-li-shi.md)
 * [可靠性度量](wen-ding-xing-ce-shi/wen-ding-xing-du-liang.md)
 * [可靠性规律](wen-ding-xing-ce-shi/wen-ding-xing-jian-kong.md)
 * [可靠性分析](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/README.md)
