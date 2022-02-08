@@ -95,7 +95,7 @@
 
 * [Page 1](wen-ding-xing-ce-shi/page-1.md)
 * [可靠性度量](wen-ding-xing-ce-shi/wen-ding-xing-du-liang.md)
-* [稳定性规律](wen-ding-xing-ce-shi/wen-ding-xing-jian-kong.md)
+* [可靠性规律](wen-ding-xing-ce-shi/wen-ding-xing-jian-kong.md)
 * [稳定性分析](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/README.md)
   * [功能框图(Block diagram)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/gong-neng-kuang-tu-block-diagram.md)
   * [失效模式与影响分析(FMEA)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/fmea.md)
