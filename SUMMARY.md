@@ -100,7 +100,7 @@
   * [功能框图(Block diagram)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/gong-neng-kuang-tu-block-diagram.md)
   * [失效模式与影响分析(FMEA)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/fmea.md)
   * [故障树分析(FTA)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/gu-zhang-shu-fta.md)
-* [稳定性测试](wen-ding-xing-ce-shi/dai-ma-fu-za-du-du-liang.md)
+* [可靠性测试](wen-ding-xing-ce-shi/dai-ma-fu-za-du-du-liang.md)
 * [参考资料](wen-ding-xing-ce-shi/can-kao-zi-liao.md)
 
 ## 性能设计与测试
