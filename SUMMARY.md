@@ -91,9 +91,10 @@
     * [四步测试用例设计法](ce-shi-xiang-guan-biao-zhun/qi-ta/fen-xi-chang-jing-she-ji-ce-shi-yong-li/deriving-test-cases-from-use-cases-a-four-step-process.md)
 * [参考资料](ce-shi-xiang-guan-biao-zhun/can-kao-zi-liao.md)
 
-## 稳定性设计与测试 <a href="#wen-ding-xing-ce-shi" id="wen-ding-xing-ce-shi"></a>
+## 可靠性设计与测试 <a href="#wen-ding-xing-ce-shi" id="wen-ding-xing-ce-shi"></a>
 
-* [稳定性度量](wen-ding-xing-ce-shi/wen-ding-xing-du-liang.md)
+* [Page 1](wen-ding-xing-ce-shi/page-1.md)
+* [可靠性度量](wen-ding-xing-ce-shi/wen-ding-xing-du-liang.md)
 * [稳定性规律](wen-ding-xing-ce-shi/wen-ding-xing-jian-kong.md)
 * [稳定性分析](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/README.md)
   * [功能框图(Block diagram)](wen-ding-xing-ce-shi/wen-ding-xing-she-ji/gong-neng-kuang-tu-block-diagram.md)
