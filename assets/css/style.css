@@ -1,0 +1,57 @@
+/* 静态网站主样式 */
+:root {
+  --color-bg: #fafafa;
+  --color-text: #1a1a1a;
+  --color-accent: #2563eb;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+main {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+nav {
+  margin-bottom: 1.5rem;
+  font-size: 0.9375rem;
+}
+
+nav a + a {
+  margin-left: 1rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
