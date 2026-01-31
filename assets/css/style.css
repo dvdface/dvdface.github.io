@@ -55,3 +55,45 @@ footer {
   font-size: 0.875rem;
   color: #6b7280;
 }
+
+/* 文章列表（首页 / 专栏） */
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.post-item {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.post-item:first-child {
+  padding-top: 0;
+}
+
+.post-item-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.post-item-title a:hover {
+  text-decoration: underline;
+}
+
+.post-item-excerpt {
+  font-size: 0.9375rem;
+  color: #4b5563;
+  margin: 0 0 0.5rem;
+  line-height: 1.5;
+}
+
+.post-item-meta {
+  font-size: 0.8125rem;
+  color: #6b7280;
+}
+
+.post-item-meta a {
+  font-weight: 500;
+}
