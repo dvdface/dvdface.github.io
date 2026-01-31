@@ -6,7 +6,7 @@
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --main-margin: clamp(0.75rem, 2.5vw, 2rem);
   --main-max-width: 88rem;
-  --card-height: 33.33vh;
+  --card-height: 42vh;
 }
 
 * {
@@ -79,21 +79,6 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-.post-card.is-expanded {
-  min-height: 80vh;
-}
-
-.post-card.is-expanded .post-card-preview {
-  display: none;
-}
-
-.post-card.is-expanded .post-card-full {
-  display: block;
-  padding: 1.5rem;
-  overflow: auto;
-  max-height: 80vh;
-}
-
 .post-card-preview {
   display: flex;
   flex-direction: column;
@@ -101,10 +86,6 @@ body {
   min-height: 12rem;
   padding: 1.25rem 1.5rem;
   overflow: hidden;
-}
-
-.post-card-full {
-  display: none;
 }
 
 .post-card-title {
@@ -125,15 +106,21 @@ body {
 }
 
 .post-card-excerpt {
-  flex: 1;
+  flex: 0 0 auto;
   font-size: 0.9375rem;
   color: #4b5563;
   margin: 0;
   line-height: 1.55;
+}
+
+.post-card-excerpt + .post-card-excerpt {
+  margin-top: 0.75rem;
+}
+
+.post-card-preview .post-card-excerpt-wrap {
+  flex: 1;
+  min-height: 0;
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
 }
 
 .post-card-actions {
