@@ -12,6 +12,7 @@ export default defineUserConfig({
     navbar: [
       { text: '首页', link: '/' },
       { text: '提示词', link: '/prompts/' },
+      { text: '育儿', link: '/parenting/' },
     ],
     sidebar: {
       '/prompts/': [
@@ -20,10 +21,16 @@ export default defineUserConfig({
           children: ['/prompts/README.md', '/posts/prompt-writing-sop.md'],
         },
       ],
+      '/parenting/': [
+        {
+          text: '育儿专栏',
+          children: ['/parenting/README.md', '/posts/learning_by_research.md'],
+        },
+      ],
       '/posts/': [
         {
           text: '文章',
-          children: ['/posts/prompt-writing-sop.md'],
+          children: ['/posts/prompt-writing-sop.md', '/posts/learning_by_research.md'],
         },
       ],
     },
