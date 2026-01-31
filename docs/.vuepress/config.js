@@ -4,7 +4,6 @@ import { viteBundler } from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
   bundler: viteBundler(),
-  dest: 'dist',
   lang: 'zh-CN',
   title: '首页',
   description: '静态网站 · 由 dvdface.github.io 托管',
