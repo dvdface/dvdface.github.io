@@ -4,7 +4,8 @@
   --color-text: #1a1a1a;
   --color-accent: #2563eb;
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --main-margin: clamp(1.5rem, 5vw, 4rem);
+  --main-margin: clamp(0.75rem, 2.5vw, 2rem);
+  --main-max-width: 88rem;
   --card-height: 33.33vh;
 }
 
@@ -33,7 +34,7 @@ body {
 .site-nav {
   display: flex;
   gap: 1.5rem;
-  max-width: 64rem;
+  max-width: var(--main-max-width);
   margin: 0 auto;
   padding: 1rem var(--main-margin);
   font-size: 0.9375rem;
@@ -52,7 +53,7 @@ body {
 
 /* 主内容区：左右边距 */
 .site-main {
-  max-width: 64rem;
+  max-width: var(--main-max-width);
   margin: 0 auto;
   padding: 2rem var(--main-margin) 3rem;
 }
