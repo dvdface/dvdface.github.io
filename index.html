@@ -7,28 +7,34 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <main>
-    <header>
-      <nav aria-label="主导航">
-        <a href="index.html">首页</a>
-        <a href="prompts/index.html">提示词</a>
-      </nav>
-      <h1>欢迎</h1>
-    </header>
-    <p>这是静态网站首页。你可以在下方浏览最新文章，或前往 <a href="prompts/index.html">提示词</a> 专栏。</p>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <a href="prompts/index.html">提示词</a>
+    </nav>
+  </header>
 
-    <section aria-labelledby="latest-heading">
-      <h2 id="latest-heading" style="font-size: 1.25rem; margin: 2rem 0 0;">最新文章</h2>
+  <main class="site-main">
+    <section class="post-section" aria-labelledby="latest-heading">
+      <h2 id="latest-heading" class="sr-only">最新文章</h2>
       <ul class="post-list">
-        <li class="post-item">
-          <h3 class="post-item-title"><a href="posts/prompt-writing-sop.html">提示词编写 SOP：从白皮书到可执行流程</a></h3>
-          <p class="post-item-excerpt">本文根据 Google《Prompt Engineering》白皮书整理出一套可复用的提示词编写标准作业流程（SOP），便于在选模型、写提示、调参与文档化时按步骤执行，减少无效尝试并提高输出质量。</p>
-          <p class="post-item-meta"><a href="posts/prompt-writing-sop.html">阅读全文</a> · 提示词专栏</p>
+        <li class="post-card" data-post-url="posts/prompt-writing-sop.html">
+          <div class="post-card-preview">
+            <h3 class="post-card-title">
+              <a href="posts/prompt-writing-sop.html">提示词编写 SOP：从白皮书到可执行流程</a>
+            </h3>
+            <p class="post-card-excerpt">本文根据 Google《Prompt Engineering》白皮书整理出一套可复用的提示词编写标准作业流程（SOP），便于在选模型、写提示、调参与文档化时按步骤执行，减少无效尝试并提高输出质量。</p>
+            <div class="post-card-actions">
+              <a href="posts/prompt-writing-sop.html" class="post-card-link">阅读原文</a>
+              <button type="button" class="post-card-expand" aria-expanded="false">展开</button>
+            </div>
+          </div>
+          <div class="post-card-full" aria-hidden="true"></div>
         </li>
       </ul>
     </section>
 
-    <footer>
+    <footer class="site-footer">
       <p>静态网站 · 由 dvdface.github.io 托管</p>
     </footer>
   </main>
