@@ -430,6 +430,87 @@ adb pull /data/perfetto-trace.pb
 
 ---
 
+## 四(补充)：Trace 事件与函数对照清单
+
+在 Perfetto 中看到的每一条轨迹都对应 Choreographer 源码中的 Trace 调用。理解这些对应关系，才能快速定位问题。
+
+### 4.4 核心 Trace 事件清单
+
+| # | Trace 事件 | 对应函数 | 含义 | 耗时 | Perfetto 表现 |
+|---|-----------|--------|------|------|------------|
+| 1 | `onVsync()` | `FrameDisplayEventReceiver.onVsync()` | VSYNC 信号到达 | 即时 | 蓝色竖线，精确间隔 |
+| 2 | `doFrame()` | `Choreographer.doFrame()` | 帧处理核心函数 | <16ms | 绿色/红色 bar |
+| 3 | `INPUT` | `doCallbacks(CALLBACK_INPUT)` | 处理输入事件 | ~1ms | doFrame 内第 1 段 |
+| 4 | `ANIMATION` | `doCallbacks(CALLBACK_ANIMATION)` | 更新动画值 | ~2-5ms | doFrame 内第 2 段 |
+| 5 | `INSETS_ANIMATION` | `doCallbacks(CALLBACK_INSETS_ANIMATION)` | 窗口 Insets 动画 | ~1ms | doFrame 内第 3 段 |
+| 6 | `TRAVERSAL` | `doCallbacks(CALLBACK_TRAVERSAL)` | **measure/layout/draw** | ~8-10ms | doFrame 内最长段 |
+| 6.1 | `performMeasure()` | `ViewRootImpl.performMeasure()` | 测量所有 View | 子事件 | 嵌套在 TRAVERSAL 内 |
+| 6.2 | `performLayout()` | `ViewRootImpl.performLayout()` | 放置所有 View | 子事件 | 嵌套在 TRAVERSAL 内 |
+| 6.3 | `performDraw()` | `ViewRootImpl.performDraw()` | 绘制所有 View | 子事件 | 嵌套在 TRAVERSAL 内 |
+| 7 | `COMMIT` | `doCallbacks(CALLBACK_COMMIT)` | 缓冲区提交 | ~1-2ms | doFrame 内最后段 |
+| 8 | `scheduleVsyncLocked()` | `Choreographer.scheduleVsyncLocked()` | 注册下一个 VSYNC | 快速 | 短事件 |
+| 9 | `MSG_DO_SCHEDULE_VSYNC` | Handler 消息处理 | 线程切换（后台线程调用） | +1-2ms | Handler 轨迹 |
+| 10 | `MSG_DO_SCHEDULE_CALLBACK` | Handler 消息处理 | 延迟回调到期 | 等待 | Handler 轨迹 |
+| 11 | `Buffer stuffing recovery` | 缓冲区恢复机制 | 缓冲区堆积恢复 | 可变 | VSYNC 间隔变大 |
+
+### 4.5 快速诊断对照表
+
+**看到这个现象，说明什么？**
+
+| 现象 | 根因 | 是否正常 | 优化方案 |
+|-----|------|---------|--------|
+| onVsync() 精确 16.67ms 间隔 | Mode 1 (VSYNC 驱动) | ✅ 正常 | 无需优化 |
+| onVsync() 间隔波动（15-17ms） | Mode 2 (定时器)或硬件异常 | ⚠️ | 检查系统属性 |
+| doFrame < 16ms，全绿 bar | 帧处理正常 | ✅ 正常 | 无需优化 |
+| doFrame > 16ms，红色 bar | **Jank 发生** | ❌ | 找到红色段，优化 |
+| TRAVERSAL 段很长（>10ms） | measure/layout/draw 耗时 | ❌ | 优化 View 树（扁平化、避免嵌套） |
+| ANIMATION 波动、不连贯 | 使用了 System.nanoTime() | ❌ | 改用 Choreographer.getFrameTime() |
+| 长时间空白（如 1000ms） | postCallbackDelayed 延迟消息在等待 | ✅ 正常 | 无需优化 |
+| measure/layout/draw 嵌套很深 | View 树层级太深 | ❌ | 扁平化布局 |
+| Buffer stuffing recovery 频繁出现 | 缓冲区堆积 | ❌ | 检查 TRAVERSAL 是否超时 |
+
+### 4.6 完整执行序列（时间轴）
+
+```
+时刻 T0:
+├─ VSYNC 信号从硬件到达
+└─ onVsync() 被回调
+   └─ 发送 Handler 消息 MSG_DO_FRAME
+
+时刻 T0+ (几微秒后):
+└─ doFrame() 开始执行
+   ├─ [1ms]   INPUT 回调 → 处理用户输入
+   ├─ [3ms]   ANIMATION 回调 → 更新动画值
+   ├─ [1ms]   INSETS_ANIMATION 回调 → Insets 更新
+   ├─ [8ms]   TRAVERSAL 回调 → measure/layout/draw ← 最耗时
+   │          ├─ performMeasure() → 测量所有 View
+   │          ├─ performLayout() → 放置所有 View
+   │          └─ performDraw() → 绘制所有 View
+   └─ [2ms]   COMMIT 回调 → 提交到 SurfaceFlinger
+
+时刻 T0+16ms (约):
+└─ doFrame() 结束（如果超过 16ms → Jank）
+└─ scheduleVsyncLocked() 注册下一个 VSYNC
+
+时刻 T0+16-33ms:
+└─ 等待下一个 VSYNC 信号（或定时器）
+
+时刻 T0+33ms (约):
+└─ 下一个 VSYNC 到来，重复循环...
+```
+
+### 4.7 5 个关键观察点（优先级）
+
+开发者在诊断性能时，应该按以下优先级查看：
+
+1. **onVsync() 间隔** - 判断是 Mode 1（精确）还是 Mode 2（不精确）
+2. **doFrame 的红色 bar** - 直接指示 Jank（>16ms）
+3. **TRAVERSAL 段长度** - 通常是最大的瓶颈
+4. **ANIMATION 一致性** - frameTime 波动说明使用了 System.nanoTime()
+5. **缓冲区恢复** - 频繁出现说明 TRAVERSAL 经常超时
+
+---
+
 ## 五、常见陷阱与最佳实践
 
 ### 5.1 五大陷阱
