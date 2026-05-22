@@ -279,6 +279,82 @@ private void doFrame(long frameTimeNanos) {
 
 3. **VSYNC 调度频率**：如果没有待执行的回调，`scheduleVsyncLocked()` 不会向 SurfaceFlinger 注册新的 VSYNC 监听，避免浪费资源。
 
+### 1.5.2 在 Perfetto 中验证 PostCallbackDelayed 执行流程
+
+当你怀疑 postCallbackDelayed 导致延迟过大时，可以通过 Perfetto trace 进行验证：
+
+**采集 Trace：**
+
+```bash
+# 方式 1：通过 adb 采集（最常用）
+adb shell perfetto \
+    --config /data/perfetto-config.txt \
+    --out /data/perfetto-trace.pb
+
+# 方式 2：通过 Android Studio Profiler
+# Profiler → Record System Trace → 点击 Choreographer，待应用运行 N 秒后 Stop
+```
+
+**Perfetto 中的关键观察点：**
+
+在 Perfetto UI 中打开 trace 文件后，切换到「**Frames**」或「**Main Thread**」视图，观察以下信号：
+
+| 观察点 | 含义 | 对应代码 |
+|------|------|--------|
+| **Choreographer#doFrame** | 帧处理的总体耗时（绿色 bar）| 对应 doFrame() 方法的执行时间 |
+| **postCallbackDelayed + 空白间隔** | 看到大的空白间隔（>16ms）说明有延迟等待 | dueTime > now 的路径，等待 MSG_DO_SCHEDULE_CALLBACK |
+| **MSG_DO_SCHEDULE_CALLBACK** | Handler 消息分发（如果有的话） | sendMessageAtTime() 的延迟消息 |
+| **INPUT / ANIMATION / TRAVERSAL / COMMIT** | 5 大回调阶段的耗时分布 | doCallbacks() 分别调用各类型回调 |
+| **VSYNC 信号** | 硬件 VSYNC 到达时刻（蓝色竖线） | onVsync() → doFrame() 的触发点 |
+
+**具体操作步骤：**
+
+1. **定位延迟回调的调用点**
+   ```
+   在 Trace 视图中，用 Ctrl+F 搜索：postCallbackDelayed
+   或在应用代码中加 Log：
+   android.util.Log.d("Choreographer", "postCallbackDelayed called, delay=" + delayMillis);
+   ```
+
+2. **观察 Handler 消息队列延迟**
+   ```
+   在 Perfetto 的 Main Thread 轨道上，看是否有：
+   - MessageQueue#next（处理消息的等待）
+   - 长时间的空白（说明没有待处理消息，在等待 dueTime）
+   ```
+
+3. **对比两种路径的 trace 表现**
+   ```
+   场景 A（无延迟 postCallback）：
+   postCallback() → 立即进入 scheduleFrameLocked() 
+   → 等待下一个 VSYNC → doFrame()
+   Trace 表现：Choreographer#doFrame 立即在下一个 VSYNC 执行
+   
+   场景 B（有延迟 postCallbackDelayed）：
+   postCallbackDelayed(1000ms) → 发送 MSG_DO_SCHEDULE_CALLBACK
+   → [1000ms 空白等待] → MSG_DO_SCHEDULE_CALLBACK 到期
+   → scheduleFrameLocked() → 下一个 VSYNC → doFrame()
+   Trace 表现：Main Thread 上有明显的「1000ms 空白」+ 「MessageQueue#next 等待」
+   ```
+
+4. **检查是否走了非 UI 线程路径**
+   ```
+   如果从后台线程调用 postCallback()：
+   Trace 上会看到：
+   - MSG_DO_SCHEDULE_VSYNC 消息被发送
+   - 主线程的 MessageQueue 接收并处理
+   - 增加 ~1-2ms 的线程切换开销
+   ```
+
+**常见问题诊断：**
+
+| 症状 | 根因 | 解决方案 |
+|-----|------|--------|
+| 看不到 postCallbackDelayed 标记 | 没有启用 Trace Tag 或 API level < 21 | 升级 targetSdkVersion；在 app 代码中用 `Trace.traceBegin()` 包装 |
+| 看到意外的 1 秒空白 | 调用了 postCallbackDelayed(1000) | 检查代码中是否有意外的延迟参数 |
+| Main Thread 频繁排队 | 从非 UI 线程频繁调用 postCallback() | 改为在 UI 线程调用，或使用 `postFrameCallback()` 替代 |
+| VSYNC 信号间隔不规则 | 缓冲区堆积或其他 Jank | 查看 SurfaceFlinger 轨道是否有异常 |
+
 ### 1.6 其他配置接口
 
 ```java
