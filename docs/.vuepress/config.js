@@ -37,7 +37,7 @@ export default defineUserConfig({
       '/android/': [
         {
           text: 'Android 专栏',
-          children: ['/android/README.md', '/posts/android-io-optimization-insights.md'],
+          children: ['/android/README.md', '/posts/choreographer-deep-dive.md', '/posts/android-io-optimization-insights.md'],
         },
       ],
       '/posts/': [
@@ -46,6 +46,7 @@ export default defineUserConfig({
           children: [
             '/posts/prompt-writing-sop.md',
             '/posts/learning_by_research.md',
+            '/posts/choreographer-deep-dive.md',
             '/posts/android-io-optimization-insights.md',
           ],
         },
