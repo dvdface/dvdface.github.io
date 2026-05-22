@@ -1,4 +1,4 @@
-# Choreographer 深度指南：Android Frame Rendering 的心脏
+# Choreographer 深度指南（第一部分）：Android Frame Rendering 的心脏
 
 > 从帧驱动机制到性能优化的完整解析，涵盖 VSYNC 同步、帧时间计算、回调链路与 Jank 根因分析。
 
@@ -12,6 +12,12 @@ Choreographer 是 Android UI 渲染的**中枢调度器**，负责协调 VSYNC �
 1. **对外接口** — 什么时候调用、怎么用
 2. **调用场景** — Framework 和应用层的实际用法
 3. **内部机制** — 初始化、VSYNC 驱动、帧处理、性能优化
+
+---
+
+> 📖 **系列文章**：
+> - 第一部分：Choreographer 接口、场景、内部机制（当前）
+> - [第二部分](./choreographer-deep-dive-part2.html)：Framework 回调链路完全解析（INPUT → ANIMATION → INSETS → TRAVERSAL → COMMIT）
 
 ---
 
