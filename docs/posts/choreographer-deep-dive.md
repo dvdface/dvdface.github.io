@@ -160,6 +160,125 @@ INPUT → ANIMATION → INSETS_ANIMATION → TRAVERSAL → COMMIT
 (典型耗时示例)
 ```
 
+### 1.5.1 PostCallbackDelayed 内部执行流程
+
+当应用调用 `postCallback()` 或 `postCallbackDelayed()` 时，Choreographer 内部的执行流程如下：
+
+```
+用户 post 回调
+  ↓
+  └─→ postCallbackDelayedInternal()
+       ├─ dueTime ≤ now → 直接调用 scheduleFrameLocked()
+       └─ dueTime > now → 发送 MSG_DO_SCHEDULE_CALLBACK
+                           ↓ (到期时)
+                           → 调用 scheduleFrameLocked()
+                             ↓
+       ┌────────────────────┴────────────────────┐
+       ↓                                          ↓
+   USE_VSYNC                               !USE_VSYNC
+       ↓                                          ↓
+   isLooperThread?                          发送 MSG_DO_FRAME
+       ├─ YES → 直接调用 scheduleVsyncLocked()    ↓
+       └─ NO  → 发送 MSG_DO_SCHEDULE_VSYNC      doFrame()
+                 ↓
+                 doScheduleVsync()
+                 ↓
+                 scheduleVsyncLocked()
+                 ↓
+                 等待 VSYNC 信号
+                 ↓
+                 onVsync() → doFrame()
+```
+
+**关键路径解析：**
+
+| 场景 | 执行路径 | 延迟 | 说明 |
+|-----|--------|-----|------|
+| 立即执行（无延迟）| postCallback → scheduleFrameLocked → scheduleVsyncLocked → 等待 VSYNC | 0-16ms | 下一个 VSYNC 信号到来时执行 |
+| 延迟执行 | postCallbackDelayed → 延迟 Timer → MSG_DO_SCHEDULE_CALLBACK → scheduleFrameLocked | 延迟 + 0-16ms | 先等待延迟，再等待下一个 VSYNC |
+| 非 VSYNC 模式 | postCallbackDelayed → MSG_DO_FRAME → 立即执行 doFrame | 无 VSYNC 等待 | 用于低端设备或模拟器 |
+| 非 UI 线程 | postCallback → 发送 MSG_DO_SCHEDULE_VSYNC 到 UI 线程 | 线程切换开销 | Handler 消息队列等待 UI 线程处理 |
+
+**代码实现细节：**
+
+```java
+// Choreographer.java
+
+private void postCallbackDelayedInternal(int callbackType,
+        Object action, Object token, long delayMillis) {
+    synchronized (mLock) {
+        final long now = SystemClock.uptimeMillis();
+        final long dueTime = now + delayMillis;
+        
+        // 添加到对应类型的回调队列
+        mCallbackQueues[callbackType].addCallbackLocked(
+            dueTime, action, token);
+        
+        // 判断是否需要立即调度
+        if (dueTime <= now) {
+            // 回调已到期，立即调度帧
+            scheduleFrameLocked(now);
+        } else {
+            // 回调未到期，发送延迟消息
+            Message msg = mHandler.obtainMessage(
+                MSG_DO_SCHEDULE_CALLBACK, action);
+            msg.arg1 = callbackType;
+            mHandler.sendMessageAtTime(msg, dueTime);
+        }
+    }
+}
+
+private void scheduleFrameLocked(long now) {
+    // 检查是否已经在等待 VSYNC
+    if (!mFrameScheduled) {
+        mFrameScheduled = true;
+        
+        if (isLooperThread()) {
+            // 在 Choreographer 的线程中，直接调度 VSYNC
+            scheduleVsyncLocked();
+        } else {
+            // 在其他线程中，发送消息给 Choreographer 线程
+            Message msg = mHandler.obtainMessage(MSG_DO_SCHEDULE_VSYNC);
+            msg.setAsynchronous(true);
+            mHandler.sendMessage(msg);
+        }
+    }
+}
+
+// 是否启用 VSYNC（通常为 true，除非是模拟器或特殊设置）
+private static final boolean USE_VSYNC = 
+    SystemProperties.getBoolean("debug.choreographer.vsync", true);
+
+private void doFrame(long frameTimeNanos) {
+    final long startNanos;
+    synchronized (mLock) {
+        if (!mFrameScheduled) {
+            return;  // 帧已取消
+        }
+        
+        // 更新当前帧时间
+        mLastFrameTimeNanos = frameTimeNanos;
+        mFrameInfo.setVsync(frameTimeNanos, frameTimeNanos, frameTimeNanos);
+        mFrameScheduled = false;
+    }
+    
+    // 执行所有待执行的回调（INPUT → ANIMATION → ... → COMMIT）
+    doCallbacks(Choreographer.CALLBACK_INPUT, frameTimeNanos);
+    doCallbacks(Choreographer.CALLBACK_ANIMATION, frameTimeNanos);
+    doCallbacks(Choreographer.CALLBACK_INSETS_ANIMATION, frameTimeNanos);
+    doCallbacks(Choreographer.CALLBACK_TRAVERSAL, frameTimeNanos);
+    doCallbacks(Choreographer.CALLBACK_COMMIT, frameTimeNanos);
+}
+```
+
+**性能影响：**
+
+1. **延迟回调的开销**：如果回调延迟很大（如 1 秒），Choreographer 会使用 Handler 的 `sendMessageAtTime()` 而非 VSYNC 等待，避免长期占用 VSYNC 资源。
+
+2. **跨线程调用的开销**：从非 UI 线程调用 `postCallback()` 需要通过 Handler 消息切换线程，增加 ~1-2ms 的延迟。
+
+3. **VSYNC 调度频率**：如果没有待执行的回调，`scheduleVsyncLocked()` 不会向 SurfaceFlinger 注册新的 VSYNC 监听，避免浪费资源。
+
 ### 1.6 其他配置接口
 
 ```java
