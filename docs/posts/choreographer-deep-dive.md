@@ -1,128 +1,234 @@
 # Choreographer 深度指南（第一部分）：Android Frame Rendering 的心脏
 
-> 从帧驱动机制到性能优化的完整解析，涵盖 VSYNC 同步、帧时间计算、回调链路与 Jank 根因分析。
+> 从两种工作模式、接口族清单、执行原理、到 Perfetto 诊断的完整解析。面向 Android 开发/测试人员。
 
 ---
 
 ## 前言
 
-Choreographer 是 Android UI 渲染的**中枢调度器**，负责协调 VSYNC 信号、帧时间、回调执行与缓冲区管理。  
-本文从三个维度系统性地解析 Choreographer：
+Choreographer 是 Android UI 渲染的**中枢调度器**。它的核心职责是：
 
-1. **对外接口** — 什么时候调用、怎么用
-2. **调用场景** — Framework 和应用层的实际用法
-3. **内部机制** — 初始化、VSYNC 驱动、帧处理、性能优化
+- **接收帧驱动信号**（VSYNC 或定时器）
+- **管理 5 大回调队列**（INPUT → ANIMATION → INSETS → TRAVERSAL → COMMIT）
+- **执行回调**（measure/layout/draw）
+- **提交到 SurfaceFlinger**
+
+本文从三个维度系统性地解析 Choreographer，适合 Android 开发/测试人员理解和诊断性能问题：
+
+1. **是什么** — 核心认知、工作模式、接口族清单
+2. **怎么用** — 常见用法、最佳实践、陷阱避坑
+3. **原理 + Trace** — 执行流程、Perfetto 观察、性能诊断
 
 ---
 
-> 📖 **系列文章**：
-> - 第一部分：Choreographer 接口、场景、内部机制（当前）
-> - [第二部分](./choreographer-deep-dive-part2.html)：Framework 回调链路完全解析（INPUT → ANIMATION → INSETS → TRAVERSAL → COMMIT）
+## 一、核心认知：两种工作模式
+
+### 1.1 Choreographer 不是"只等 VSYNC"
+
+常见的错误理解是：
+```
+Choreographer = "等待硬件 VSYNC" → "执行回调"
+```
+
+实际上，Choreographer 有**两种完全不同的工作模式**，由系统属性控制：
+
+```java
+boolean USE_VSYNC = SystemProperties.getBoolean(
+    "debug.choreographer.vsync", 
+    true  // 默认值
+)
+```
+
+### 1.2 Mode 1：VSYNC 驱动（USE_VSYNC = true）
+
+**这是 99% 的生产设备使用的模式。**
+
+```
+硬件 VSYNC 信号（来自 SurfaceFlinger）
+    ↓
+DisplayEventReceiver（监听信号）
+    ↓
+onVsync() 回调触发
+    ↓
+发送 Handler 消息（MSG_DO_FRAME）
+    ↓
+UI 线程处理消息
+    ↓
+Choreographer.doFrame(frameTimeNanos)
+    ↓
+顺序执行 5 大回调：
+  INPUT → ANIMATION → INSETS → TRAVERSAL → COMMIT
+    ↓
+提交到 SurfaceFlinger
+    ↓
+下一个 VSYNC 到来时重复
+```
+
+**特点**：
+- 帧时间由硬件 VSYNC 决定（精确）
+- 60Hz 屏幕：每 16.67ms 一个 VSYNC
+- 120Hz 屏幕：每 8.33ms 一个 VSYNC
+- **自动适配高刷屏幕**
+- 省电（等待信号，不轮询）
+
+**关键类**：`DisplayEventReceiver`（接收 SurfaceFlinger 的 VSYNC）
+
+### 1.3 Mode 2：定时器驱动（USE_VSYNC = false）
+
+**用于低端设备或模拟器（没有硬件 VSYNC）。**
+
+```
+应用启动 或 上一帧完成
+    ↓
+Choreographer.scheduleFrame()
+    ↓
+Handler.postDelayed(doFrame, ~16ms)  ← 硬编码定时器
+    ↓
+定时器到期
+    ↓
+Handler 回调 doFrame()
+    ↓
+顺序执行 5 大回调：
+  INPUT → ANIMATION → INSETS → TRAVERSAL → COMMIT
+    ↓
+递归调用 scheduleFrame()，继续下一帧
+```
+
+**特点**：
+- 帧时间由软件定时器决定（不精确）
+- 总是硬编码 16ms（60Hz）
+- **无法自动适配高刷屏幕**
+- 与硬件 VSYNC 不同步 → 可能撕裂、抖动
+- 高耗电（频繁 Timer 唤醒）
+
+**关键问题**：定时器偏差（如 15ms 或 17ms）会导致帧率不稳定
+
+### 1.4 如何判断当前是哪种模式？
+
+**通过 adb 命令**：
+```bash
+adb shell getprop debug.choreographer.vsync
+# 输出：true（Mode 1）或 false（Mode 2）
+```
+
+**在 Perfetto Trace 中**：
+- **Mode 1**：看得到 `FrameDisplayEventReceiver#onVsync()`，VSYNC 间隔精确（±0.1ms）
+- **Mode 2**：看不到 onVsync()，只有 Handler 定时器，间隔不稳定（±2-3ms）
 
 ---
 
-## 一、Choreographer 对外接口完全清单
+## 二、接口族清单
 
-## 接口族 1：实例获取族
+Choreographer 暴露 18 个接口，按功能分为 4 个族。
 
-**接口清单**：
-- `getInstance()` - 获取当前线程的 Choreographer
-- `getMainThreadInstance()` - 获取主线程的 Choreographer
-- `getInstanceForSurfaceControl(long layerHandle, Looper looper)` - 基于 SurfaceControl 创建专用 Choreographer
-- `releaseInstance()` - 释放当前线程的 Choreographer
+### 接口族 1：实例获取族
 
 **用途**：获取或释放 Choreographer 实例
+
+**接口清单**：
+- `getInstance()` - 获取当前线程的 Choreographer（绑定到 Looper）
+- `getMainThreadInstance()` - 获取主线程的 Choreographer（可能为 null）
+- `getInstanceForSurfaceControl(layerHandle, looper)` - 基于 SurfaceControl 创建专用实例
+- `releaseInstance()` - 释放当前线程的 Choreographer
 
 **使用场景**：
 - 动画、自定义渲染时获取实例
 - 后台线程需要独立的 Choreographer 实例
 - 线程销毁前释放实例避免内存泄漏
 
+**关键约束**：Choreographer 必须在有 Looper 的线程中创建
+
 ---
 
-## 接口族 2：帧时间查询族
+### 接口族 2：帧时间查询族
+
+**用途**：查询帧时间、帧间隔、预期呈现时间等
 
 **接口清单**：
 - `getFrameTime()` - 当前帧时间（毫秒）
 - `getFrameTimeNanos()` - 当前帧时间（纳秒）
 - `getLastFrameTimeNanos()` - 最后一帧的时间
 - `getExpectedPresentationTimeNanos()` - 当前帧的预期呈现时间
-- `getLatestExpectedPresentTimeNanos()` - 最新的预期呈现时间（包含 Binder 调用到 SurfaceFlinger）
+- `getLatestExpectedPresentTimeNanos()` - 最新的预期呈现时间（包含 Binder 调用）
 - `getFrameIntervalNanos()` - 帧间隔（纳秒，动态）
-- `getVsyncId()` - 当前帧的 VSYNC ID
+- `getVsyncId()` - 当前帧的 VSYNC ID（用于与 SurfaceFlinger 帧关联）
 - `getFrameDeadline()` - 当前帧的截止时间
-
-**用途**：查询帧时间、帧间隔、预期呈现时间等
 
 **使用场景**：
 - 动画计算、帧同步
-- 高刷屏幕（120Hz/144Hz）适配
+- **高刷屏幕（120Hz/144Hz）适配**
 - 帧时间精度要求高的场景
 
 **关键约束**：`getFrameTime*` 和 `getVsyncId` **只能在 Frame Callback 中调用**
 
-**为什么需要 frameTime 而不是 System.nanoTime()？**
+**为什么不用 System.nanoTime()？**
 
-```
-使用 System.nanoTime()：                使用 frameTime：
-动画值在帧内随机波动                   所有回调共用同一时间
-帧时间可能回退                         帧时间严格递增
-需要额外的时间校准                     与屏幕刷新精确同步
-  ↓                                      ↓
-帧内不一致、波动、Jank 检测失败  →  动画平滑、无 pop、精准检测
-```
+| 问题 | System.nanoTime() | frameTime |
+|------|------------------|-----------|
+| 帧内时间一致性 | ❌ 波动 | ✅ 一致 |
+| 时间顺序 | ❌ 可能回退 | ✅ 严格递增 |
+| 与屏幕同步 | ❌ 需手动校准 | ✅ 精确同步 |
+| 结果 | 动画 pop、Jank 检测失败 | 平滑、精准 |
 
 ---
 
-## 接口族 3：帧回调族
+### 接口族 3：帧回调族
 
-### 3.1 通用帧回调（与 VSYNC 同步）
+**用途**：注册与帧处理同步的回调
+
+#### 3.1 通用帧回调（与 VSYNC 同步、执行顺序确定）
 
 **接口清单**：
-- `postCallback(int callbackType, Runnable action, Object token)` - 注册回调（立即）
-- `postCallbackDelayed(int callbackType, Runnable action, Object token, long delayMillis)` - 注册回调（延迟）
-- `removeCallbacks(int callbackType, Runnable action, Object token)` - 移除回调
+- `postCallback(callbackType, action, token)` - 注册回调（立即）
+- `postCallbackDelayed(callbackType, action, token, delayMillis)` - 注册回调（延迟）
+- `removeCallbacks(callbackType, action, token)` - 移除回调
 
-**5 大回调类型**（执行顺序固定）：
-```
-CALLBACK_INPUT (0)            → 处理输入事件（~1ms）
-CALLBACK_ANIMATION (1)        → 更新动画（~2-5ms）
-CALLBACK_INSETS_ANIMATION (2) → 窗口 Insets 动画（~1ms）
-CALLBACK_TRAVERSAL (3)        → View measure/layout/draw（~8-10ms）
-CALLBACK_COMMIT (4)           → 帧后处理与缓冲区提交（~1-2ms）
-```
+**5 大回调类型**（执行顺序固定，不可改变）：
 
-**用途**：注册与 VSYNC 同步、执行顺序确定的帧回调
+```
+CALLBACK_INPUT (0)            ← 处理输入事件        (~1ms)
+  ↓
+CALLBACK_ANIMATION (1)        ← 更新动画值          (~2-5ms)
+  ↓
+CALLBACK_INSETS_ANIMATION (2) ← 窗口 Insets 动画    (~1ms)
+  ↓
+CALLBACK_TRAVERSAL (3)        ← measure/layout/draw (~8-10ms)
+  ↓
+CALLBACK_COMMIT (4)           ← 缓冲区提交          (~1-2ms)
+  ↓
+总耗时预算：16ms（60Hz）/ 8.33ms（120Hz）
+```
 
 **使用场景**：
-- Framework 内部驱动（ViewRootImpl.scheduleTraversals）
+- **Framework 内部驱动**（ViewRootImpl.scheduleTraversals）
 - 动画框架（ValueAnimator、ObjectAnimator）
 - 需要精确执行顺序的场景
 
 ---
 
-### 3.2 简化帧回调（每帧一次）
+#### 3.2 简化帧回调（每帧一次，自动移除）
 
 **接口清单**：
-- `postFrameCallback(FrameCallback callback)` - 注册每帧回调（自动移除）
-- `removeFrameCallback(FrameCallback callback)` - 移除回调
+- `postFrameCallback(callback)` - 注册每帧回调
+- `removeFrameCallback(callback)` - 移除回调
 
-**用途**：每帧都需要更新的场景
+**特点**：
+- 每帧自动执行一次
+- 执行后自动移除（需手动重新注册继续下一帧）
+- 不受 callbackType 限制
 
 **使用场景**：
 - 游戏引擎（帧循环）
 - 自定义 OpenGL/Vulkan 渲染
-- 实时数据更新（如动画、物理模拟）
-
-**特点**：每帧自动执行一次，执行后自动移除（需要手动重新注册继续下一帧）
+- 实时数据更新（动画、物理模拟）
 
 ---
 
-### 3.3 高精度帧回调（Android 12+）
+#### 3.3 高精度帧回调（Android 12+，多时间线）
 
 **接口清单**：
-- `postVsyncCallback(VsyncCallback callback)` - 注册 VSYNC 回调
-- `removeVsyncCallback(VsyncCallback callback)` - 移除回调
+- `postVsyncCallback(callback)` - 注册 VSYNC 回调
+- `removeVsyncCallback(callback)` - 移除回调
 
 **用途**：获取精细的帧时间信息（多条时间线）
 
@@ -135,1093 +241,275 @@ CALLBACK_COMMIT (4)           → 帧后处理与缓冲区提交（~1-2ms）
 
 ---
 
-## 接口族 4：配置族
+### 接口族 4：配置族
+
+**用途**：配置帧处理的全局参数
 
 **接口清单**：
-- `setFrameDelay(long frameDelay)` - 设置帧延迟（毫秒）
+- `setFrameDelay(frameDelay)` - 设置帧延迟（毫秒）
 - `getFrameDelay()` - 获取帧延迟
-- `subtractFrameDelay(long delayMillis)` - 从延迟中减去帧延迟时间
-- `setFPSDivisor(int divisor)` - 设置 FPS 分频器
-- `onWaitForBufferRelease(long durationNanos)` - 缓冲区堆积恢复通知
-
-**用途**：配置帧处理的参数和行为
+- `subtractFrameDelay(delayMillis)` - 从延迟中减去帧延迟时间
+- `setFPSDivisor(divisor)` - 设置 FPS 分频器（降低刷新率）
+- `onWaitForBufferRelease(durationNanos)` - 缓冲区堆积恢复通知
 
 **使用场景**：
 - 低端设备优化（增加帧延迟以降低功耗）
 - 缓冲区堆积恢复（SurfaceFlinger 通知）
-- FPS 降频（降低刷新率实验）
+- FPS 降频实验
 
 ---
 
-## 接口族总结
+## 三、执行原理
 
-| 接口族 | 接口数 | 主要用途 | 典型用户 | 关键特性 |
-|--------|--------|---------|---------|---------|
-| **实例获取** | 4 | 获取 Choreographer 实例 | 所有开发者 | 线程绑定 |
-| **帧时间查询** | 8 | 查询帧时间、帧间隔 | 动画/渲染开发者 | 只能在回调中调用 |
-| **通用帧回调** | 3 | 与 VSYNC 同步、固定执行顺序 | Framework 内部 | 5 大回调队列 |
-| **简化帧回调** | 2 | 每帧自动执行 | 游戏/渲染引擎 | 每帧自动移除 |
-| **高精度帧回调** | 2 | 详细帧信息（多时间线） | 多屏/高精度场景 | Android 12+ |
-| **配置** | 5 | 配置帧处理参数 | 系统/OEM | 全局配置 |
+### 3.1 postCallback vs postCallbackDelayed
 
-### 1.5.1 PostCallbackDelayed 内部执行流程
+这两个接口的区别决定了**何时把回调加入队列**。
 
-当应用调用 `postCallback()` 或 `postCallbackDelayed()` 时，Choreographer 内部的执行流程如下：
+**postCallback()（立即入队）**：
 
 ```
-用户 post 回调
-  ↓
-  └─→ postCallbackDelayedInternal()
-       ├─ dueTime ≤ now → 直接调用 scheduleFrameLocked()
-       └─ dueTime > now → 发送 MSG_DO_SCHEDULE_CALLBACK
-                           ↓ (到期时)
-                           → 调用 scheduleFrameLocked()
-                             ↓
-       ┌────────────────────┴────────────────────┐
-       ↓                                          ↓
-   USE_VSYNC                               !USE_VSYNC
-       ↓                                          ↓
-   isLooperThread?                          发送 MSG_DO_FRAME
-       ├─ YES → 直接调用 scheduleVsyncLocked()    ↓
-       └─ NO  → 发送 MSG_DO_SCHEDULE_VSYNC      doFrame()
-                 ↓
-                 doScheduleVsync()
-                 ↓
-                 scheduleVsyncLocked()
-                 ↓
-                 等待 VSYNC 信号
-                 ↓
-                 onVsync() → doFrame()
+postCallback(CALLBACK_ANIMATION, runnable)
+    ↓
+立即加入回调队列（不等待）
+    ↓
+[等待下一个 VSYNC / 定时器]
+    ↓
+Mode 1: 下一个 VSYNC 到来时执行
+Mode 2: 下一个定时器到期时执行
 ```
 
-**关键路径解析：**
+**总延迟**：0-16ms（取决于 VSYNC 相位或定时器精度）
 
-| 场景 | 执行路径 | 延迟 | 说明 |
-|-----|--------|-----|------|
-| 立即执行（无延迟）| postCallback → scheduleFrameLocked → scheduleVsyncLocked → 等待 VSYNC | 0-16ms | 下一个 VSYNC 信号到来时执行 |
-| 延迟执行 | postCallbackDelayed → 延迟 Timer → MSG_DO_SCHEDULE_CALLBACK → scheduleFrameLocked | 延迟 + 0-16ms | 先等待延迟，再等待下一个 VSYNC |
-| 非 VSYNC 模式 | postCallbackDelayed → MSG_DO_FRAME → 立即执行 doFrame | 无 VSYNC 等待 | 用于低端设备或模拟器 |
-| 非 UI 线程 | postCallback → 发送 MSG_DO_SCHEDULE_VSYNC 到 UI 线程 | 线程切换开销 | Handler 消息队列等待 UI 线程处理 |
+---
 
-**代码实现细节：**
+**postCallbackDelayed()（延迟入队）**：
 
-```java
-// Choreographer.java
-
-private void postCallbackDelayedInternal(int callbackType,
-        Object action, Object token, long delayMillis) {
-    synchronized (mLock) {
-        final long now = SystemClock.uptimeMillis();
-        final long dueTime = now + delayMillis;
-        
-        // 添加到对应类型的回调队列
-        mCallbackQueues[callbackType].addCallbackLocked(
-            dueTime, action, token);
-        
-        // 判断是否需要立即调度
-        if (dueTime <= now) {
-            // 回调已到期，立即调度帧
-            scheduleFrameLocked(now);
-        } else {
-            // 回调未到期，发送延迟消息
-            Message msg = mHandler.obtainMessage(
-                MSG_DO_SCHEDULE_CALLBACK, action);
-            msg.arg1 = callbackType;
-            mHandler.sendMessageAtTime(msg, dueTime);
-        }
-    }
-}
-
-private void scheduleFrameLocked(long now) {
-    // 检查是否已经在等待 VSYNC
-    if (!mFrameScheduled) {
-        mFrameScheduled = true;
-        
-        if (isLooperThread()) {
-            // 在 Choreographer 的线程中，直接调度 VSYNC
-            scheduleVsyncLocked();
-        } else {
-            // 在其他线程中，发送消息给 Choreographer 线程
-            Message msg = mHandler.obtainMessage(MSG_DO_SCHEDULE_VSYNC);
-            msg.setAsynchronous(true);
-            mHandler.sendMessage(msg);
-        }
-    }
-}
-
-// 是否启用 VSYNC（通常为 true，除非是模拟器或特殊设置）
-private static final boolean USE_VSYNC = 
-    SystemProperties.getBoolean("debug.choreographer.vsync", true);
-
-private void doFrame(long frameTimeNanos) {
-    final long startNanos;
-    synchronized (mLock) {
-        if (!mFrameScheduled) {
-            return;  // 帧已取消
-        }
-        
-        // 更新当前帧时间
-        mLastFrameTimeNanos = frameTimeNanos;
-        mFrameInfo.setVsync(frameTimeNanos, frameTimeNanos, frameTimeNanos);
-        mFrameScheduled = false;
-    }
-    
-    // 执行所有待执行的回调（INPUT → ANIMATION → ... → COMMIT）
-    doCallbacks(Choreographer.CALLBACK_INPUT, frameTimeNanos);
-    doCallbacks(Choreographer.CALLBACK_ANIMATION, frameTimeNanos);
-    doCallbacks(Choreographer.CALLBACK_INSETS_ANIMATION, frameTimeNanos);
-    doCallbacks(Choreographer.CALLBACK_TRAVERSAL, frameTimeNanos);
-    doCallbacks(Choreographer.CALLBACK_COMMIT, frameTimeNanos);
-}
+```
+postCallbackDelayed(CALLBACK_ANIMATION, runnable, 100ms)
+    ↓
+计算 dueTime = now + 100ms
+    ↓
+[时间判断]
+├─ dueTime ≤ now  → 立即加入队列（延迟已到期）
+└─ dueTime > now  → 发送 Handler 延迟消息（MSG_DO_SCHEDULE_CALLBACK）
+                   等待 100ms 后再加入队列
+    ↓
+[Mode 1] 加入队列后，等待下一个 VSYNC（0-16.67ms）
+[Mode 2] 加入队列后，等待下一个定时器（0-16ms，但精度差）
 ```
 
-**性能影响：**
+**总延迟**：100ms + 0-16ms
 
-1. **延迟回调的开销**：如果回调延迟很大（如 1 秒），Choreographer 会使用 Handler 的 `sendMessageAtTime()` 而非 VSYNC 等待，避免长期占用 VSYNC 资源。
+---
 
-2. **跨线程调用的开销**：从非 UI 线程调用 `postCallback()` 需要通过 Handler 消息切换线程，增加 ~1-2ms 的延迟。
+### 3.2 五大回调阶段的耗时分布
 
-3. **VSYNC 调度频率**：如果没有待执行的回调，`scheduleVsyncLocked()` 不会向 SurfaceFlinger 注册新的 VSYNC 监听，避免浪费资源。
+每帧 16ms 的预算如何分配？
 
-### 1.5.2 在 Perfetto 中验证 PostCallbackDelayed 执行流程
+```
+0ms ─────────────────────────────────────────────── 16ms
+│                                                      │
+├─ INPUT (0-1ms)         ↓
+│  处理触摸、按键事件
+│
+├─ ANIMATION (1-5ms)     ↓
+│  更新动画值、位移、缩放等
+│
+├─ INSETS (5-6ms)        ↓
+│  窗口 Insets 动画
+│
+├─ TRAVERSAL (6-14ms)    ↓ ← 最耗时
+│  measure/layout/draw
+│  这里通常是瓶颈
+│
+├─ COMMIT (14-16ms)      ↓
+│  缓冲区提交
+│
+└─ 用户感知到的帧在屏幕上（约 16ms 后）
+```
 
-当你怀疑 postCallbackDelayed 导致延迟过大时，可以通过 Perfetto trace 进行验证：
+**关键认识**：
+- TRAVERSAL 是最耗时的阶段（8-10ms）
+- 如果 TRAVERSAL 超过 10ms，下一帧会 Jank
+- INPUT 必须快速响应（<1ms），否则操作卡顿
 
-**采集 Trace：**
+---
 
+### 3.3 Mode 1 vs Mode 2 下的行为差异
+
+| 场景 | Mode 1 (VSYNC) | Mode 2 (定时器) |
+|------|---|---|
+| **doFrame 触发** | VSYNC 信号精确触发 | 定时器大约 16ms 触发 |
+| **帧间隔** | 精确 16.67ms（60Hz）、8.33ms（120Hz） | 不精确，波动 2-3ms |
+| **高刷适配** | ✅ 自动精确匹配 120Hz/144Hz | ❌ 硬编码 16ms，无法适配 |
+| **postCallbackDelayed 后** | 精确等待下一个 VSYNC | 等待不精确的定时器 |
+| **功耗** | 低（等待，不轮询） | 高（频繁 Timer 唤醒） |
+
+---
+
+## 四、Perfetto 中的观察与诊断
+
+### 4.1 采集 Trace
+
+**方式 1：Android Studio Profiler**
+```
+Profiler → System Trace → Record
+（运行 UI 操作，30 秒后自动停止）
+```
+
+**方式 2：adb 命令**
 ```bash
-# 方式 1：通过 adb 采集（最常用）
 adb shell perfetto \
-    --config /data/perfetto-config.txt \
+    --config <(echo 'buffers { size_kb: 32768 }
+        data_sources { config { name: "linux.ftrace" } }
+    ') \
     --out /data/perfetto-trace.pb
 
-# 方式 2：通过 Android Studio Profiler
-# Profiler → Record System Trace → 点击 Choreographer，待应用运行 N 秒后 Stop
+# 在应用中运行 UI 操作...
+
+adb pull /data/perfetto-trace.pb
+# 在 https://ui.perfetto.dev 打开
 ```
 
-**Perfetto 中的关键观察点：**
+### 4.2 关键观察点
 
-在 Perfetto UI 中打开 trace 文件后，切换到「**Frames**」或「**Main Thread**」视图，观察以下信号：
+打开 Perfetto UI 后，切换到 **Main Thread** 视图，观察 6 个关键信号：
 
-| 观察点 | 含义 | 对应代码 |
-|------|------|--------|
-| **Choreographer#doFrame** | 帧处理的总体耗时（绿色 bar）| 对应 doFrame() 方法的执行时间 |
-| **postCallbackDelayed + 空白间隔** | 看到大的空白间隔（>16ms）说明有延迟等待 | dueTime > now 的路径，等待 MSG_DO_SCHEDULE_CALLBACK |
-| **MSG_DO_SCHEDULE_CALLBACK** | Handler 消息分发（如果有的话） | sendMessageAtTime() 的延迟消息 |
-| **INPUT / ANIMATION / TRAVERSAL / COMMIT** | 5 大回调阶段的耗时分布 | doCallbacks() 分别调用各类型回调 |
-| **VSYNC 信号** | 硬件 VSYNC 到达时刻（蓝色竖线） | onVsync() → doFrame() 的触发点 |
+| 信号 | 含义 | 对应代码 | 正常表现 |
+|------|------|--------|--------|
+| **Choreographer#doFrame** | 帧处理总耗时 | doFrame() 执行时间 | 绿色 bar，<16ms |
+| **INPUT / ANIMATION / TRAVERSAL / COMMIT** | 5 大阶段耗时分布 | 各阶段的 doCallbacks() | 显示在 doFrame 内 |
+| **VSYNC 竖线** | 硬件 VSYNC 信号到达 | onVsync() 触发 | 蓝色竖线，16.67ms 间隔（60Hz） |
+| **空白间隔** | 没有 UI 操作的阶段 | 等待下一个 VSYNC | 正常，通常 0-16ms |
+| **MessageQueue#next** | Handler 消息队列等待 | 处理 Handler 消息 | 如果看到长时间等待，说明有延迟消息 |
+| **measure/layout/draw** | View 树遍历 | ViewRootImpl.doTraversal() | 耗时最长的阶段 |
 
-**具体操作步骤：**
+### 4.3 快速诊断流程
 
-1. **定位延迟回调的调用点**
-   ```
-   在 Trace 视图中，用 Ctrl+F 搜索：postCallbackDelayed
-   或在应用代码中加 Log：
-   android.util.Log.d("Choreographer", "postCallbackDelayed called, delay=" + delayMillis);
-   ```
+**问题 A：应用掉帧了（Jank）**
 
-2. **观察 Handler 消息队列延迟**
-   ```
-   在 Perfetto 的 Main Thread 轨道上，看是否有：
-   - MessageQueue#next（处理消息的等待）
-   - 长时间的空白（说明没有待处理消息，在等待 dueTime）
-   ```
-
-3. **对比两种路径的 trace 表现**
-   ```
-   场景 A（无延迟 postCallback）：
-   postCallback() → 立即进入 scheduleFrameLocked() 
-   → 等待下一个 VSYNC → doFrame()
-   Trace 表现：Choreographer#doFrame 立即在下一个 VSYNC 执行
-   
-   场景 B（有延迟 postCallbackDelayed）：
-   postCallbackDelayed(1000ms) → 发送 MSG_DO_SCHEDULE_CALLBACK
-   → [1000ms 空白等待] → MSG_DO_SCHEDULE_CALLBACK 到期
-   → scheduleFrameLocked() → 下一个 VSYNC → doFrame()
-   Trace 表现：Main Thread 上有明显的「1000ms 空白」+ 「MessageQueue#next 等待」
-   ```
-
-4. **检查是否走了非 UI 线程路径**
-   ```
-   如果从后台线程调用 postCallback()：
-   Trace 上会看到：
-   - MSG_DO_SCHEDULE_VSYNC 消息被发送
-   - 主线程的 MessageQueue 接收并处理
-   - 增加 ~1-2ms 的线程切换开销
-   ```
-
-**常见问题诊断：**
-
-| 症状 | 根因 | 解决方案 |
-|-----|------|--------|
-| 看不到 postCallbackDelayed 标记 | 没有启用 Trace Tag 或 API level < 21 | 升级 targetSdkVersion；在 app 代码中用 `Trace.traceBegin()` 包装 |
-| 看到意外的 1 秒空白 | 调用了 postCallbackDelayed(1000) | 检查代码中是否有意外的延迟参数 |
-| Main Thread 频繁排队 | 从非 UI 线程频繁调用 postCallback() | 改为在 UI 线程调用，或使用 `postFrameCallback()` 替代 |
-| VSYNC 信号间隔不规则 | 缓冲区堆积或其他 Jank | 查看 SurfaceFlinger 轨道是否有异常 |
-
-### 1.5.2 在 Perfetto 中验证 PostCallbackDelayed 执行流程
-
-### 2.1 Framework 内部如何使用
-
-#### **场景 1：View.postOnAnimation() — 应用动画同步**
-
-当应用调用 `View.postOnAnimation()` 时，ViewRootImpl 会将回调注册到 Choreographer。
-
-```java
-// View.java
-public void postOnAnimation(Runnable action) {
-    ViewRootImpl viewRoot = getViewRootImpl();
-    if (viewRoot != null) {
-        viewRoot.mChoreographer.postCallback(
-            Choreographer.CALLBACK_ANIMATION, action, null);
-    }
-}
-
-// 实际使用场景
-button.postOnAnimation(() -> {
-    updatePosition(10);  // 在稳定帧时间内更新位置
-    button.postOnAnimation(this);  // 继续下一帧
-});
+```
+采集 Trace
+    ↓
+打开 Perfetto → Main Thread 视图
+    ↓
+找到红色 bar（>16ms 的 doFrame）
+    ↓
+检查：
+├─ TRAVERSAL 耗时过长？ → View 树太复杂，measure/layout/draw 超时
+├─ INPUT 被延迟？ → 前一帧的 TRAVERSAL 过长，导致输入卡顿
+└─ VSYNC 间隔不均？ → 可能是 Mode 2（定时器），或缓冲区堆积
+    ↓
+针对根因优化
 ```
 
-**关键点：** 使用 `CALLBACK_ANIMATION` 确保与动画更新同步。
+**问题 B：动画不平滑（pop/闪烁）**
 
-#### **场景 2：ViewRootImpl.scheduleTraversals() — 主循环驱动**
-
-View Tree 的 measure/layout/draw 通过 Choreographer 驱动，确保与屏幕刷新同步。
-
-```java
-// ViewRootImpl.java 伪代码
-public void scheduleTraversals() {
-    if (!mTraversalScheduled) {
-        mTraversalScheduled = true;
-        // 注册 TRAVERSAL 回调
-        mChoreographer.postCallback(
-            Choreographer.CALLBACK_TRAVERSAL,
-            mTraversalRunnable,
-            null);
-    }
-}
-
-private final Runnable mTraversalRunnable = new Runnable() {
-    @Override
-    public void run() {
-        doTraversal();  // 执行 measure/layout/draw
-    }
-};
+```
+采集 Trace
+    ↓
+在 ANIMATION 阶段，检查回调中的 frameTime 值
+    ↓
+如果 frameTime 波动：
+├─ 应用使用了 System.nanoTime()  → 改为 Choreographer.getFrameTime()
+└─ 或 Mode 2 定时器精度不够    → 建议用 Mode 1
 ```
 
-**触发条件：**
-- 应用首次显示 Window
-- 调用 `View.requestLayout()`
-- 调用 `View.invalidate()`
+**问题 C：延迟回调问题**
 
-#### **场景 3：ValueAnimator — 帧动画框架**
-
-Android Animation Framework 依赖 Choreographer 来实现帧同步动画。
-
-```java
-// ValueAnimator.java 伪代码
-public void start() {
-    mAnimationHandler.addAnimationFrameCallback(this);
-}
-
-// AnimationHandler 内部
-class AnimationHandler {
-    private Choreographer mChoreographer = Choreographer.getInstance();
-    
-    void addAnimationFrameCallback(ValueAnimator animator) {
-        mChoreographer.postFrameCallback(mFrameCallback);
-    }
-}
 ```
-
-**示例：**
-
-```java
-ObjectAnimator.ofFloat(view, "translationX", 0f, 100f)
-    .setDuration(300)
-    .start();  // ← 内部自动使用 Choreographer
-```
-
-#### **场景 4：SurfaceFlinger VSYNC 同步**
-
-Choreographer 接收 SurfaceFlinger 的硬件 VSYNC 信号，驱动整个帧处理。
-
-```java
-// FrameDisplayEventReceiver.java
-@Override
-public void onVsync(long timestampNanos, long physicalDisplayId, int frame,
-                    VsyncEventData vsyncEventData) {
-    // 收到 VSYNC 信号
-    // 发送 MSG_DO_FRAME 消息到 Handler
-    Message msg = Message.obtain(mHandler, this);
-    msg.setAsynchronous(true);
-    mHandler.sendMessageAtTime(msg, timestampNanos / TimeUtils.NANOS_PER_MS);
-}
-```
-
-**关键点：** VSYNC 是硬件级时钟，确保帧时间与屏幕刷新精确同步。
-
-### 2.2 应用层如何使用
-
-#### **场景 A：自定义 OpenGL 渲染线程**
-
-游戏或 3D 应用需要与屏幕刷新同步，但渲染在独立线程中。
-
-```java
-public class GLSurfaceView extends View {
-    private Choreographer mChoreographer;
-    private GLRenderThread mRenderThread;
-    
-    public void startRendering() {
-        mChoreographer = Choreographer.getInstance();
-        mChoreographer.postFrameCallback(new Choreographer.FrameCallback() {
-            @Override
-            public void doFrame(long frameTimeNanos) {
-                // 获取稳定的帧时间
-                mRenderThread.queueFrame(frameTimeNanos);
-                
-                // 继续监听下一帧
-                mChoreographer.postFrameCallback(this);
-            }
-        });
-    }
-}
-
-// GL 线程使用帧时间更新动画
-class GLRenderThread extends Thread {
-    void queueFrame(long frameTimeNanos) {
-        synchronized (this) {
-            mFrameTimeNanos = frameTimeNanos;
-            notify();
-        }
-    }
-}
-```
-
-**优点：** GL 线程获得与 UI 线程相同的帧时间，避免时间不对齐导致的渲染卡顿。
-
-#### **场景 B：性能监测（Jank 检测）**
-
-测量帧间隔，检测掉帧（Jank）。
-
-```java
-public class JankDetector {
-    private Choreographer mChoreographer;
-    private long mLastFrameTime = 0;
-    
-    public void startMonitoring() {
-        mChoreographer = Choreographer.getInstance();
-        mChoreographer.postFrameCallback(new Choreographer.FrameCallback() {
-            @Override
-            public void doFrame(long frameTimeNanos) {
-                if (mLastFrameTime > 0) {
-                    long deltaMs = (frameTimeNanos - mLastFrameTime) / 1_000_000;
-                    
-                    // 60Hz 帧间隔应为 ~16.67ms
-                    if (deltaMs > 16 + 3) {  // 允许 3ms 容差
-                        Log.w("Jank", "Detected jank: " + deltaMs + "ms");
-                        // 上报到性能平台
-                        Analytics.trackJank(deltaMs);
-                    }
-                }
-                mLastFrameTime = frameTimeNanos;
-                mChoreographer.postFrameCallback(this);
-            }
-        });
-    }
-}
-```
-
-**应用场景：** Firebase Crashlytics、性能监控 SDK
-
-#### **场景 C：精细帧时间分析（Android 12+）**
-
-某些高精度场景需要多个可能的帧时间线和截止时间。
-
-```java
-public class FrameTimingAnalyzer {
-    public void analyzeFrameTiming() {
-        Choreographer choreographer = Choreographer.getInstance();
-        choreographer.postVsyncCallback(new Choreographer.VsyncCallback() {
-            @Override
-            public void onVsync(@NonNull Choreographer.FrameData data) {
-                long frameTimeNanos = data.getFrameTimeNanos();
-                Choreographer.FrameTimeline preferred = 
-                    data.getPreferredFrameTimeline();
-                
-                Log.d("FrameTiming",
-                    String.format(
-                        "Frame: %d, Deadline: %d, ExpectedPresent: %d",
-                        frameTimeNanos,
-                        preferred.getDeadlineNanos(),
-                        preferred.getExpectedPresentationTimeNanos()));
-            }
-        });
-    }
-}
+采集 Trace
+    ↓
+在 Main Thread 上看 Handler 消息队列
+    ↓
+如果看到长时间等待（如 1000ms+ 空白）：
+├─ 说明有 postCallbackDelayed 的延迟消息在等待
+├─ 确认 dueTime 是否符合预期
+└─ 检查是否意外设置了过大的延迟
 ```
 
 ---
 
-## 三、Choreographer 内部工作机制
+## 五、常见陷阱与最佳实践
 
-### 3.1 初始化流程（线程本地存储）
+### 5.1 五大陷阱
 
+| 陷阱 | 后果 | 根因 | 解决方案 | Trace 表现 |
+|------|------|-----|--------|----------|
+| **在 TRAVERSAL 做复杂计算** | TRAVERSAL 超时 → Jank | CPU 繁忙 | 预计算或后台线程 | 红色 bar，TRAVERSAL 段很长 |
+| **频繁在回调中 invalidate()** | 帧内递归，掉帧加倍 | 反复触发 TRAVERSAL | 批量更新，避免递归 | 多个 doFrame bar 紧密排列 |
+| **硬编码 16ms 帧间隔** | 120Hz 屏幕动画错乱 | 没有用 getFrameIntervalNanos() | 用动态帧间隔 | Trace 中 VSYNC 间隔异常 |
+| **从回调外调用 getFrameTime()** | IllegalStateException | 框架限制 | 仅在回调中调用 | Crash log 清晰 |
+| **从后台线程频繁 postCallback()** | 线程切换开销累积 | 1-2ms × N 次 | 改为批量或在 UI 线程调用 | Handler 消息队列繁忙 |
+
+### 5.2 最佳实践清单
+
+✓ **使用 frameTime 而非 System.nanoTime()**
 ```
-应用首次调用 Choreographer.getInstance()
-           ↓
-    [线程本地存储检查]
-    sThreadInstance.get()
-           ↓
-    ┌─ 第一次调用？
-    │
-    ├─→ YES：创建新实例
-    │        ├─ 检查当前线程是否有 Looper
-    │        │  (无 Looper → 抛出 IllegalStateException)
-    │        │
-    │        ├─ 创建 Choreographer 实例
-    │        │  ├─ 初始化 mLooper 引用
-    │        │  ├─ 创建 FrameHandler(looper)
-    │        │  │  └─ 处理 MSG_DO_FRAME、MSG_DO_SCHEDULE_VSYNC 等消息
-    │        │  ├─ 如果 USE_VSYNC = true
-    │        │  │  └─ 创建 FrameDisplayEventReceiver
-    │        │  │     └─ 注册 Native VSYNC 监听（到 SurfaceFlinger）
-    │        │  ├─ 初始化 mCallbackQueues[5]
-    │        │  │  └─ INPUT / ANIMATION / INSETS_ANIMATION / TRAVERSAL / COMMIT
-    │        │  ├─ 获取屏幕刷新率
-    │        │  │  └─ mFrameIntervalNanos = 1e9 / refreshRate
-    │        │  │     (60Hz → 16,666,666 ns; 120Hz → 8,333,333 ns)
-    │        │  └─ 设置 FPSDivisor
-    │        │
-    │        └─ 如果是主线程 → 缓存到 mMainInstance
-    │
-    └─→ NO：返回已缓存的实例
-
-返回 Choreographer
+动画会平滑，无波动和 pop
+在 Trace 中看到 ANIMATION 的 frameTime 一致
 ```
 
-**关键点：** Choreographer 是线程级单例，每个 Looper 线程一个实例。
-
-### 3.2 VSYNC 驱动的帧渲染完整流程
-
+✓ **使用 getFrameIntervalNanos() 而非硬编码 16ms**
 ```
-═══════════════════════════════════════════════════════════════════
-
-[硬件 VSYNC 周期]  t=0ms        t=16.67ms      t=33.34ms      t=50ms
-                   │               │              │              │
-                   ▼               ▼              ▼              ▼
-            ┌──────────────┐
-            │ VSYNC 信号   │
-            │ 来自显示子   │
-            │ 系统         │
-            └──────┬───────┘
-                   ↓
-    FrameDisplayEventReceiver.onVsync(
-        timestampNanos,
-        vsyncEventData)
-        │
-        ├─→ 检查时间戳是否在未来
-        │   (图形 HAL 时钟漂移检测)
-        │
-        ├─→ 检查是否已有待处理的 VSYNC
-        │   mHavePendingVsync
-        │
-        └─→ 发送 MSG_DO_FRAME 消息
-            msg.sendMessageAtTime(msg, timestampNanos)
-            ↓
-    [Handler 消息队列排队]
-    (其他更早时间戳的消息会先执行)
-            ↓
-    FrameHandler.handleMessage(MSG_DO_FRAME)
-            ↓
-    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-    ┃             doFrame() 开始执行                    ┃
-    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-            ↓
-    [1] 缓冲区堆积检测与恢复
-        updateBufferStuffingState()
-        ├─ 如果检测到缓冲区堆积
-        │  ├─ 执行 OFFSET：调整帧时间偏移
-        │  └─ 执行 DELAY_FRAME：延迟帧处理
-        └─ 如果空闲期结束 → 重置恢复状态
-            ↓
-    [2] 帧时间计算与调整
-        ├─ 计算 Jitter = startNanos - frameTimeNanos
-        │  (实际执行时间 - 预期执行时间)
-        │
-        ├─ 如果 Jitter >= frameInterval
-        │  ├─ 跳帧检测：skipCount = Jitter / frameInterval
-        │  ├─ 调整 frameTime 为最近 VSYNC 边界
-        │  └─ 警告日志（如果跳帧超过阈值）
-        │
-        ├─ 如果 frameTime 回退（时间戳变小）
-        │  ├─ 日志警告
-        │  └─ 等待下一个 VSYNC
-        │
-        └─ 如果启用 FPSDivisor
-           └─ 故意跳帧以降低渲染速率
-            ↓
-    [3] 记录帧元数据
-        mFrameInfo.setVsync(
-            intendedFrameTime,  // 原始 VSYNC 时间
-            adjustedFrameTime,  // 调整后的帧时间
-            vsyncId,
-            deadline,
-            startNanos,
-            frameInterval)
-            ↓
-    [4] 动画时钟锁定
-        AnimationUtils.lockAnimationClock(
-            frameTime_ms,
-            expectedPresentationTime_ns)
-        ├─ 所有回调在此帧内使用相同的时间
-        └─ 确保帧内动画值一致性
-            ↓
-    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-    ┃         执行 5 个回调阶段（顺序严格）                   ┃
-    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-            ↓
-    [5] CALLBACK_INPUT
-        mFrameInfo.markInputHandlingStart()
-        doCallbacks(CALLBACK_INPUT, frameInterval)
-        └─ 执行输入事件处理回调
-            ↓
-    [6] CALLBACK_ANIMATION
-        mFrameInfo.markAnimationsStart()
-        doCallbacks(CALLBACK_ANIMATION, frameInterval)
-        └─ 执行动画更新、postOnAnimation() 等回调
-            ↓
-    [7] CALLBACK_INSETS_ANIMATION
-        doCallbacks(CALLBACK_INSETS_ANIMATION, frameInterval)
-        └─ 执行 IME、导航栏等 Insets 动画
-            ↓
-    [8] CALLBACK_TRAVERSAL
-        mFrameInfo.markPerformTraversalsStart()
-        doCallbacks(CALLBACK_TRAVERSAL, frameInterval)
-        └─ 执行 View.measure / layout / draw
-            ↓
-    [9] CALLBACK_COMMIT
-        doCallbacks(CALLBACK_COMMIT, frameInterval)
-        ├─ 检查 Jitter >= 2 * frameInterval
-        │  └─ 如果是 → 调整 frameTime 以确保单调递增
-        └─ 执行帧后处理（缓冲区提交、资源清理）
-            ↓
-    [10] 动画时钟解锁
-        AnimationUtils.unlockAnimationClock()
-        └─ 为下一帧做准备
-            ↓
-    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-    ┃      一帧处理完成，等待下一个 VSYNC 信号         ┃
-    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+自动适配 60Hz/90Hz/120Hz/144Hz 屏幕
+在 Trace 中看到 VSYNC 间隔与屏幕刷新率匹配
 ```
 
-### 3.3 回调执行细节
-
-#### **doCallbacks(callbackType) 的内部流程**
-
-```java
-void doCallbacks(int callbackType, long frameIntervalNanos) {
-    // 第1步：提取所有到期的回调
-    CallbackRecord callbacks = mCallbackQueues[callbackType]
-        .extractDueCallbacksLocked(now / 1e6);
-    
-    if (callbacks == null) {
-        return;  // 没有回调要执行
-    }
-    
-    // 第2步：CALLBACK_COMMIT 特殊处理
-    // 检查是否因为严重延迟导致帧时间需要调整
-    if (callbackType == CALLBACK_COMMIT) {
-        long jitterNanos = now - frameTimeNanos;
-        if (frameIntervalNanos > 0 && jitterNanos >= 2 * frameIntervalNanos) {
-            // 延迟超过 2 个帧间隔 → 调整 frameTime
-            final long lastFrameOffset = jitterNanos % frameIntervalNanos 
-                    + frameIntervalNanos;
-            frameTimeNanos = now - lastFrameOffset;
-            mLastFrameTimeNanos = frameTimeNanos;
-            // 更新帧时间线数据
-            mFrameData.update(frameTimeNanos, mDisplayEventReceiver, jitterNanos);
-        }
-    }
-    
-    // 第3步：标记回调运行中（允许调用 getFrameTime()）
-    mCallbacksRunning = true;
-    
-    // 第4步：执行所有回调
-    try {
-        Trace.traceBegin(TRACE_TAG_VIEW, CALLBACK_TRACE_TITLES[callbackType]);
-        for (CallbackRecord c = callbacks; c != null; c = c.next) {
-            if (c.token == VSYNC_CALLBACK_TOKEN) {
-                ((VsyncCallback) c.action).onVsync(mFrameData);
-            } else if (c.token == FRAME_CALLBACK_TOKEN) {
-                ((FrameCallback) c.action).doFrame(frameTimeNanos);
-            } else {
-                ((Runnable) c.action).run();
-            }
-        }
-    } finally {
-        // 第5步：清理与回收
-        mCallbacksRunning = false;
-        do {
-            final CallbackRecord next = callbacks.next;
-            recycleCallbackLocked(callbacks);  // 回收到对象池
-            callbacks = next;
-        } while (callbacks != null);
-    }
-}
+✓ **避免在 TRAVERSAL 中做重操作**
+```
+measure/layout/draw 必须 < 10ms
+在 Trace 中看到 TRAVERSAL 段为绿色，不是红色
 ```
 
-### 3.4 关键时间指标
-
-#### **Jitter 计算与处理**
-
+✓ **监测帧间隔，建立 Jank 告警**
 ```
-定义：Jitter = 实际执行时间 - 预期执行时间
-            = startNanos - frameTimeNanos
-
-示例 1：正常情况
-  预期执行：0ms
-  实际执行：0.5ms
-  Jitter = 0.5ms < 16.67ms ✓ 无跳帧
-
-示例 2：主线程卡顿，跳过 2 帧
-  预期执行：0ms (VSYNC1)
-  实际执行：33.5ms (VSYNC3 之后)
-  Jitter = 33.5ms ≈ 2 * 16.67ms
-  处理：
-    skipCount = 33.5 / 16.67 = 2
-    调整 frameTime = 33.5 - (33.5 % 16.67) = 33.34ms (最近的 VSYNC)
-    mFrameInfo 记录为 2 帧跳过
-
-示例 3：时间戳漂移（罕见）
-  frameTime 看起来在回退
-  处理：
-    等待下一个 VSYNC，中止本帧处理
-    Log: "Frame time appears to be going backwards"
+记录 frameTime 差值，超过 16.67ms 则上报
+在性能基线中建立 Jank 率告警阈值
 ```
 
-#### **缓冲区堆积恢复（Buffer Stuffing Recovery）**
-
+✓ **高刷屏幕适配**
 ```
-背景：
-  应用帧生产速率 > SurfaceFlinger 消费速率
-  → BufferQueue 堆积 → 新帧需等待 dequeueBuffer
-  → 下一帧处理被延迟 → Jank
-
-检测：
-  onWaitForBufferRelease(durationNanos)
-  if (durationNanos > mLastFrameIntervalNanos / 2) {
-      mBufferStuffingState.isStuffed.set(true)
-  }
-
-恢复策略：
-  ① OFFSET：向动画提供负偏移的帧时间
-     offsetFrameTime = frameTime - frameInterval
-     效果：动画"追赶"SurfaceFlinger，减少队列深度
-
-  ② DELAY_FRAME：延迟帧处理
-     scheduleVsyncLocked()
-     效果：主动跳过本帧，减少生产速率
-
-结束条件：
-  vsyncsSinceLastCallback > totalFrameDelays
-  (检测到空闲期，说明缓冲区已 drain)
-  → 重置恢复状态
-```
-
-### 3.5 无 VSYNC 模式（备用）
-
-如果硬件不支持 VSYNC 或被禁用（`USE_VSYNC = false`），Choreographer 使用 Handler 消息队列作为时钟源。
-
-```java
-// USE_VSYNC = false 时的帧调度
-scheduleFrameLocked(now) {
-    if (!mFrameScheduled) {
-        mFrameScheduled = true;
-        
-        // 计算下一帧时间
-        final long nextFrameTime = Math.max(
-            mLastFrameTimeNanos / 1e6 + sFrameDelay,  // 帧延迟
-            now);
-        
-        // 发送 MSG_DO_FRAME 消息到 Handler
-        Message msg = mHandler.obtainMessage(MSG_DO_FRAME);
-        msg.setAsynchronous(true);
-        mHandler.sendMessageAtTime(msg, nextFrameTime);
-    }
-}
-
-// Handler 按消息时间戳排队处理
-// 默认帧延迟 = 10ms（保守估计，允许系统繁忙时做出反应）
+动画、滚动、拖拽都要用 getFrameIntervalNanos()
+在 120Hz 屏幕测试，Trace 中 VSYNC 应该是 8.33ms 间隔
 ```
 
 ---
 
-## 四、性能优化与常见问题
+## 六、总结
 
-### 4.1 为什么动画会 pop（突跳）？
+### 核心三层认知
 
-**原因 1：未使用 frameTime，改用 System.nanoTime()**
-
-```java
-// ✗ BAD：导致帧内时间波动
-long now = System.nanoTime();
-animationValue += velocity * (now - lastTime) / 1e9f;
+**第 1 层：工作模式**
+```
+Mode 1 (99%): VSYNC 驱动 → 精确、省电、自动适配高刷
+Mode 2 (1%):  定时器驱动 → 不精确、耗电、低端设备
 ```
 
-解决方案：
-```java
-// ✓ GOOD：所有回调共享同一帧时间
-Choreographer.getInstance().postFrameCallback(
-    new Choreographer.FrameCallback() {
-        @Override
-        public void doFrame(long frameTimeNanos) {
-            float deltaSeconds = 
-                (frameTimeNanos - lastFrameTimeNanos) / 1e9f;
-            animationValue += velocity * deltaSeconds;
-            lastFrameTimeNanos = frameTimeNanos;
-            
-            // 继续下一帧
-            Choreographer.getInstance().postFrameCallback(this);
-        }
-    });
+**第 2 层：执行顺序**
+```
+VSYNC/定时器 → doFrame() → INPUT → ANIMATION → INSETS → TRAVERSAL → COMMIT
+（每次按固定顺序，不可变）
 ```
 
-**原因 2：帧时间不连续（向后回退）**
-
-Choreographer 自动检测并修复：
-```java
-if (frameTimeNanos < mLastFrameTimeNanos) {
-    Log.d(TAG, "Frame time goes backward. Waiting for next vsync.");
-    scheduleVsyncLocked();  // 等待下一个 VSYNC
-    return;
-}
+**第 3 层：诊断方法**
+```
+掉帧 → 看 doFrame 耗时 → 找到红色 bar → 定位是哪个阶段超时
+不平滑 → 看 frameTime 一致性 → 检查是否用了 System.nanoTime()
+延迟 → 看 Handler 消息队列 → 检查 postCallbackDelayed 的 dueTime
 ```
 
-**原因 3：跨帧的帧间隔计算错误**
+### 性能优化的要点
 
-```java
-// ✗ BAD：硬编码 16ms（假设 60Hz）
-if (elapsed > 16) skipFrame();
-
-// ✓ GOOD：使用动态帧间隔
-long frameIntervalMs = 
-    Choreographer.getInstance().getFrameIntervalNanos() / 1_000_000;
-if (elapsed > frameIntervalMs) skipFrame();
-```
-
-### 4.2 高刷屏幕（120Hz/144Hz）适配
-
-```java
-// 获取动态帧间隔
-long frameIntervalNanos = 
-    Choreographer.getInstance().getFrameIntervalNanos();
-
-// 120Hz: 8,333,333 ns ≈ 8.33ms
-// 60Hz:  16,666,666 ns ≈ 16.67ms
-
-// 动画计算时使用动态间隔
-Choreographer.getInstance().postFrameCallback(
-    new Choreographer.FrameCallback() {
-        private long lastFrameTime = 0;
-        
-        @Override
-        public void doFrame(long frameTimeNanos) {
-            if (lastFrameTime > 0) {
-                long deltaMs = 
-                    (frameTimeNanos - lastFrameTime) / 1_000_000;
-                float deltaSeconds = deltaMs / 1000f;
-                
-                // 根据实际帧间隔计算位移
-                animationValue += velocity * deltaSeconds;
-            }
-            lastFrameTime = frameTimeNanos;
-        }
-    });
-```
-
-### 4.3 Jank 监测最佳实践
-
-```java
-public class JankMonitor {
-    private static final int FRAME_INTERVAL_60HZ = 16;  // ms
-    private static final int JANK_THRESHOLD = FRAME_INTERVAL_60HZ + 3;  // 3ms 容差
-    
-    private long mLastFrameTime = 0;
-    
-    public void startMonitoring(Context context) {
-        Choreographer choreographer = 
-            Choreographer.getInstance();
-        
-        choreographer.postFrameCallback(
-            new Choreographer.FrameCallback() {
-                @Override
-                public void doFrame(long frameTimeNanos) {
-                    if (mLastFrameTime > 0) {
-                        long deltaMs = 
-                            (frameTimeNanos - mLastFrameTime) / 1_000_000;
-                        
-                        if (deltaMs > JANK_THRESHOLD) {
-                            int skippedFrames = 
-                                (int) (deltaMs / FRAME_INTERVAL_60HZ) - 1;
-                            
-                            // 上报 Jank
-                            reportJank(skippedFrames, deltaMs);
-                            
-                            Log.w("JankMonitor", 
-                                String.format(
-                                    "Jank detected: %dms (%d frames skipped)",
-                                    deltaMs, skippedFrames));
-                        }
-                    }
-                    mLastFrameTime = frameTimeNanos;
-                    
-                    // 继续监测
-                    Choreographer.getInstance()
-                        .postFrameCallback(this);
-                }
-            });
-    }
-    
-    private void reportJank(int skippedFrames, long deltaMs) {
-        // 上报到分析平台（Firebase、DataDog 等）
-    }
-}
-```
-
-### 4.4 避免常见陷阱
-
-| 陷阱 | 后果 | 解决方案 |
-|-----|-----|--------|
-| 在 CALLBACK_TRAVERSAL 做复杂计算 | measure/layout/draw 超时 → Jank | 预计算，或移到后台线程 |
-| 在 CALLBACK_COMMIT 触发新的 invalidate() | 帧重新进入处理 → 掉帧 | 批量更新，避免帧内递归 |
-| 使用硬编码的 16ms 帧间隔 | 高刷屏幕适配错误 | 使用 `getFrameIntervalNanos()` |
-| 从回调外调用 `getFrameTime()` | IllegalStateException | 仅在回调中调用 |
-| 频繁注册/移除回调 | GC 压力增加 | 复用回调对象，或使用对象池 |
-
-### 4.5 性能分析工具与命令
-
-#### **启用 Choreographer Debug 日志**
-
-```bash
-# 打印每帧回调信息（高产量）
-adb shell setprop debug.choreographer.frames true
-
-# 打印 Jank 检测日志（低产量）
-adb shell setprop debug.choreographer.jank true
-
-# 打印帧时间变化
-adb shell setprop debug.choreographer.frametime true
-
-# 跳帧警告阈值（默认 30）
-adb shell setprop debug.choreographer.skipwarning 10
-```
-
-#### **使用 Perfetto 追踪 Choreographer**
-
-```
-关键 Trace Tags：
-- Trace.TRACE_TAG_VIEW
-  └─ Choreographer#doFrame（每帧的总体耗时）
-  └─ INPUT / ANIMATION / TRAVERSAL / COMMIT（各阶段耗时）
-  └─ "Choreographer#scheduleVsyncLocked"（VSYNC 注册）
-  └─ "Buffer stuffing recovery"（缓冲区恢复）
-
-Perfetto 可以直观展示：
-1. VSYNC 信号到来的时间点
-2. 每帧 doFrame() 的执行时间和耗时
-3. 5 个回调阶段各自的耗时分布
-4. Jank 帧的标记
-5. 跳帧情况（skipCount）
-```
+1. **把耗时操作从 TRAVERSAL 移出**（measure/layout/draw 必须快）
+2. **用 getFrameTime() 而非 System.nanoTime()**（保证一致性）
+3. **高刷屏幕用 getFrameIntervalNanos()**（自动适配）
+4. **在 Perfetto 中观察 5 大阶段的耗时分布**（快速定位瓶颈）
+5. **建立 Jank 告警机制**（及时发现性能回归）
 
 ---
 
-## 五、深度技术细节
+**最后修订**：2026 年 5 月  
+**关键类**：`android.view.Choreographer.java`  
+**关键工具**：Perfetto (https://ui.perfetto.dev)
 
-### 5.1 CallbackRecord 对象池
-
-Choreographer 维护一个 `CallbackRecord` 对象池，避免频繁分配回调记录导致的 GC。
-
-```java
-private CallbackRecord mCallbackPool;  // 对象池头
-
-private CallbackRecord obtainCallbackLocked(long dueTime, Object action, Object token) {
-    // 从池中取对象，如果池空则创建新对象
-    CallbackRecord callback = mCallbackPool;
-    if (callback == null) {
-        callback = new CallbackRecord();
-    } else {
-        mCallbackPool = callback.next;
-        callback.next = null;
-    }
-    callback.dueTime = dueTime;
-    callback.action = action;
-    callback.token = token;
-    return callback;
-}
-
-private void recycleCallbackLocked(CallbackRecord callback) {
-    // 回到对象池
-    callback.action = null;
-    callback.token = null;
-    callback.next = mCallbackPool;
-    mCallbackPool = callback;
-}
-```
-
-**性能影响：** 每帧可能创建数十个回调对象，对象池避免了频繁的 GC pause。
-
-### 5.2 CallbackQueue 数据结构
-
-使用有序链表维护待执行的回调，避免排序开销。
-
-```java
-private final class CallbackQueue {
-    private CallbackRecord mHead;
-    
-    // 按 dueTime 有序插入（O(n) 最坏）
-    public void addCallbackLocked(long dueTime, Object action, Object token) {
-        CallbackRecord callback = obtainCallbackLocked(dueTime, action, token);
-        CallbackRecord entry = mHead;
-        
-        // 链表有序遍历，找到插入位置
-        if (entry == null) {
-            mHead = callback;
-            return;
-        }
-        
-        if (dueTime < entry.dueTime) {
-            callback.next = entry;
-            mHead = callback;
-            return;
-        }
-        
-        while (entry.next != null && dueTime >= entry.next.dueTime) {
-            entry = entry.next;
-        }
-        
-        callback.next = entry.next;
-        entry.next = callback;
-    }
-    
-    // 提取所有到期回调（O(n)）
-    public CallbackRecord extractDueCallbacksLocked(long now) {
-        CallbackRecord callbacks = mHead;
-        if (callbacks == null || callbacks.dueTime > now) {
-            return null;
-        }
-        
-        CallbackRecord last = callbacks;
-        CallbackRecord next = last.next;
-        while (next != null) {
-            if (next.dueTime > now) {
-                last.next = null;
-                break;
-            }
-            last = next;
-            next = next.next;
-        }
-        mHead = next;
-        return callbacks;
-    }
-}
-```
-
-**权衡：** 
-- 插入时无排序开销（不需要排序库函数）
-- 提取时 O(n)，但实际很快（通常只遍历个位数的回调）
-
-### 5.3 FrameTimeline 多屏幕支持（Android 12+）
-
-现代 Android 支持多个可能的帧时间线（如多屏输出、不同刷新率）。
-
-```java
-public static class FrameData {
-    private long mFrameTimeNanos;
-    private FrameTimeline[] mFrameTimelines;      // 多条时间线
-    private int mPreferredFrameTimelineIndex;     // 优选索引
-    
-    // 更新帧数据
-    FrameTimeline update(long frameTimeNanos, 
-                         DisplayEventReceiver.VsyncEventData vsyncEventData) {
-        allocateFrameTimelines(vsyncEventData.frameTimelinesLength);
-        mFrameTimeNanos = frameTimeNanos;
-        mPreferredFrameTimelineIndex = vsyncEventData.preferredFrameTimelineIndex;
-        
-        // 从 VsyncEventData 填充每条时间线
-        for (int i = 0; i < mFrameTimelines.length; i++) {
-            mFrameTimelines[i].update(
-                vsyncEventData.frameTimelines[i].vsyncId,
-                vsyncEventData.frameTimelines[i].expectedPresentationTime,
-                vsyncEventData.frameTimelines[i].deadline);
-        }
-        
-        return mFrameTimelines[mPreferredFrameTimelineIndex];
-    }
-}
-```
-
-**用途：** 某些场景需要多个帧时间线（如不同的输出设备有不同的 deadline）。
-
-### 5.4 线程安全性
-
-Choreographer 使用一个 `mLock` 保护所有共享状态。
-
-```java
-private final Object mLock = new Object();
-
-// 所有状态修改都在锁下
-synchronized (mLock) {
-    mCallbackQueues[callbackType].addCallbackLocked(dueTime, action, token);
-    // ...
-}
-```
-
-**设计考量：**
-- 多线程可以从不同线程调用 `postCallback()`（线程安全）
-- 但 `getFrameTime()` 等查询函数只能从 Choreographer 所属线程调用
-- Choreographer 本身绑定到一个 Looper 线程，所有回调在那个线程执行
-
----
-
-## 六、总结与最佳实践
-
-### 优化清单
-
-```
-✓ 使用 frameTime 而非 System.nanoTime() 计算动画
-  → 减少帧波动，避免 pop
-
-✓ 使用 getFrameIntervalNanos() 而非硬编码 16ms
-  → 自动适配高刷屏幕
-
-✓ 避免在 CALLBACK_TRAVERSAL 中做复杂计算
-  → measure/layout/draw 必须控制在 16ms 以内
-
-✓ 避免在 CALLBACK_COMMIT 中触发新的 invalidate()
-  → 可能导致帧递归与掉帧
-
-✓ 监测帧间隔，捕捉 Jank 并上报
-  → 及时发现性能回归
-
-✓ 考虑在独立线程渲染时使用 postFrameCallback()
-  → 与 UI 线程帧时间同步，避免撕裂
-
-✓ 在 Android 12+ 使用 VsyncCallback 获取详细帧信息
-  → 更精细的帧时间控制
-```
-
-### 相关资源
-
-- **Android Framework 源码：** `android.view.Choreographer`
-- **性能工具：** Perfetto (systrace 继任者)、Android Profiler、Android GPU Inspector
-- **文档：** Android Developers — Rendering Performance
-
----
-
-**最后修订：** 2026 年 5 月  
-**源码版本：** Android Framework (AOSP)  
-**关键类：** `Choreographer.java` (1714 行)
