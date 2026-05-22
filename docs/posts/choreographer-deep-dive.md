@@ -23,142 +23,146 @@ Choreographer 是 Android UI 渲染的**中枢调度器**，负责协调 VSYNC �
 
 ## 一、Choreographer 对外接口完全清单
 
-### 1.1 获取 Choreographer 实例
+## 接口族 1：实例获取族
 
-```java
-// 获取当前线程的 Choreographer（绑定到 Looper）
-public static Choreographer getInstance()
+**接口清单**：
+- `getInstance()` - 获取当前线程的 Choreographer
+- `getMainThreadInstance()` - 获取主线程的 Choreographer
+- `getInstanceForSurfaceControl(long layerHandle, Looper looper)` - 基于 SurfaceControl 创建专用 Choreographer
+- `releaseInstance()` - 释放当前线程的 Choreographer
 
-// 获取主线程的 Choreographer（可能为 null）
-public static Choreographer getMainThreadInstance()
+**用途**：获取或释放 Choreographer 实例
 
-// 基于 SurfaceControl 创建专用 Choreographer
-static Choreographer getInstanceForSurfaceControl(long layerHandle, Looper looper)
+**使用场景**：
+- 动画、自定义渲染时获取实例
+- 后台线程需要独立的 Choreographer 实例
+- 线程销毁前释放实例避免内存泄漏
 
-// 释放当前线程的 Choreographer
-public static void releaseInstance()
-```
+---
 
-**约束：** Choreographer 必须在有 Looper 的线程中创建。通常是 UI 线程或后台 Handler 线程。
+## 接口族 2：帧时间查询族
 
-### 1.2 帧时间查询（最常用）
+**接口清单**：
+- `getFrameTime()` - 当前帧时间（毫秒）
+- `getFrameTimeNanos()` - 当前帧时间（纳秒）
+- `getLastFrameTimeNanos()` - 最后一帧的时间
+- `getExpectedPresentationTimeNanos()` - 当前帧的预期呈现时间
+- `getLatestExpectedPresentTimeNanos()` - 最新的预期呈现时间（包含 Binder 调用到 SurfaceFlinger）
+- `getFrameIntervalNanos()` - 帧间隔（纳秒，动态）
+- `getVsyncId()` - 当前帧的 VSYNC ID
+- `getFrameDeadline()` - 当前帧的截止时间
 
-这组接口提供**稳定的帧时间**，而非 `System.nanoTime()`。所有同一帧内的回调看到相同的帧时间，确保动画的平滑性。
+**用途**：查询帧时间、帧间隔、预期呈现时间等
 
-```java
-// 当前帧的时间（毫秒，uptimeMillis 基准）
-public long getFrameTime()
+**使用场景**：
+- 动画计算、帧同步
+- 高刷屏幕（120Hz/144Hz）适配
+- 帧时间精度要求高的场景
 
-// 当前帧的时间（纳秒，nanoTime 基准）
-public long getFrameTimeNanos()
-
-// 最后一帧的时间（纳秒）
-public long getLastFrameTimeNanos()
-
-// 当前帧的预期呈现时间（纳秒）
-public long getExpectedPresentationTimeNanos()
-
-// 最新的预期呈现时间（包含 Binder 调用到 SurfaceFlinger）
-public long getLatestExpectedPresentTimeNanos()
-
-// 获取帧间隔（纳秒）— 重要！用于动画计算
-public long getFrameIntervalNanos()
-
-// 获取 VSYNC ID（用于与 SurfaceFlinger 帧关联）
-public long getVsyncId()
-
-// 获取当前帧的截止时间（deadline）
-public long getFrameDeadline()
-```
-
-**使用约束：**
-- `getFrameTime*` 和 `getVsyncId` **只能在 Frame Callback 中调用**
-- 在回调外调用会抛出 `IllegalStateException`
+**关键约束**：`getFrameTime*` 和 `getVsyncId` **只能在 Frame Callback 中调用**
 
 **为什么需要 frameTime 而不是 System.nanoTime()？**
 
 ```
 使用 System.nanoTime()：                使用 frameTime：
-动画值在帧内随机波动 ← ┐               所有回调共用同一时间 ← ┐
-帧时间可能回退 ← ┐                      帧时间严格递增 ← ┐
-解决方案：                               结果：
-① 帧内时间不一致                        ① 动画平滑，无 pop
-② 可能导致帧波动                        ② Jank 检测更准确
-③ 需要额外的时间校准逻辑                ③ 与屏幕刷新精确同步
+动画值在帧内随机波动                   所有回调共用同一时间
+帧时间可能回退                         帧时间严格递增
+需要额外的时间校准                     与屏幕刷新精确同步
+  ↓                                      ↓
+帧内不一致、波动、Jank 检测失败  →  动画平滑、无 pop、精准检测
 ```
 
-### 1.3 Frame Callback 接口（低级）
+---
 
-适用于需要每帧更新的场景，如自定义 OpenGL 渲染、游戏引擎。
+## 接口族 3：帧回调族
 
-```java
-public interface FrameCallback {
-    void doFrame(long frameTimeNanos);
-}
+### 3.1 通用帧回调（与 VSYNC 同步）
 
-// 注册帧回调
-public void postFrameCallback(FrameCallback callback)
+**接口清单**：
+- `postCallback(int callbackType, Runnable action, Object token)` - 注册回调（立即）
+- `postCallbackDelayed(int callbackType, Runnable action, Object token, long delayMillis)` - 注册回调（延迟）
+- `removeCallbacks(int callbackType, Runnable action, Object token)` - 移除回调
 
-// 延迟注册帧回调
-public void postFrameCallbackDelayed(FrameCallback callback, long delayMillis)
-
-// 移除帧回调
-public void removeFrameCallback(FrameCallback callback)
+**5 大回调类型**（执行顺序固定）：
+```
+CALLBACK_INPUT (0)            → 处理输入事件（~1ms）
+CALLBACK_ANIMATION (1)        → 更新动画（~2-5ms）
+CALLBACK_INSETS_ANIMATION (2) → 窗口 Insets 动画（~1ms）
+CALLBACK_TRAVERSAL (3)        → View measure/layout/draw（~8-10ms）
+CALLBACK_COMMIT (4)           → 帧后处理与缓冲区提交（~1-2ms）
 ```
 
-**特点：** 每帧回调一次，自动移除。用户需手动重新注册以继续接收。
+**用途**：注册与 VSYNC 同步、执行顺序确定的帧回调
 
-### 1.4 VsyncCallback 接口（高级，Android 12+）
+**使用场景**：
+- Framework 内部驱动（ViewRootImpl.scheduleTraversals）
+- 动画框架（ValueAnimator、ObjectAnimator）
+- 需要精确执行顺序的场景
 
-适用于需要精细帧时间信息的场景，如多屏幕、高精度同步。
+---
 
-```java
-public interface VsyncCallback {
-    void onVsync(@NonNull FrameData data);
-}
+### 3.2 简化帧回调（每帧一次）
 
-public void postVsyncCallback(@NonNull VsyncCallback callback)
-public void removeVsyncCallback(@Nullable VsyncCallback callback)
+**接口清单**：
+- `postFrameCallback(FrameCallback callback)` - 注册每帧回调（自动移除）
+- `removeFrameCallback(FrameCallback callback)` - 移除回调
 
-// FrameData 包含详细的帧信息
-public static class FrameData {
-    public long getFrameTimeNanos()
-    public FrameTimeline[] getFrameTimelines()      // 多个可能的时间线
-    public FrameTimeline getPreferredFrameTimeline() // 优选时间线
-}
+**用途**：每帧都需要更新的场景
 
-public static class FrameTimeline {
-    public long getVsyncId()                        // 帧 ID
-    public long getExpectedPresentationTimeNanos()  // 预期呈现时间
-    public long getDeadlineNanos()                  // 帧截止时间
-}
-```
+**使用场景**：
+- 游戏引擎（帧循环）
+- 自定义 OpenGL/Vulkan 渲染
+- 实时数据更新（如动画、物理模拟）
 
-### 1.5 通用 Callback 接口（Framework 内部）
+**特点**：每帧自动执行一次，执行后自动移除（需要手动重新注册继续下一帧）
 
-Framework 使用这组接口来驱动整个帧处理流程。
+---
 
-```java
-public void postCallback(int callbackType, Runnable action, Object token)
-public void postCallbackDelayed(int callbackType, Runnable action, Object token, long delayMillis)
-public void removeCallbacks(int callbackType, Runnable action, Object token)
+### 3.3 高精度帧回调（Android 12+）
 
-// Callback 类型（执行顺序严格递序）
-public static final int CALLBACK_INPUT            = 0  // 输入事件处理
-public static final int CALLBACK_ANIMATION        = 1  // 动画更新
-public static final int CALLBACK_INSETS_ANIMATION = 2  // 窗口 Insets 动画
-public static final int CALLBACK_TRAVERSAL        = 3  // View measure/layout/draw
-public static final int CALLBACK_COMMIT           = 4  // 帧后处理与缓冲区提交
-```
+**接口清单**：
+- `postVsyncCallback(VsyncCallback callback)` - 注册 VSYNC 回调
+- `removeVsyncCallback(VsyncCallback callback)` - 移除回调
 
-**执行顺序（每帧固定）：**
+**用途**：获取精细的帧时间信息（多条时间线）
 
-```
-INPUT → ANIMATION → INSETS_ANIMATION → TRAVERSAL → COMMIT
-  ↓         ↓             ↓              ↓          ↓
-1ms      2-5ms          1ms            8-10ms     1-2ms
-(典型耗时示例)
-```
+**使用场景**：
+- 多屏幕场景（不同屏幕有不同的时间线）
+- 高精度同步需求
+- 帧时间预测
+
+**特点**：提供 FrameData 对象，包含多条可能的 FrameTimeline（vsyncId、expectedPresentationTime、deadline）
+
+---
+
+## 接口族 4：配置族
+
+**接口清单**：
+- `setFrameDelay(long frameDelay)` - 设置帧延迟（毫秒）
+- `getFrameDelay()` - 获取帧延迟
+- `subtractFrameDelay(long delayMillis)` - 从延迟中减去帧延迟时间
+- `setFPSDivisor(int divisor)` - 设置 FPS 分频器
+- `onWaitForBufferRelease(long durationNanos)` - 缓冲区堆积恢复通知
+
+**用途**：配置帧处理的参数和行为
+
+**使用场景**：
+- 低端设备优化（增加帧延迟以降低功耗）
+- 缓冲区堆积恢复（SurfaceFlinger 通知）
+- FPS 降频（降低刷新率实验）
+
+---
+
+## 接口族总结
+
+| 接口族 | 接口数 | 主要用途 | 典型用户 | 关键特性 |
+|--------|--------|---------|---------|---------|
+| **实例获取** | 4 | 获取 Choreographer 实例 | 所有开发者 | 线程绑定 |
+| **帧时间查询** | 8 | 查询帧时间、帧间隔 | 动画/渲染开发者 | 只能在回调中调用 |
+| **通用帧回调** | 3 | 与 VSYNC 同步、固定执行顺序 | Framework 内部 | 5 大回调队列 |
+| **简化帧回调** | 2 | 每帧自动执行 | 游戏/渲染引擎 | 每帧自动移除 |
+| **高精度帧回调** | 2 | 详细帧信息（多时间线） | 多屏/高精度场景 | Android 12+ |
+| **配置** | 5 | 配置帧处理参数 | 系统/OEM | 全局配置 |
 
 ### 1.5.1 PostCallbackDelayed 内部执行流程
 
@@ -355,26 +359,7 @@ adb shell perfetto \
 | Main Thread 频繁排队 | 从非 UI 线程频繁调用 postCallback() | 改为在 UI 线程调用，或使用 `postFrameCallback()` 替代 |
 | VSYNC 信号间隔不规则 | 缓冲区堆积或其他 Jank | 查看 SurfaceFlinger 轨道是否有异常 |
 
-### 1.6 其他配置接口
-
-```java
-// 获取/设置帧延迟（毫秒）
-public static long getFrameDelay()
-public static void setFrameDelay(long frameDelay)
-
-// 从延迟中减去帧延迟时间
-public static long subtractFrameDelay(long delayMillis)
-
-// 缓冲区堆积恢复
-public void onWaitForBufferRelease(long durationNanos)
-
-// FPS 分频器（降低刷新率实验）
-void setFPSDivisor(int divisor)
-```
-
----
-
-## 二、实际调用场景分析
+### 1.5.2 在 Perfetto 中验证 PostCallbackDelayed 执行流程
 
 ### 2.1 Framework 内部如何使用
 
