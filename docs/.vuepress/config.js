@@ -44,6 +44,14 @@ export default defineUserConfig({
             '/posts/android-io-optimization-insights.md'
           ],
         },
+        {
+          text: 'Device Farm 系列',
+          children: [
+            '/posts/usbip-introduction.md',
+            '/posts/device-farm-design.md',
+            '/posts/device-farm-implementation.md'
+          ],
+        },
       ],
       '/posts/': [
         {
@@ -54,6 +62,14 @@ export default defineUserConfig({
             '/posts/choreographer-deep-dive.md',
             '/posts/choreographer-trace-events.md',
             '/posts/android-io-optimization-insights.md',
+          ],
+        },
+        {
+          text: 'Device Farm 系列',
+          children: [
+            '/posts/usbip-introduction.md',
+            '/posts/device-farm-design.md',
+            '/posts/device-farm-implementation.md'
           ],
         },
       ],
