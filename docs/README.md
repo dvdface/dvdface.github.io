@@ -1,40 +1,40 @@
 ---
 home: true
-heroText: 首页
-tagline: 静态网站 · 由 dvdface.github.io 托管
+heroText: 开发者知识库
+tagline: 深度技术博客 · 从 Android 性能优化到设备自动化测试 · 由 dvdface.github.io 托管
 actions:
-  - text: Device Farm 系列
-    link: /posts/usbip-introduction.html
+  - text: 🔧 Device Farm 系列（全新）
+    link: /android/#-android-device-farm-系列
     type: primary
-  - text: Choreographer 深度指南
+  - text: 📖 Choreographer 深度指南
     link: /posts/choreographer-deep-dive.html
     type: secondary
-  - text: 提示词 SOP
-    link: /posts/prompt-writing-sop.html
+  - text: 📋 更多文章
+    link: /android/
     type: secondary
 features:
-  - title: Choreographer 深度指南（第一部分）
+  - title: 🚀 USB/IP 完全指南（Device Farm 第一部分）
+    details: 深度解析 USB/IP 协议的演进（2003-2024）、工作原理、Windows vs Linux 实现差异。包含 13 个命令完整参考、4 个实战场景、性能指标与故障排查。从零开始理解如何通过网络共享 USB 设备。
+    link: /posts/usbip-introduction.html
+  - title: 🏗️ Device Farm 系统设计（第二部分）
+    details: 从产品需求出发设计一个可靠的设备共享系统。包含 MVP 架构、多主机支持、正常流与异常流详细分析、4 个迭代版本路线图、生产级高可用部署。学习如何从零开始架构一个企业级设备农场。
+    link: /posts/device-farm-design.html
+  - title: 💻 Device Farm 完整实现（第三部分）
+    details: 生产就绪的 Python 实现（1500+ 行代码）、REST API、后台线程管理、Docker 化、pytest/Appium 集成、Prometheus 监控告警与完整运维手册。看完整的代码如何实现企业级测试平台。
+    link: /posts/device-farm-implementation.html
+  - title: 📊 Choreographer 深度指南（第一部分）
     details: Android Frame Rendering 的心脏：VSYNC 驱动、帧时间计算、5 大回调阶段、Jank 根因分析与性能优化完全指南。涵盖 6 大公开接口、Framework/应用双侧调用场景、内部机制与最佳实践。
     link: /posts/choreographer-deep-dive.html
-  - title: Choreographer 深度指南（第二部分）
+  - title: 📈 Choreographer 深度指南（第二部分）
     details: Framework 回调链路完全解析：逐帧追踪 INPUT、ANIMATION、INSETS、TRAVERSAL、COMMIT 五大阶段在 Framework 中的精确调用点。包含源码位置、时间估算、序列图、Perfetto 验证与性能瓶颈对症下药。
     link: /posts/choreographer-deep-dive-part2.html
-  - title: 提示词编写 SOP
-    details: 基于 Google《Prompt Engineering》白皮书的可复用 SOP：明确目标、选模型调参、提示技巧、撰写原则与文档化迭代。
-    link: /posts/prompt-writing-sop.html
-  - title: 降维打击（育儿）
-    details: 像研究生一样战斗：立项、降维调研、逻辑拆解、费曼内化，以及脑科学小贴士与作文/道法/写人案例。
-    link: /posts/learning_by_research.html
-  - title: Android I/O 优化实战
+  - title: 💾 Android I/O 优化实战
     details: 从主线程磁盘访问治理到 Room/DataStore/WorkManager 调度，再到 Perfetto 与 Baseline Profile 的可观测闭环，系统降低启动与运行期 I/O 抖动。
     link: /posts/android-io-optimization-insights.html
-  - title: USB/IP 完全指南（Device Farm 第一部分）
-    details: 深度解析 USB/IP 协议的演进（2003-2024）、工作原理、Windows vs Linux 实现差异。包含 13 个命令完整参考、4 个实战场景、性能指标与故障排查。
-    link: /posts/usbip-introduction.html
-  - title: Device Farm 系统设计（第二部分）
-    details: 从产品需求出发设计一个可靠的设备共享系统。包含 MVP 架构、多主机支持、正常流与异常流详细分析、4 个迭代版本路线图、生产级高可用部署。
-    link: /posts/device-farm-design.html
-  - title: Device Farm 完整实现（第三部分）
-    details: 生产就绪的 Python 实现（1500+ 行代码）、REST API、后台线程管理、Docker 化、pytest/Appium 集成、Prometheus 监控告警与完整运维手册。
-    link: /posts/device-farm-implementation.html
+  - title: ✍️ 提示词编写 SOP
+    details: 基于 Google《Prompt Engineering》白皮书的可复用 SOP：明确目标、选模型调参、提示技巧、撰写原则与文档化迭代。
+    link: /posts/prompt-writing-sop.html
+  - title: 👨‍👩‍👧‍👦 降维打击（育儿）
+    details: 像研究生一样战斗：立项、降维调研、逻辑拆解、费曼内化，以及脑科学小贴士与作文/道法/写人案例。
+    link: /posts/learning_by_research.html
 ---
