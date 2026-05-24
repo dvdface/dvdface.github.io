@@ -3,14 +3,14 @@ home: true
 heroText: 首页
 tagline: 静态网站 · 由 dvdface.github.io 托管
 actions:
-  - text: 提示词 SOP
-    link: /posts/prompt-writing-sop.html
+  - text: Device Farm 系列
+    link: /posts/usbip-introduction.html
     type: primary
   - text: Choreographer 深度指南
     link: /posts/choreographer-deep-dive.html
     type: secondary
-  - text: 降维打击
-    link: /posts/learning_by_research.html
+  - text: 提示词 SOP
+    link: /posts/prompt-writing-sop.html
     type: secondary
 features:
   - title: Choreographer 深度指南（第一部分）
@@ -28,4 +28,13 @@ features:
   - title: Android I/O 优化实战
     details: 从主线程磁盘访问治理到 Room/DataStore/WorkManager 调度，再到 Perfetto 与 Baseline Profile 的可观测闭环，系统降低启动与运行期 I/O 抖动。
     link: /posts/android-io-optimization-insights.html
+  - title: USB/IP 完全指南（Device Farm 第一部分）
+    details: 深度解析 USB/IP 协议的演进（2003-2024）、工作原理、Windows vs Linux 实现差异。包含 13 个命令完整参考、4 个实战场景、性能指标与故障排查。
+    link: /posts/usbip-introduction.html
+  - title: Device Farm 系统设计（第二部分）
+    details: 从产品需求出发设计一个可靠的设备共享系统。包含 MVP 架构、多主机支持、正常流与异常流详细分析、4 个迭代版本路线图、生产级高可用部署。
+    link: /posts/device-farm-design.html
+  - title: Device Farm 完整实现（第三部分）
+    details: 生产就绪的 Python 实现（1500+ 行代码）、REST API、后台线程管理、Docker 化、pytest/Appium 集成、Prometheus 监控告警与完整运维手册。
+    link: /posts/device-farm-implementation.html
 ---
